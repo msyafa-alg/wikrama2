@@ -1,29 +1,22 @@
 [
   {
     "id": 1,
-    "nama": "Yoga Pratama",
+    "nama": "Anindia Shabirina Praske Aqilamayza",
     "rombel": "XII RPL 1",
-    "alamat": "Jl. Nusa Indah No.17, Bogor",
-    "foto": "https://i.pravatar.cc/300?img=51",
-    "ttl": "Bogor, 12 Maret 2007",
-    "nisn": "0071234501",
-    "email": "yoga.pratama@gmail.com",
-    "no_hp": "081234567801",
-    "tentang": "Siswa aktif dengan minat besar di bidang pemrograman web dan mobile. Memiliki pengalaman membangun aplikasi berbasis React dan Flutter. Aktif mengikuti berbagai lomba coding dan hackathon tingkat kota maupun provinsi.",
-    "keahlian": ["React.js", "Flutter", "Node.js", "MySQL", "Figma"],
-    "sertifikat": [
-      { "id": "s1", "nama": "Juara 1 LKS Web Technology Kota Bogor 2024", "penerbit": "Dinas Pendidikan Kota Bogor", "tahun": "2024", "gambar": "https://picsum.photos/seed/cert1y/600/420" },
-      { "id": "s2", "nama": "Sertifikat Kompetensi Junior Web Developer", "penerbit": "BNSP Indonesia", "tahun": "2024", "gambar": "https://picsum.photos/seed/cert2y/600/420" },
-      { "id": "s3", "nama": "Hackathon Edu Bogor – Best Innovation", "penerbit": "Komunitas Tech Bogor", "tahun": "2023", "gambar": "https://picsum.photos/seed/cert3y/600/420" }
-    ],
+    "alamat": "Dewi Sri III RT. 03 RW. 12 No. 5 Pasir Kuda Kec. Bogor Barat",
+    "foto": "/students/12/anindia.jpg",
+    "ttl": "",
+    "nisn": "",
+    "email": "",
+    "no_hp": "",
+    "tentang": "",
+    "keahlian": [],
+    "sertifikat": [],
     "cv": {
-      "pendidikan": "SMK Wikrama Bogor – Rekayasa Perangkat Lunak (2022–2025)",
-      "pengalaman": [
-        { "posisi": "Frontend Developer Intern", "tempat": "PT. Digital Nusantara", "periode": "Jun–Agu 2024" },
-        { "posisi": "Panitia IT LKS Sekolah", "tempat": "SMK Wikrama Bogor", "periode": "2023–2024" }
-      ],
-      "organisasi": ["Ketua OSIS Wikrama 2", "Anggota Ekskul Coding Club"],
-      "prestasi": ["Juara 1 LKS Web Tech Kota Bogor 2024", "Best Innovation Hackathon Edu 2023"]
+      "pendidikan": "",
+      "pengalaman": [],
+      "organisasi": [],
+      "prestasi": []
     }
   },
   {
@@ -32,277 +25,18 @@
     "rombel": "XII RPL 1",
     "alamat": "Jl. Kramat Jati No.3, Bogor",
     "foto": "https://i.pravatar.cc/300?img=53",
-    "ttl": "Bogor, 5 Juli 2007",
-    "nisn": "0071234502",
-    "email": "zahra.amalia@gmail.com",
-    "no_hp": "081234567802",
-    "tentang": "Siswi berprestasi dengan keahlian di bidang UI/UX Design dan pemrograman. Gemar membuat desain aplikasi yang estetis dan fungsional. Pernah memenangkan lomba desain antarmuka tingkat provinsi.",
-    "keahlian": ["Figma", "Adobe XD", "HTML/CSS", "JavaScript", "Canva"],
-    "sertifikat": [
-      { "id": "s1", "nama": "Juara 2 Lomba Desain UI/UX Provinsi Jabar", "penerbit": "Dinas Pendidikan Prov. Jabar", "tahun": "2024", "gambar": "https://picsum.photos/seed/cert4z/600/420" },
-      { "id": "s2", "nama": "Sertifikat Google UX Design", "penerbit": "Google via Coursera", "tahun": "2024", "gambar": "https://picsum.photos/seed/cert5z/600/420" }
-    ],
+    "ttl": "",
+    "nisn": "",
+    "email": "",
+    "no_hp": "",
+    "tentang": "",
+    "keahlian": [],
+    "sertifikat": [],
     "cv": {
-      "pendidikan": "SMK Wikrama Bogor – Rekayasa Perangkat Lunak (2022–2025)",
-      "pengalaman": [
-        { "posisi": "UI/UX Designer Freelance", "tempat": "Project Mandiri", "periode": "2023–sekarang" }
-      ],
-      "organisasi": ["Sekretaris Rayon Wikrama 2", "Anggota PMR"],
-      "prestasi": ["Juara 2 Desain UI/UX Prov. Jabar 2024", "Sertifikat Google UX Design"]
-    }
-  },
-  {
-    "id": 3,
-    "nama": "Arif Budiman",
-    "rombel": "XII RPL 2",
-    "alamat": "Jl. Tanah Baru No.24, Bogor",
-    "foto": "https://i.pravatar.cc/300?img=52",
-    "ttl": "Bogor, 20 Januari 2007",
-    "nisn": "0071234503",
-    "email": "arif.budiman@gmail.com",
-    "no_hp": "081234567803",
-    "tentang": "Siswa dengan passion di bidang backend development dan keamanan jaringan. Menguasai berbagai bahasa pemrograman server-side dan database management. Aktif berkontribusi di komunitas open source.",
-    "keahlian": ["PHP", "Laravel", "Python", "PostgreSQL", "Linux"],
-    "sertifikat": [
-      { "id": "s1", "nama": "Sertifikat Kompetensi Junior Network Admin", "penerbit": "BNSP Indonesia", "tahun": "2024", "gambar": "https://picsum.photos/seed/cert6a/600/420" },
-      { "id": "s2", "nama": "Cisco Networking Academy – CCNA Essentials", "penerbit": "Cisco", "tahun": "2023", "gambar": "https://picsum.photos/seed/cert7a/600/420" }
-    ],
-    "cv": {
-      "pendidikan": "SMK Wikrama Bogor – Rekayasa Perangkat Lunak (2022–2025)",
-      "pengalaman": [
-        { "posisi": "Backend Developer Intern", "tempat": "CV. Solusi Digital Bogor", "periode": "Jul–Sep 2024" }
-      ],
-      "organisasi": ["Bendahara Rayon Wikrama 2", "Anggota Coding Club"],
-      "prestasi": ["Sertifikat BNSP Junior Network Admin", "CCNA Cisco 2023"]
-    }
-  },
-  {
-    "id": 4,
-    "nama": "Bella Novita",
-    "rombel": "XII RPL 2",
-    "alamat": "Jl. Loji No.6, Bogor",
-    "foto": "https://i.pravatar.cc/300?img=56",
-    "ttl": "Sukabumi, 8 April 2007",
-    "nisn": "0071234504",
-    "email": "bella.novita@gmail.com",
-    "no_hp": "081234567804",
-    "tentang": "Siswi kreatif yang menguasai desain grafis dan multimedia. Senang membuat konten visual berkualitas tinggi. Aktif di ekskul desain dan pernah menjuarai lomba poster digital tingkat kota.",
-    "keahlian": ["Adobe Photoshop", "Illustrator", "Premiere Pro", "Canva", "CorelDRAW"],
-    "sertifikat": [
-      { "id": "s1", "nama": "Juara 1 Lomba Poster Digital Kota Bogor", "penerbit": "Dinas Pendidikan Kota Bogor", "tahun": "2024", "gambar": "https://picsum.photos/seed/cert1b/600/420" },
-      { "id": "s2", "nama": "Sertifikat Adobe Creative Suite", "penerbit": "Adobe Education", "tahun": "2023", "gambar": "https://picsum.photos/seed/cert2b/600/420" }
-    ],
-    "cv": {
-      "pendidikan": "SMK Wikrama Bogor – Rekayasa Perangkat Lunak (2022–2025)",
-      "pengalaman": [
-        { "posisi": "Graphic Designer Freelance", "tempat": "UMKM Lokal Bogor", "periode": "2023–sekarang" }
-      ],
-      "organisasi": ["Ketua Ekskul Desain Grafis", "Anggota Paskibra"],
-      "prestasi": ["Juara 1 Poster Digital Kota Bogor 2024", "Sertifikat Adobe Creative Suite"]
-    }
-  },
-  {
-    "id": 5,
-    "nama": "Chandra Kusuma",
-    "rombel": "XII TKJ 1",
-    "alamat": "Jl. Menteng No.11, Bogor",
-    "foto": "https://i.pravatar.cc/300?img=54",
-    "ttl": "Bogor, 17 September 2006",
-    "nisn": "0071234505",
-    "email": "chandra.kusuma@gmail.com",
-    "no_hp": "081234567805",
-    "tentang": "Siswa dengan keahlian jaringan komputer dan sistem administrasi server. Berpengalaman dalam konfigurasi router, switch, dan server Linux. Bercita-cita menjadi Network Engineer profesional.",
-    "keahlian": ["Cisco IOS", "MikroTik", "Linux Server", "Wireshark", "VMware"],
-    "sertifikat": [
-      { "id": "s1", "nama": "MikroTik Certified Network Associate (MTCNA)", "penerbit": "MikroTik", "tahun": "2024", "gambar": "https://picsum.photos/seed/cert1c/600/420" },
-      { "id": "s2", "nama": "Sertifikat Kompetensi Teknisi Jaringan", "penerbit": "BNSP Indonesia", "tahun": "2024", "gambar": "https://picsum.photos/seed/cert2c/600/420" },
-      { "id": "s3", "nama": "Cisco IT Essentials", "penerbit": "Cisco Networking Academy", "tahun": "2023", "gambar": "https://picsum.photos/seed/cert3c/600/420" }
-    ],
-    "cv": {
-      "pendidikan": "SMK Wikrama Bogor – Teknik Komputer dan Jaringan (2022–2025)",
-      "pengalaman": [
-        { "posisi": "Teknisi Jaringan Magang", "tempat": "PT. Telkom Bogor", "periode": "Jun–Agu 2024" }
-      ],
-      "organisasi": ["Wakil Ketua Rayon Wikrama 2", "Anggota Tim IT Sekolah"],
-      "prestasi": ["MTCNA MikroTik 2024", "Sertifikat BNSP Teknisi Jaringan"]
-    }
-  },
-  {
-    "id": 6,
-    "nama": "Dian Purnama",
-    "rombel": "XII TKJ 1",
-    "alamat": "Jl. Kebun Raya No.9, Bogor",
-    "foto": "https://i.pravatar.cc/300?img=58",
-    "ttl": "Bogor, 22 Februari 2007",
-    "nisn": "0071234506",
-    "email": "dian.purnama@gmail.com",
-    "no_hp": "081234567806",
-    "tentang": "Siswi tekun yang mendalami bidang jaringan dan keamanan siber. Senang mempelajari teknik-teknik pengamanan sistem informasi. Aktif mengikuti webinar dan pelatihan keamanan jaringan.",
-    "keahlian": ["Network Security", "Firewall", "VPN", "Linux", "Python Scripting"],
-    "sertifikat": [
-      { "id": "s1", "nama": "Sertifikat Cyber Security Fundamentals", "penerbit": "IBM via Coursera", "tahun": "2024", "gambar": "https://picsum.photos/seed/cert1d/600/420" },
-      { "id": "s2", "nama": "Sertifikat Kompetensi Teknisi Jaringan", "penerbit": "BNSP Indonesia", "tahun": "2024", "gambar": "https://picsum.photos/seed/cert2d/600/420" }
-    ],
-    "cv": {
-      "pendidikan": "SMK Wikrama Bogor – Teknik Komputer dan Jaringan (2022–2025)",
-      "pengalaman": [
-        { "posisi": "IT Support Intern", "tempat": "Kantor Dinas Kota Bogor", "periode": "Jul–Sep 2024" }
-      ],
-      "organisasi": ["Bendahara OSIS", "Anggota Pramuka"],
-      "prestasi": ["Sertifikat IBM Cyber Security", "Sertifikat BNSP Teknisi Jaringan"]
-    }
-  },
-  {
-    "id": 7,
-    "nama": "Erwin Santoso",
-    "rombel": "XII TKJ 2",
-    "alamat": "Jl. Pengadilan No.28, Bogor",
-    "foto": "https://i.pravatar.cc/300?img=55",
-    "ttl": "Cianjur, 3 November 2006",
-    "nisn": "0071234507",
-    "email": "erwin.santoso@gmail.com",
-    "no_hp": "081234567807",
-    "tentang": "Siswa berpengalaman di bidang instalasi dan perawatan komputer serta jaringan lokal. Memiliki kemampuan troubleshooting yang baik dan terbiasa menangani berbagai masalah teknis di lingkungan sekolah.",
-    "keahlian": ["Hardware Komputer", "LAN/WAN", "Windows Server", "Active Directory", "Help Desk"],
-    "sertifikat": [
-      { "id": "s1", "nama": "Sertifikat Kompetensi Teknisi Komputer", "penerbit": "BNSP Indonesia", "tahun": "2024", "gambar": "https://picsum.photos/seed/cert1e/600/420" },
-      { "id": "s2", "nama": "Microsoft Certified: Azure Fundamentals", "penerbit": "Microsoft", "tahun": "2024", "gambar": "https://picsum.photos/seed/cert2e/600/420" }
-    ],
-    "cv": {
-      "pendidikan": "SMK Wikrama Bogor – Teknik Komputer dan Jaringan (2022–2025)",
-      "pengalaman": [
-        { "posisi": "Teknisi IT Sekolah", "tempat": "SMK Wikrama Bogor", "periode": "2023–sekarang" }
-      ],
-      "organisasi": ["Koordinator Lab Komputer", "Anggota Rohis"],
-      "prestasi": ["Sertifikat BNSP Teknisi Komputer", "Microsoft Azure Fundamentals"]
-    }
-  },
-  {
-    "id": 8,
-    "nama": "Farida Hanum",
-    "rombel": "XII TKJ 2",
-    "alamat": "Jl. Ciwaringin No.15, Bogor",
-    "foto": "https://i.pravatar.cc/300?img=60",
-    "ttl": "Bogor, 14 Agustus 2007",
-    "nisn": "0071234508",
-    "email": "farida.hanum@gmail.com",
-    "no_hp": "081234567808",
-    "tentang": "Siswi dengan keahlian di bidang desain website dan pemrograman dasar. Gemar mengeksplorasi teknologi baru dan senang berbagi ilmu melalui komunitas belajar online. Bercita-cita bekerja di perusahaan teknologi terkemuka.",
-    "keahlian": ["HTML/CSS", "Bootstrap", "JavaScript", "WordPress", "SEO Dasar"],
-    "sertifikat": [
-      { "id": "s1", "nama": "Sertifikat Web Design Fundamental", "penerbit": "Dicoding Indonesia", "tahun": "2024", "gambar": "https://picsum.photos/seed/cert1f/600/420" },
-      { "id": "s2", "nama": "Google Digital Marketing", "penerbit": "Google Garage", "tahun": "2023", "gambar": "https://picsum.photos/seed/cert2f/600/420" }
-    ],
-    "cv": {
-      "pendidikan": "SMK Wikrama Bogor – Teknik Komputer dan Jaringan (2022–2025)",
-      "pengalaman": [
-        { "posisi": "Web Content Creator", "tempat": "Blog Mandiri", "periode": "2023–sekarang" }
-      ],
-      "organisasi": ["Anggota PMR", "Sekretaris Kelas"],
-      "prestasi": ["Sertifikat Dicoding Web Design", "Google Digital Marketing"]
-    }
-  },
-  {
-    "id": 9,
-    "nama": "Gilang Ramadhan",
-    "rombel": "XII DKV 1",
-    "alamat": "Jl. Sempur No.20, Bogor",
-    "foto": "https://i.pravatar.cc/300?img=57",
-    "ttl": "Depok, 29 Mei 2007",
-    "nisn": "0071234509",
-    "email": "gilang.ramadhan@gmail.com",
-    "no_hp": "081234567809",
-    "tentang": "Siswa berbakat di bidang desain komunikasi visual dan videografi. Terampil membuat konten kreatif untuk media sosial dan branding. Sudah memiliki portofolio freelance yang aktif dijalankan sejak kelas 11.",
-    "keahlian": ["DaVinci Resolve", "After Effects", "Illustrator", "Photoshop", "Branding"],
-    "sertifikat": [
-      { "id": "s1", "nama": "Juara 3 Lomba Animasi Digital Nasional", "penerbit": "Kemendikbud RI", "tahun": "2023", "gambar": "https://picsum.photos/seed/cert1g/600/420" },
-      { "id": "s2", "nama": "Sertifikat Videografi & Motion Graphic", "penerbit": "IDCamp Indosat", "tahun": "2024", "gambar": "https://picsum.photos/seed/cert2g/600/420" }
-    ],
-    "cv": {
-      "pendidikan": "SMK Wikrama Bogor – Desain Komunikasi Visual (2022–2025)",
-      "pengalaman": [
-        { "posisi": "Videographer & Editor Freelance", "tempat": "Project UMKM Bogor", "periode": "2023–sekarang" },
-        { "posisi": "Dokumentasi Rayon Wikrama 2", "tempat": "SMK Wikrama Bogor", "periode": "2022–2025" }
-      ],
-      "organisasi": ["Koordinator Dokumentasi Rayon", "Anggota Film Club"],
-      "prestasi": ["Juara 3 Animasi Digital Nasional 2023", "Sertifikat IDCamp Videografi"]
-    }
-  },
-  {
-    "id": 10,
-    "nama": "Hesti Lestari",
-    "rombel": "XII DKV 1",
-    "alamat": "Jl. Surya Kencana No.7, Bogor",
-    "foto": "https://i.pravatar.cc/300?img=62",
-    "ttl": "Bogor, 11 Oktober 2007",
-    "nisn": "0071234510",
-    "email": "hesti.lestari@gmail.com",
-    "no_hp": "081234567810",
-    "tentang": "Siswi dengan passion di bidang ilustrasi digital dan desain karakter. Aktif membuat karya ilustrasi yang diunggah ke platform Behance dan Instagram. Bermimpi melanjutkan studi di jurusan seni digital.",
-    "keahlian": ["Procreate", "Adobe Illustrator", "Character Design", "Typography", "Infografis"],
-    "sertifikat": [
-      { "id": "s1", "nama": "Juara 2 Lomba Desain Grafis DKV Kota Bogor", "penerbit": "Dinas Pendidikan Kota Bogor", "tahun": "2024", "gambar": "https://picsum.photos/seed/cert1h/600/420" },
-      { "id": "s2", "nama": "Sertifikat Ilustrasi Digital – Skill Academy", "penerbit": "Ruangguru Skill Academy", "tahun": "2024", "gambar": "https://picsum.photos/seed/cert2h/600/420" }
-    ],
-    "cv": {
-      "pendidikan": "SMK Wikrama Bogor – Desain Komunikasi Visual (2022–2025)",
-      "pengalaman": [
-        { "posisi": "Illustrator Freelance", "tempat": "Behance / Fiverr", "periode": "2023–sekarang" }
-      ],
-      "organisasi": ["Ketua Ekskul Seni Rupa", "Anggota OSIS"],
-      "prestasi": ["Juara 2 Desain Grafis DKV Kota Bogor 2024", "Sertifikat Skill Academy Ilustrasi"]
-    }
-  },
-  {
-    "id": 11,
-    "nama": "Ivan Permana",
-    "rombel": "XII DKV 2",
-    "alamat": "Jl. Pangrango No.12, Bogor",
-    "foto": "https://i.pravatar.cc/300?img=59",
-    "ttl": "Bogor, 7 Desember 2006",
-    "nisn": "0071234511",
-    "email": "ivan.permana@gmail.com",
-    "no_hp": "081234567811",
-    "tentang": "Siswa kreatif yang menguasai fotografi dan desain produk. Berpengalaman dalam sesi foto komersial untuk berbagai produk UMKM. Aktif mengikuti komunitas fotografer muda Bogor.",
-    "keahlian": ["Fotografi", "Lightroom", "Photoshop", "Product Photography", "Desain Kemasan"],
-    "sertifikat": [
-      { "id": "s1", "nama": "Sertifikat Fotografi Profesional", "penerbit": "SMKN Photography Community", "tahun": "2024", "gambar": "https://picsum.photos/seed/cert1i/600/420" },
-      { "id": "s2", "nama": "Sertifikat Desain Kemasan Produk", "penerbit": "IDCamp Indosat", "tahun": "2023", "gambar": "https://picsum.photos/seed/cert2i/600/420" }
-    ],
-    "cv": {
-      "pendidikan": "SMK Wikrama Bogor – Desain Komunikasi Visual (2022–2025)",
-      "pengalaman": [
-        { "posisi": "Fotografer Produk Freelance", "tempat": "UMKM Kuliner Bogor", "periode": "2023–sekarang" }
-      ],
-      "organisasi": ["Ketua Komunitas Fotografi Sekolah", "Anggota Pramuka"],
-      "prestasi": ["Sertifikat Fotografi Profesional 2024", "Sertifikat Desain Kemasan IDCamp"]
-    }
-  },
-  {
-    "id": 12,
-    "nama": "Julia Wulandari",
-    "rombel": "XII DKV 2",
-    "alamat": "Jl. Bondongan No.31, Bogor",
-    "foto": "https://i.pravatar.cc/300?img=63",
-    "ttl": "Bogor, 25 Juni 2007",
-    "nisn": "0071234512",
-    "email": "julia.wulandari@gmail.com",
-    "no_hp": "081234567812",
-    "tentang": "Siswi multitalenta yang menguasai desain visual dan konten media sosial. Berpengalaman mengelola akun media sosial untuk beberapa brand lokal. Senang bereksperimen dengan tren desain terbaru.",
-    "keahlian": ["Social Media Design", "Canva Pro", "Reels Editing", "Copywriting", "Brand Identity"],
-    "sertifikat": [
-      { "id": "s1", "nama": "Sertifikat Social Media Marketing", "penerbit": "Meta Blueprint", "tahun": "2024", "gambar": "https://picsum.photos/seed/cert1j/600/420" },
-      { "id": "s2", "nama": "Sertifikat Content Creator Profesional", "penerbit": "Skill Academy Ruangguru", "tahun": "2024", "gambar": "https://picsum.photos/seed/cert2j/600/420" },
-      { "id": "s3", "nama": "Penghargaan Siswi Kreatif Wikrama 2", "penerbit": "SMK Wikrama Bogor", "tahun": "2023", "gambar": "https://picsum.photos/seed/cert3j/600/420" }
-    ],
-    "cv": {
-      "pendidikan": "SMK Wikrama Bogor – Desain Komunikasi Visual (2022–2025)",
-      "pengalaman": [
-        { "posisi": "Social Media Manager", "tempat": "Kafe Lokal Bogor", "periode": "2023–sekarang" },
-        { "posisi": "Content Creator", "tempat": "Brand Fashion Lokal", "periode": "Agu–Des 2024" }
-      ],
-      "organisasi": ["Bendahara Ekskul DKV", "Anggota PMR"],
-      "prestasi": ["Sertifikat Meta Blueprint 2024", "Siswi Kreatif Wikrama 2 2023"]
+      "pendidikan": "",
+      "pengalaman": [],
+      "organisasi": [],
+      "prestasi": []
     }
   }
 ]

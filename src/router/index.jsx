@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <HomePage /> },
       { path: 'murid', element: <Navigate to="/murid/kelas10" replace /> },
-      { path: 'murid/kelas12/:id', element: <SiswaDetailPage /> },
+      { path: 'murid/:kelas/:id', element: <SiswaDetailPage /> },
       { path: 'murid/:kelas', element: <MuridPage /> },
       { path: 'alumni/:tahun', element: <AlumniPage /> },
       { path: 'alumni', element: <Navigate to="/alumni/2025" replace /> },

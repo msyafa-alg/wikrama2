@@ -1,24 +1,23 @@
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import { MapPin, Mail, AtSign } from 'lucide-react'
 
 const Footer = () => {
   return (
-    <footer style={{ background: 'linear-gradient(135deg, #0a3660 0%, #0F4C81 100%)' }} className="text-white">
+    <footer style={{ background: 'linear-gradient(180deg, #0F172A 0%, #0a1020 100%)', borderTop: '1px solid rgba(255,255,255,0.08)' }} className="text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur flex items-center justify-center font-bold text-xl border border-white/30">
-                W2
+              <div className="w-12 h-12 rounded-xl overflow-hidden shadow-lg">
+                <img src="/favicon.png" alt="Logo Wikrama 2" className="w-full h-full object-cover" />
               </div>
               <div>
-                <h3 className="font-bold text-xl">Wikrama 2</h3>
-                <p className="text-blue-200 text-xs">SMK Wikrama Bogor</p>
+                <h3 className="font-bold text-xl text-white">Wikrama 2</h3>
+                <p className="text-xs" style={{ color: '#CBD5E1' }}>SMK Wikrama Bogor</p>
               </div>
             </div>
-            <p className="text-blue-200 text-sm leading-relaxed">
+            <p className="text-sm leading-relaxed" style={{ color: '#CBD5E1' }}>
               Tempat Bertumbuh, Berkarya, dan Menginspirasi Bersama. Rayon kebanggaan SMK Wikrama Bogor.
             </p>
           </div>
@@ -34,8 +33,9 @@ const Footer = () => {
                 { label: 'Kontak', href: '/kontak' },
               ].map((item) => (
                 <li key={item.href}>
-                  <Link to={item.href} className="text-blue-200 hover:text-white text-sm transition-colors flex items-center gap-2">
-                    <span className="w-1 h-1 bg-sky-400 rounded-full" />
+                  <Link to={item.href} className="text-sm transition-colors flex items-center gap-2 hover:text-white"
+                    style={{ color: '#CBD5E1' }}>
+                    <span className="w-1 h-1 rounded-full" style={{ background: '#38bdf8' }} />
                     {item.label}
                   </Link>
                 </li>
@@ -55,8 +55,9 @@ const Footer = () => {
                 { label: 'Alumni 2024', href: '/alumni/2024' },
               ].map((item) => (
                 <li key={item.href}>
-                  <Link to={item.href} className="text-blue-200 hover:text-white text-sm transition-colors flex items-center gap-2">
-                    <span className="w-1 h-1 bg-sky-400 rounded-full" />
+                  <Link to={item.href} className="text-sm transition-colors flex items-center gap-2 hover:text-white"
+                    style={{ color: '#CBD5E1' }}>
+                    <span className="w-1 h-1 rounded-full" style={{ background: '#38bdf8' }} />
                     {item.label}
                   </Link>
                 </li>
@@ -68,16 +69,16 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold text-lg mb-4 text-white">Kontak</h4>
             <ul className="space-y-3">
-              <li className="flex items-start gap-3 text-sm text-blue-200">
-                <MapPin className="w-4 h-4 mt-0.5 shrink-0 text-sky-400" strokeWidth={1.8} />
+              <li className="flex items-start gap-3 text-sm" style={{ color: '#CBD5E1' }}>
+                <MapPin className="w-4 h-4 mt-0.5 shrink-0" style={{ color: '#38bdf8' }} strokeWidth={1.8} />
                 Jl. Raya Wangun, RT.01/RW.06, Sindangsari, Kec. Bogor Tim., Kota Bogor, Jawa Barat 16146
               </li>
-              <li className="flex items-center gap-3 text-sm text-blue-200">
-                <Mail className="w-4 h-4 shrink-0 text-sky-400" strokeWidth={1.8} />
+              <li className="flex items-center gap-3 text-sm" style={{ color: '#CBD5E1' }}>
+                <Mail className="w-4 h-4 shrink-0" style={{ color: '#38bdf8' }} strokeWidth={1.8} />
                 wikrama2@smkwikrama.sch.id
               </li>
-              <li className="flex items-center gap-3 text-sm text-blue-200">
-                <AtSign className="w-4 h-4 shrink-0 text-sky-400" strokeWidth={1.8} />
+              <li className="flex items-center gap-3 text-sm" style={{ color: '#CBD5E1' }}>
+                <AtSign className="w-4 h-4 shrink-0" style={{ color: '#38bdf8' }} strokeWidth={1.8} />
                 @wikrama2_bogor
               </li>
             </ul>
@@ -86,12 +87,12 @@ const Footer = () => {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-white/10">
+      <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-blue-200 text-xs">
+          <p className="text-xs" style={{ color: '#CBD5E1' }}>
             © {new Date().getFullYear()} WIKRAMA 2 - SMK Wikrama Bogor. All rights reserved.
           </p>
-          <p className="text-blue-300 text-xs">
+          <p className="text-xs" style={{ color: '#38bdf8' }}>
             Dibuat Oleh Syafa
           </p>
         </div>

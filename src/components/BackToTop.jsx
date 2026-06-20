@@ -25,7 +25,7 @@ const BackToTop = () => {
           exit={{ opacity: 0, y: 20 }}
           onClick={scrollToTop}
           className="fixed bottom-8 right-6 z-50 w-12 h-12 rounded-full shadow-2xl flex items-center justify-center text-white cursor-pointer"
-          style={{ background: 'linear-gradient(135deg, #0F4C81, #38bdf8)' }}
+          style={{ background: 'linear-gradient(135deg, #1E3A5F, #38bdf8)', border: '1px solid rgba(56,189,248,0.3)' }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           aria-label="Kembali ke atas"

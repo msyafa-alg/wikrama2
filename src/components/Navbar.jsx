@@ -9,8 +9,6 @@ const Navbar = () => {
   const [alumniDropdown, setAlumniDropdown] = useState(false)
   const location = useLocation()
 
-  const isHome = location.pathname === '/'
-
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60)
     window.addEventListener('scroll', handleScroll)
@@ -22,15 +20,6 @@ const Navbar = () => {
     setStudentDropdown(false)
     setAlumniDropdown(false)
   }, [location])
-
-  const navBg = isHome
-    ? scrolled
-      ? 'bg-white shadow-lg'
-      : 'bg-transparent'
-    : 'bg-white shadow-lg'
-
-  const textColor = isHome && !scrolled ? 'text-white' : 'text-gray-800'
-  const logoColor = isHome && !scrolled ? 'text-white' : 'text-[#0F4C81]'
 
   const navLinks = [
     { label: 'Beranda', href: '/' },
@@ -54,24 +43,34 @@ const Navbar = () => {
     { label: 'Kontak', href: '/kontak' },
   ]
 
+  const isActive = (href) => location.pathname === href
+
   return (
     <motion.nav
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className={`fixed top-0 left-0 w-full z-[100] transition-all duration-300 ${navBg}`}
+      className="fixed top-0 left-0 w-full z-[100] transition-all duration-300"
+      style={{
+        background: scrolled
+          ? 'rgba(15,23,42,0.92)'
+          : 'rgba(15,23,42,0.55)',
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.08)' : '1px solid transparent',
+        boxShadow: scrolled ? '0 4px 30px rgba(0,0,0,0.3)' : 'none',
+      }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-18">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg shadow-md"
-              style={{ background: isHome && !scrolled ? 'rgba(255,255,255,0.2)' : '#0F4C81', color: 'white', border: isHome && !scrolled ? '1px solid rgba(255,255,255,0.3)' : 'none' }}>
-              W2
+            <div className="w-10 h-10 rounded-xl overflow-hidden shadow-lg">
+              <img src="/favicon.png" alt="Logo Wikrama 2" className="w-full h-full object-cover" />
             </div>
             <div>
-              <p className={`font-bold text-lg leading-tight transition-colors ${logoColor}`}>WIKRAMA 2</p>
-              <p className={`text-xs leading-tight transition-colors ${isHome && !scrolled ? 'text-blue-200' : 'text-gray-400'}`}>SMK Wikrama Bogor</p>
+              <p className="font-bold text-lg leading-tight text-white tracking-wide">WIKRAMA 2</p>
+              <p className="text-xs leading-tight" style={{ color: '#CBD5E1' }}>SMK Wikrama Bogor</p>
             </div>
           </Link>
 
@@ -91,11 +90,13 @@ const Navbar = () => {
                     else setAlumniDropdown(false)
                   }}
                 >
-                  <button
-                    className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all hover:bg-white/10 ${textColor}`}
+                  <button className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-white hover:text-[#38bdf8]"
+                    style={{ background: 'transparent' }}
+                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.06)'}
+                    onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                   >
                     {link.label}
-                    <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-3.5 h-3.5 mt-0.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </button>
@@ -107,13 +108,22 @@ const Navbar = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 8 }}
                         transition={{ duration: 0.15 }}
-                        className="absolute top-full left-0 mt-1 w-44 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden"
+                        className="absolute top-full left-0 mt-2 w-44 rounded-xl overflow-hidden"
+                        style={{
+                          background: 'rgba(15,23,42,0.95)',
+                          backdropFilter: 'blur(20px)',
+                          border: '1px solid rgba(255,255,255,0.08)',
+                          boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
+                        }}
                       >
                         {link.dropdown.map((item) => (
                           <Link
                             key={item.href}
                             to={item.href}
-                            className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-[#0F4C81] font-medium transition-colors"
+                            className="block px-4 py-2.5 text-sm font-medium transition-colors duration-150"
+                            style={{ color: '#CBD5E1' }}
+                            onMouseEnter={e => { e.currentTarget.style.color = '#38bdf8'; e.currentTarget.style.background = 'rgba(56,189,248,0.08)' }}
+                            onMouseLeave={e => { e.currentTarget.style.color = '#CBD5E1'; e.currentTarget.style.background = 'transparent' }}
                           >
                             {item.label}
                           </Link>
@@ -126,7 +136,23 @@ const Navbar = () => {
                 <Link
                   key={link.href}
                   to={link.href}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all hover:bg-white/10 ${textColor} ${location.pathname === link.href ? 'bg-white/20' : ''}`}
+                  className="px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200"
+                  style={{
+                    color: isActive(link.href) ? '#38bdf8' : '#ffffff',
+                    background: isActive(link.href) ? 'rgba(56,189,248,0.1)' : 'transparent',
+                  }}
+                  onMouseEnter={e => {
+                    if (!isActive(link.href)) {
+                      e.currentTarget.style.color = '#38bdf8'
+                      e.currentTarget.style.background = 'rgba(255,255,255,0.06)'
+                    }
+                  }}
+                  onMouseLeave={e => {
+                    if (!isActive(link.href)) {
+                      e.currentTarget.style.color = '#ffffff'
+                      e.currentTarget.style.background = 'transparent'
+                    }
+                  }}
                 >
                   {link.label}
                 </Link>
@@ -137,13 +163,14 @@ const Navbar = () => {
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className={`lg:hidden p-2 rounded-lg transition-colors ${textColor} hover:bg-white/10`}
+            className="lg:hidden p-2 rounded-lg transition-colors text-white"
+            style={{ background: 'rgba(255,255,255,0.06)' }}
             aria-label="Toggle menu"
           >
             <div className="w-5 h-4 flex flex-col justify-between">
-              <span className={`block h-0.5 rounded transition-all duration-300 ${mobileOpen ? 'rotate-45 translate-y-1.5' : ''} ${isHome && !scrolled ? 'bg-white' : 'bg-gray-700'}`} />
-              <span className={`block h-0.5 rounded transition-all duration-300 ${mobileOpen ? 'opacity-0' : ''} ${isHome && !scrolled ? 'bg-white' : 'bg-gray-700'}`} />
-              <span className={`block h-0.5 rounded transition-all duration-300 ${mobileOpen ? '-rotate-45 -translate-y-2.5' : ''} ${isHome && !scrolled ? 'bg-white' : 'bg-gray-700'}`} />
+              <span className={`block h-0.5 rounded bg-white transition-all duration-300 ${mobileOpen ? 'rotate-45 translate-y-1.5' : ''}`} />
+              <span className={`block h-0.5 rounded bg-white transition-all duration-300 ${mobileOpen ? 'opacity-0' : ''}`} />
+              <span className={`block h-0.5 rounded bg-white transition-all duration-300 ${mobileOpen ? '-rotate-45 -translate-y-2.5' : ''}`} />
             </div>
           </button>
         </div>
@@ -157,18 +184,23 @@ const Navbar = () => {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
-            className="lg:hidden bg-white border-t border-gray-100 shadow-xl overflow-hidden"
+            className="lg:hidden overflow-hidden"
+            style={{
+              background: 'rgba(15,23,42,0.98)',
+              borderTop: '1px solid rgba(255,255,255,0.08)',
+            }}
           >
             <div className="px-4 py-4 space-y-1">
               {navLinks.map((link) =>
                 link.dropdown ? (
                   <div key={link.label}>
-                    <p className="px-3 py-2 text-sm font-semibold text-[#0F4C81]">{link.label}</p>
+                    <p className="px-3 py-2 text-sm font-semibold" style={{ color: '#38bdf8' }}>{link.label}</p>
                     {link.dropdown.map((item) => (
                       <Link
                         key={item.href}
                         to={item.href}
-                        className="block px-6 py-2 text-sm text-gray-600 hover:text-[#0F4C81] hover:bg-blue-50 rounded-lg transition-colors"
+                        className="block px-6 py-2 text-sm rounded-lg transition-colors"
+                        style={{ color: '#CBD5E1' }}
                       >
                         {item.label}
                       </Link>
@@ -178,7 +210,11 @@ const Navbar = () => {
                   <Link
                     key={link.href}
                     to={link.href}
-                    className={`block px-3 py-2 text-sm font-medium rounded-lg transition-colors ${location.pathname === link.href ? 'text-[#0F4C81] bg-blue-50' : 'text-gray-700 hover:text-[#0F4C81] hover:bg-gray-50'}`}
+                    className="block px-3 py-2 text-sm font-medium rounded-lg transition-colors"
+                    style={{
+                      color: isActive(link.href) ? '#38bdf8' : '#CBD5E1',
+                      background: isActive(link.href) ? 'rgba(56,189,248,0.1)' : 'transparent',
+                    }}
                   >
                     {link.label}
                   </Link>

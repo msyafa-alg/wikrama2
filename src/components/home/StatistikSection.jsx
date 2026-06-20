@@ -3,8 +3,8 @@ import { motion, useInView } from 'framer-motion'
 import { Users, GraduationCap, Trophy, Camera } from 'lucide-react'
 
 const stats = [
-  { icon: Users, label: 'Total Murid', value: 360, suffix: '+', color: '#0F4C81' },
-  { icon: GraduationCap, label: 'Total Alumni', value: 480, suffix: '+', color: '#0ea5e9' },
+  { icon: Users, label: 'Total Murid', value: 360, suffix: '+', color: '#38bdf8' },
+  { icon: GraduationCap, label: 'Total Alumni', value: 480, suffix: '+', color: '#7dd3fc' },
   { icon: Trophy, label: 'Prestasi', value: 24, suffix: '', color: '#f59e0b' },
   { icon: Camera, label: 'Dokumentasi', value: 120, suffix: '+', color: '#10b981' },
 ]
@@ -37,7 +37,7 @@ const StatistikSection = () => {
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section ref={ref} className="py-20 px-4" style={{ background: 'linear-gradient(135deg, #0F4C81 0%, #0a3660 100%)' }}>
+    <section ref={ref} className="py-20 px-4" style={{ background: 'linear-gradient(135deg, #1E3A5F 0%, #0F172A 100%)' }}>
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -45,8 +45,8 @@ const StatistikSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium text-sky-300 mb-3"
-            style={{ background: 'rgba(56,189,248,0.15)', border: '1px solid rgba(56,189,248,0.3)' }}>
+          <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium mb-3"
+            style={{ background: 'rgba(56,189,248,0.12)', border: '1px solid rgba(56,189,248,0.3)', color: '#38bdf8' }}>
             Dalam Angka
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-white">Statistik Rayon</h2>
@@ -59,12 +59,12 @@ const StatistikSection = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              whileHover={{ y: -6 }}
-              className="relative p-6 sm:p-8 rounded-2xl text-center overflow-hidden"
+              whileHover={{ y: -4, boxShadow: '0 10px 30px rgba(0,0,0,0.25)' }}
+              className="relative p-6 sm:p-8 rounded-2xl text-center overflow-hidden transition-all duration-300"
               style={{
-                background: 'rgba(255,255,255,0.08)',
+                background: 'rgba(255,255,255,0.04)',
                 backdropFilter: 'blur(12px)',
-                border: '1px solid rgba(255,255,255,0.12)',
+                border: '1px solid rgba(255,255,255,0.08)',
               }}
             >
               <div className="absolute inset-0 opacity-5 rounded-2xl"
@@ -72,8 +72,8 @@ const StatistikSection = () => {
 
               <div className="flex justify-center mb-3 relative z-10">
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center"
-                  style={{ background: `${stat.color}22` }}>
-                  <stat.icon className="w-6 h-6" style={{ color: stat.color === '#0F4C81' ? '#7dd3fc' : stat.color }} strokeWidth={1.8} />
+                  style={{ background: `${stat.color}18` }}>
+                  <stat.icon className="w-6 h-6" style={{ color: stat.color }} strokeWidth={1.8} />
                 </div>
               </div>
               <div className="relative z-10">
@@ -81,7 +81,7 @@ const StatistikSection = () => {
                   <CountUp target={stat.value} isActive={isInView} />
                   {stat.suffix}
                 </p>
-                <p className="text-blue-200 text-sm font-medium">{stat.label}</p>
+                <p className="text-sm font-medium" style={{ color: '#CBD5E1' }}>{stat.label}</p>
               </div>
             </motion.div>
           ))}

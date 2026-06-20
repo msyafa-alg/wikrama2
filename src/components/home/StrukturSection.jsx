@@ -7,7 +7,7 @@ const StrukturSection = () => {
   const [zoomed, setZoomed] = useState(false)
 
   return (
-    <section ref={ref} className="py-20 px-4 bg-gray-50">
+    <section ref={ref} className="py-20 px-4" style={{ background: '#0F172A' }}>
       <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -15,12 +15,12 @@ const StrukturSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium text-[#0F4C81] mb-3"
-            style={{ background: 'rgba(15,76,129,0.08)', border: '1px solid rgba(15,76,129,0.2)' }}>
+          <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium mb-3"
+            style={{ background: 'rgba(56,189,248,0.1)', border: '1px solid rgba(56,189,248,0.25)', color: '#38bdf8' }}>
             Organisasi
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">Struktur Organisasi</h2>
-          <p className="text-gray-500 mt-3">Susunan kepengurusan Rayon Wikrama 2</p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white">Struktur Organisasi</h2>
+          <p className="mt-3" style={{ color: '#CBD5E1' }}>Susunan kepengurusan Rayon Wikrama 2</p>
         </motion.div>
 
         <motion.div
@@ -30,7 +30,7 @@ const StrukturSection = () => {
           className="relative group cursor-zoom-in"
           onClick={() => setZoomed(true)}
         >
-          <div className="rounded-2xl overflow-hidden shadow-xl border border-gray-200">
+          <div className="rounded-2xl overflow-hidden shadow-xl" style={{ border: '1px solid rgba(255,255,255,0.08)' }}>
             <img
               src="https://picsum.photos/seed/struktur/1200/700"
               alt="Struktur Organisasi Rayon Wikrama 2"
@@ -38,7 +38,7 @@ const StrukturSection = () => {
             />
           </div>
           <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"
-            style={{ background: 'rgba(15,76,129,0.3)', backdropFilter: 'blur(4px)' }}>
+            style={{ background: 'rgba(15,23,42,0.65)', backdropFilter: 'blur(4px)' }}>
             <div className="text-white text-center">
               <svg className="w-12 h-12 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
@@ -48,7 +48,6 @@ const StrukturSection = () => {
           </div>
         </motion.div>
 
-        {/* Modal zoom */}
         {zoomed && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -65,7 +64,8 @@ const StrukturSection = () => {
               onClick={(e) => e.stopPropagation()}
             />
             <button
-              className="absolute top-4 right-4 text-white bg-white/10 hover:bg-white/20 rounded-full p-2 transition-colors"
+              className="absolute top-4 right-4 text-white rounded-full p-2 transition-colors"
+              style={{ background: 'rgba(255,255,255,0.1)' }}
               onClick={() => setZoomed(false)}
             >
               <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

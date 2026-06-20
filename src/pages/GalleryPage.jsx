@@ -33,17 +33,17 @@ const GalleryPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-20">
+    <div className="min-h-screen pt-20" style={{ background: '#0F172A' }}>
       {/* Header */}
-      <div className="py-14 px-4" style={{ background: 'linear-gradient(135deg, #0F4C81 0%, #0a3660 100%)' }}>
+      <div className="py-14 px-4" style={{ background: 'linear-gradient(135deg, #1E3A5F 0%, #0F172A 100%)' }}>
         <div className="max-w-7xl mx-auto text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium text-sky-300 mb-3"
-              style={{ background: 'rgba(56,189,248,0.15)', border: '1px solid rgba(56,189,248,0.3)' }}>
+            <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium mb-3"
+              style={{ background: 'rgba(56,189,248,0.12)', border: '1px solid rgba(56,189,248,0.3)', color: '#38bdf8' }}>
               Foto & Dokumentasi
             </span>
             <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">Gallery Wikrama 2</h1>
-            <p className="text-blue-200">Momen berharga perjalanan kami</p>
+            <p style={{ color: '#CBD5E1' }}>Momen berharga perjalanan kami</p>
           </motion.div>
 
           <div className="flex flex-wrap justify-center gap-2 mt-8">
@@ -51,9 +51,11 @@ const GalleryPage = () => {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
-                  activeCategory === cat ? 'bg-white text-[#0F4C81] shadow-lg' : 'bg-white/10 text-white hover:bg-white/20 border border-white/20'
-                }`}
+                className="px-4 py-2 rounded-xl text-sm font-medium transition-all"
+                style={activeCategory === cat
+                  ? { background: '#38bdf8', color: '#0F172A', fontWeight: 700 }
+                  : { background: 'rgba(255,255,255,0.06)', color: '#ffffff', border: '1px solid rgba(255,255,255,0.12)' }
+                }
               >
                 {cat}
               </button>
@@ -74,7 +76,8 @@ const GalleryPage = () => {
               className="masonry-item group cursor-pointer"
               onClick={() => openModal(item, i)}
             >
-              <div className="relative rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300">
+              <div className="relative rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300"
+                style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
                 <img
                   src={item.foto}
                   alt={item.judul}
@@ -82,11 +85,11 @@ const GalleryPage = () => {
                   loading="lazy"
                 />
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-end justify-start p-3"
-                  style={{ background: 'linear-gradient(135deg, rgba(15,76,129,0.6), transparent)' }}>
-                  <span className="px-2 py-0.5 rounded-full text-xs text-white bg-sky-600/80">{item.kategori}</span>
+                  style={{ background: 'linear-gradient(135deg, rgba(15,23,42,0.7), transparent)' }}>
+                  <span className="px-2 py-0.5 rounded-full text-xs text-white" style={{ background: 'rgba(56,189,248,0.6)' }}>{item.kategori}</span>
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.7), transparent)' }}>
+                  style={{ background: 'linear-gradient(to top, rgba(15,23,42,0.85), transparent)' }}>
                   <p className="text-white text-xs font-medium">{item.judul}</p>
                 </div>
               </div>
@@ -121,28 +124,29 @@ const GalleryPage = () => {
               <div className="mt-3 flex items-center justify-between px-2">
                 <div>
                   <p className="text-white font-semibold">{selectedImg.judul}</p>
-                  <span className="text-sky-400 text-sm">{selectedImg.kategori}</span>
+                  <span className="text-sm" style={{ color: '#38bdf8' }}>{selectedImg.kategori}</span>
                 </div>
-                <span className="text-gray-400 text-sm">{selectedIndex + 1} / {filtered.length}</span>
+                <span className="text-sm" style={{ color: '#CBD5E1' }}>{selectedIndex + 1} / {filtered.length}</span>
               </div>
 
-              {/* Prev/Next */}
               <button onClick={goPrev}
-                className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center transition-colors">
+                className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center text-white transition-colors"
+                style={{ background: 'rgba(255,255,255,0.1)' }}>
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
               </button>
               <button onClick={goNext}
-                className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 hover:bg-black/70 text-white flex items-center justify-center transition-colors">
+                className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full flex items-center justify-center text-white transition-colors"
+                style={{ background: 'rgba(255,255,255,0.1)' }}>
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </button>
 
-              {/* Close */}
               <button onClick={() => setSelectedImg(null)}
-                className="absolute -top-4 -right-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors">
+                className="absolute -top-4 -right-4 w-9 h-9 rounded-full flex items-center justify-center text-white transition-colors"
+                style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)' }}>
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>

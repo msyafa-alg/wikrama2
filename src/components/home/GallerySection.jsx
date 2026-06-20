@@ -15,7 +15,7 @@ const GallerySection = () => {
     : galleryData.filter((g) => g.kategori === activeCategory)
 
   return (
-    <section ref={ref} id="gallery" className="py-20 px-4 bg-gray-50">
+    <section ref={ref} id="gallery" className="py-20 px-4" style={{ background: '#1E293B' }}>
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -23,12 +23,12 @@ const GallerySection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium text-[#0F4C81] mb-3"
-            style={{ background: 'rgba(15,76,129,0.08)', border: '1px solid rgba(15,76,129,0.2)' }}>
+          <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium mb-3"
+            style={{ background: 'rgba(56,189,248,0.1)', border: '1px solid rgba(56,189,248,0.25)', color: '#38bdf8' }}>
             Foto & Dokumentasi
           </span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">Gallery Rayon</h2>
-          <p className="text-gray-500 mt-3">Momen berharga perjalanan Wikrama 2</p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white">Gallery Rayon</h2>
+          <p className="mt-3" style={{ color: '#CBD5E1' }}>Momen berharga perjalanan Wikrama 2</p>
         </motion.div>
 
         {/* Category filter */}
@@ -42,12 +42,11 @@ const GallerySection = () => {
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
-                activeCategory === cat
-                  ? 'text-white shadow-lg scale-105'
-                  : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
-              }`}
-              style={activeCategory === cat ? { background: 'linear-gradient(135deg, #0F4C81, #38bdf8)' } : {}}
+              className="px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200"
+              style={activeCategory === cat
+                ? { background: '#38bdf8', color: '#0F172A', fontWeight: 700 }
+                : { background: 'rgba(255,255,255,0.05)', color: '#CBD5E1', border: '1px solid rgba(255,255,255,0.08)' }
+              }
             >
               {cat}
             </button>
@@ -67,7 +66,8 @@ const GallerySection = () => {
               className="masonry-item group cursor-pointer"
               onClick={() => setSelectedImg(item)}
             >
-              <div className="relative rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300">
+              <div className="relative rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition-shadow duration-300"
+                style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
                 <img
                   src={item.foto}
                   alt={item.judul}
@@ -75,12 +75,12 @@ const GallerySection = () => {
                   loading="lazy"
                 />
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center"
-                  style={{ background: 'rgba(15,76,129,0.7)', backdropFilter: 'blur(2px)' }}>
+                  style={{ background: 'rgba(15,23,42,0.75)', backdropFilter: 'blur(2px)' }}>
                   <svg className="w-8 h-8 text-white mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                   <p className="text-white text-xs font-medium text-center px-2">{item.judul}</p>
-                  <span className="mt-1 px-2 py-0.5 rounded-full text-xs text-sky-200 bg-sky-900/40">{item.kategori}</span>
+                  <span className="mt-1 px-2 py-0.5 rounded-full text-xs" style={{ color: '#38bdf8', background: 'rgba(56,189,248,0.15)' }}>{item.kategori}</span>
                 </div>
               </div>
             </motion.div>
@@ -105,20 +105,17 @@ const GallerySection = () => {
               className="relative max-w-3xl w-full"
               onClick={(e) => e.stopPropagation()}
             >
-              <img
-                src={selectedImg.foto}
-                alt={selectedImg.judul}
-                className="w-full rounded-2xl shadow-2xl"
-              />
+              <img src={selectedImg.foto} alt={selectedImg.judul} className="w-full rounded-2xl shadow-2xl" />
               <div className="mt-3 flex items-center justify-between">
                 <div>
                   <p className="text-white font-semibold">{selectedImg.judul}</p>
-                  <span className="text-sky-300 text-sm">{selectedImg.kategori}</span>
+                  <span className="text-sm" style={{ color: '#38bdf8' }}>{selectedImg.kategori}</span>
                 </div>
               </div>
               <button
                 onClick={() => setSelectedImg(null)}
-                className="absolute -top-4 -right-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+                className="absolute -top-4 -right-4 w-9 h-9 rounded-full flex items-center justify-center text-white transition-colors"
+                style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)' }}
               >
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />

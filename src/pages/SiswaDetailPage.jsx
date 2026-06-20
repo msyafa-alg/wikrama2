@@ -7,6 +7,15 @@ import {
   ZoomIn, User, X, GraduationCap
 } from 'lucide-react'
 import kelas12DetailData from '../data/kelas12detail.json'
+import studentsData from '../data/students.json'
+
+const kelasLabels = {
+  kelas10: 'Kelas 10',
+  kelas11: 'Kelas 11',
+  kelas12: 'Kelas 12',
+}
+
+const cardStyle = { background: '#1E293B', border: '1px solid rgba(255,255,255,0.08)' }
 
 const CertModal = ({ cert, onClose }) => (
   <motion.div
@@ -20,18 +29,17 @@ const CertModal = ({ cert, onClose }) => (
       initial={{ scale: 0.85 }}
       animate={{ scale: 1 }}
       exit={{ scale: 0.85 }}
-      className="relative max-w-2xl w-full"
+      className="relative w-full max-w-2xl"
       onClick={(e) => e.stopPropagation()}
     >
       <img src={cert.gambar} alt={cert.nama} className="w-full rounded-2xl shadow-2xl" />
-      <div className="mt-4 text-center">
-        <p className="text-white font-semibold text-base">{cert.nama}</p>
-        <p className="text-sky-300 text-sm mt-1">{cert.penerbit} · {cert.tahun}</p>
+      <div className="mt-3 text-center px-2">
+        <p className="text-white font-semibold text-sm sm:text-base">{cert.nama}</p>
+        <p className="text-xs sm:text-sm mt-1" style={{ color: '#38bdf8' }}>{cert.penerbit} · {cert.tahun}</p>
       </div>
-      <button
-        onClick={onClose}
-        className="absolute -top-3 -right-3 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
-      >
+      <button onClick={onClose}
+        className="absolute -top-3 -right-3 w-9 h-9 rounded-full text-white flex items-center justify-center"
+        style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)' }}>
         <X className="w-4 h-4" />
       </button>
     </motion.div>
@@ -40,28 +48,30 @@ const CertModal = ({ cert, onClose }) => (
 
 const SectionTitle = ({ icon: Icon, title }) => (
   <div className="flex items-center gap-3 mb-5">
-    <div className="w-9 h-9 rounded-xl flex items-center justify-center shadow-sm"
-      style={{ background: 'linear-gradient(135deg, #0F4C81, #38bdf8)' }}>
+    <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+      style={{ background: 'linear-gradient(135deg, #1E3A5F, #38bdf8)' }}>
       <Icon className="w-4 h-4 text-white" strokeWidth={2} />
     </div>
-    <h2 className="text-lg font-bold text-gray-800">{title}</h2>
+    <h2 className="text-base sm:text-lg font-bold text-white">{title}</h2>
   </div>
 )
 
 const SiswaDetailPage = () => {
-  const { id } = useParams()
+  const { kelas, id } = useParams()
   const navigate = useNavigate()
   const [certModal, setCertModal] = useState(null)
 
-  const siswa = kelas12DetailData.find((s) => s.id === parseInt(id))
+  const basicData = (studentsData[kelas] || []).find((s) => s.id === parseInt(id))
+  const detailData = kelas === 'kelas12' ? kelas12DetailData.find((s) => s.id === parseInt(id)) : null
+  const siswa = detailData ? { ...basicData, ...detailData } : basicData
 
   if (!siswa) {
     return (
-      <div className="min-h-screen bg-gray-50 pt-20 flex items-center justify-center">
+      <div className="min-h-screen pt-20 flex items-center justify-center px-4" style={{ background: '#0F172A' }}>
         <div className="text-center">
-          <p className="text-gray-400 text-xl font-medium mb-4">Siswa tidak ditemukan</p>
-          <Link to="/murid/kelas12" className="text-[#0F4C81] font-semibold hover:underline">
-            ← Kembali ke Daftar Kelas 12
+          <p className="text-lg font-medium mb-4" style={{ color: '#CBD5E1' }}>Siswa tidak ditemukan</p>
+          <Link to={`/murid/${kelas}`} className="font-semibold hover:underline" style={{ color: '#38bdf8' }}>
+            ← Kembali ke Daftar {kelasLabels[kelas] || 'Murid'}
           </Link>
         </div>
       </div>
@@ -70,145 +80,153 @@ const SiswaDetailPage = () => {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50 pt-16">
+      <div className="min-h-screen pt-16" style={{ background: '#0F172A' }}>
 
-        {/* ── HERO BANNER ── */}
-        <div className="relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0F4C81 0%, #0a3660 100%)' }}>
-          {/* decorative blobs */}
-          <div className="absolute top-0 right-0 w-80 h-80 rounded-full opacity-10 pointer-events-none"
+        {/* ── HERO ── */}
+        <div className="relative overflow-hidden"
+          style={{ background: 'linear-gradient(135deg, #1E3A5F 0%, #0F172A 100%)' }}>
+          <div className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-10 pointer-events-none"
             style={{ background: 'radial-gradient(circle, #38bdf8, transparent)', transform: 'translate(30%,-30%)' }} />
-          <div className="absolute bottom-0 left-0 w-60 h-60 rounded-full opacity-10 pointer-events-none"
-            style={{ background: 'radial-gradient(circle, #0F4C81, transparent)', transform: 'translate(-30%,30%)' }} />
+          <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full opacity-8 pointer-events-none"
+            style={{ background: 'radial-gradient(circle, #1E3A5F, transparent)', transform: 'translate(-30%,30%)' }} />
 
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 relative z-10">
-            {/* Back button */}
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 relative z-10">
+            {/* Back */}
             <motion.button
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
-              onClick={() => navigate('/murid/kelas12')}
-              className="flex items-center gap-2 text-sky-300 hover:text-white text-sm font-medium mb-8 transition-colors group"
+              onClick={() => navigate(`/murid/${kelas}`)}
+              className="flex items-center gap-2 text-sm font-medium mb-6 transition-colors group hover:text-white"
+              style={{ color: '#38bdf8' }}
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" strokeWidth={2} />
-              Kembali ke Daftar Kelas 12
+              Kembali ke Daftar {kelasLabels[kelas] || 'Murid'}
             </motion.button>
 
-            {/* Profile card */}
+            {/* Profile */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="flex flex-col sm:flex-row items-center sm:items-start gap-6"
+              className="flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-6"
             >
               {/* Photo */}
               <div className="relative shrink-0">
-                <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-3xl overflow-hidden ring-4 shadow-2xl"
-                  style={{ ringColor: 'rgba(255,255,255,0.2)' }}>
-                  <img
-                    src={siswa.foto}
-                    alt={siswa.nama}
-                    className="w-full h-full object-cover"
-                  />
+                <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl"
+                  style={{ border: '2px solid rgba(56,189,248,0.3)' }}>
+                  <img src={siswa.foto} alt={siswa.nama} className="w-full h-full object-cover" />
                 </div>
-                <div className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-green-400 border-4 border-[#0a3660] shadow" />
+                <div className="absolute -bottom-2 -right-2 w-7 h-7 rounded-full bg-green-400 shadow"
+                  style={{ border: '3px solid #0F172A' }} />
               </div>
 
               {/* Info */}
-              <div className="flex-1 text-center sm:text-left">
+              <div className="flex-1 text-center sm:text-left min-w-0">
                 <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-2">
-                  <span className="px-3 py-1 rounded-full text-xs font-semibold text-sky-200"
-                    style={{ background: 'rgba(56,189,248,0.15)', border: '1px solid rgba(56,189,248,0.3)' }}>
+                  <span className="px-2.5 py-1 rounded-full text-xs font-semibold"
+                    style={{ background: 'rgba(56,189,248,0.15)', border: '1px solid rgba(56,189,248,0.3)', color: '#38bdf8' }}>
                     {siswa.rombel}
                   </span>
-                  <span className="px-3 py-1 rounded-full text-xs font-semibold text-white"
-                    style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)' }}>
-                    NISN {siswa.nisn}
-                  </span>
+                  {siswa.nisn && (
+                    <span className="px-2.5 py-1 rounded-full text-xs font-semibold text-white"
+                      style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)' }}>
+                      NISN {siswa.nisn}
+                    </span>
+                  )}
+                  {siswa.isDevWeb && (
+                    <span className="relative flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-black text-white shadow-xl overflow-hidden"
+                      style={{ background: 'linear-gradient(135deg, #4f46e5, #7c3aed, #a855f7)' }}>
+                      <span className="absolute inset-0 rounded-full blur-sm opacity-50"
+                        style={{ background: 'linear-gradient(135deg, #4f46e5, #a855f7)' }} />
+                      <span className="absolute inset-0 -translate-x-full"
+                        style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent)', animation: 'shimmer 2.5s infinite' }} />
+                      <span className="relative z-10 flex items-center gap-1.5">
+                        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                        <span className="tracking-widest uppercase text-[10px]">Web Developer</span>
+                      </span>
+                    </span>
+                  )}
                 </div>
-                <h1 className="text-3xl sm:text-4xl font-black text-white mb-1">{siswa.nama}</h1>
-                <p className="text-blue-200 text-sm mb-4">SMK Wikrama Bogor · Wikrama 2</p>
-
-                {/* Skill tags */}
+                <h1 className="text-2xl sm:text-4xl font-black text-white mb-1 leading-tight">{siswa.nama}</h1>
+                <p className="text-xs sm:text-sm mb-3" style={{ color: '#CBD5E1' }}>SMK Wikrama Bogor · Wikrama 2</p>
                 <div className="flex flex-wrap justify-center sm:justify-start gap-2">
                   {siswa.keahlian?.map((k) => (
-                    <span key={k}
-                      className="px-3 py-1 rounded-xl text-xs font-medium text-white"
-                      style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.2)' }}>
+                    <span key={k} className="px-2.5 py-1 rounded-xl text-xs font-medium text-white"
+                      style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)' }}>
                       {k}
                     </span>
                   ))}
                 </div>
               </div>
 
-              {/* Stats mini */}
+              {/* Mini stats */}
               <div className="flex sm:flex-col gap-3 shrink-0">
-                <div className="text-center px-5 py-3 rounded-2xl"
-                  style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)' }}>
-                  <p className="text-2xl font-black text-white">{siswa.sertifikat?.length}</p>
-                  <p className="text-sky-300 text-xs font-medium">Sertifikat</p>
-                </div>
-                <div className="text-center px-5 py-3 rounded-2xl"
-                  style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.12)' }}>
-                  <p className="text-2xl font-black text-white">{siswa.cv?.pengalaman?.length}</p>
-                  <p className="text-sky-300 text-xs font-medium">Pengalaman</p>
-                </div>
+                {[
+                  { val: siswa.sertifikat?.length ?? '-', label: 'Sertifikat' },
+                  { val: siswa.cv?.pengalaman?.length ?? '-', label: 'Pengalaman' },
+                ].map((s, i) => (
+                  <div key={i} className="text-center px-4 py-2.5 rounded-2xl"
+                    style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}>
+                    <p className="text-xl sm:text-2xl font-black text-white">{s.val}</p>
+                    <p className="text-xs font-medium" style={{ color: '#38bdf8' }}>{s.label}</p>
+                  </div>
+                ))}
               </div>
             </motion.div>
           </div>
         </div>
 
         {/* ── CONTENT ── */}
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-6 sm:space-y-8">
 
-          {/* Row 1: Tentang + Info Pribadi */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Tentang */}
+          {/* Tentang + Info Pribadi */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="lg:col-span-2 bg-white rounded-3xl p-7 shadow-sm border border-gray-100"
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
+              className="lg:col-span-2 rounded-2xl sm:rounded-3xl p-5 sm:p-7"
+              style={cardStyle}
             >
               <SectionTitle icon={User} title="Tentang Saya" />
-              <p className="text-gray-600 leading-relaxed">{siswa.tentang}</p>
-
-              <div className="mt-6">
-                <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">Keahlian</p>
-                <div className="flex flex-wrap gap-2">
-                  {siswa.keahlian?.map((k) => (
-                    <span key={k}
-                      className="px-3 py-1.5 rounded-xl text-sm font-semibold text-[#0F4C81]"
-                      style={{ background: 'rgba(15,76,129,0.07)', border: '1px solid rgba(15,76,129,0.15)' }}>
-                      {k}
-                    </span>
-                  ))}
+              <p className="leading-relaxed text-sm sm:text-base" style={{ color: '#CBD5E1' }}>{siswa.tentang || 'Tidak ada informasi.'}</p>
+              {siswa.keahlian && (
+                <div className="mt-5">
+                  <p className="text-xs font-semibold uppercase tracking-wide mb-3" style={{ color: '#CBD5E1' }}>Keahlian</p>
+                  <div className="flex flex-wrap gap-2">
+                    {siswa.keahlian?.map((k) => (
+                      <span key={k} className="px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold"
+                        style={{ background: 'rgba(56,189,248,0.1)', border: '1px solid rgba(56,189,248,0.2)', color: '#38bdf8' }}>
+                        {k}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </motion.div>
 
-            {/* Info Pribadi */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="bg-white rounded-3xl p-7 shadow-sm border border-gray-100"
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+              className="rounded-2xl sm:rounded-3xl p-5 sm:p-7"
+              style={cardStyle}
             >
               <SectionTitle icon={Hash} title="Info Pribadi" />
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {[
                   { icon: CalendarDays, label: 'Tgl. Lahir', value: siswa.ttl },
                   { icon: MapPin, label: 'Alamat', value: siswa.alamat },
                   { icon: Mail, label: 'Email', value: siswa.email },
                   { icon: Phone, label: 'No. HP', value: siswa.no_hp },
                   { icon: BookOpen, label: 'Kelas', value: siswa.rombel },
-                ].map((item, i) => (
+                ].filter(item => item.value).map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
-                      style={{ background: 'rgba(15,76,129,0.07)' }}>
-                      <item.icon className="w-4 h-4 text-[#0F4C81]" strokeWidth={1.8} />
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
+                      style={{ background: 'rgba(56,189,248,0.1)' }}>
+                      <item.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4" style={{ color: '#38bdf8' }} strokeWidth={1.8} />
                     </div>
                     <div className="min-w-0">
-                      <p className="text-xs text-gray-400">{item.label}</p>
-                      <p className="text-sm font-medium text-gray-800 break-words">{item.value}</p>
+                      <p className="text-xs" style={{ color: '#CBD5E1' }}>{item.label}</p>
+                      <p className="text-xs sm:text-sm font-medium text-white break-words">{item.value}</p>
                     </div>
                   </div>
                 ))}
@@ -216,41 +234,38 @@ const SiswaDetailPage = () => {
             </motion.div>
           </div>
 
-          {/* Row 2: CV */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Pendidikan + Pengalaman */}
+          {/* CV */}
+          {(siswa.cv || siswa.sertifikat) && (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25 }}
-              className="lg:col-span-2 space-y-6"
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}
+              className="lg:col-span-2 space-y-5 sm:space-y-6"
             >
-              {/* Pendidikan */}
-              <div className="bg-white rounded-3xl p-7 shadow-sm border border-gray-100">
+              <div className="rounded-2xl sm:rounded-3xl p-5 sm:p-7" style={cardStyle}>
                 <SectionTitle icon={GraduationCap} title="Pendidikan" />
-                <div className="flex items-start gap-4 p-4 rounded-2xl"
-                  style={{ background: 'rgba(15,76,129,0.04)', border: '1px solid rgba(15,76,129,0.1)' }}>
-                  <div className="w-3 h-3 rounded-full mt-1 shrink-0"
-                    style={{ background: 'linear-gradient(135deg, #0F4C81, #38bdf8)' }} />
-                  <p className="text-gray-700 text-sm leading-relaxed">{siswa.cv?.pendidikan}</p>
+                <div className="flex items-start gap-3 p-3 sm:p-4 rounded-xl sm:rounded-2xl"
+                  style={{ background: 'rgba(56,189,248,0.06)', border: '1px solid rgba(56,189,248,0.15)' }}>
+                  <div className="w-2.5 h-2.5 rounded-full mt-1.5 shrink-0"
+                    style={{ background: '#38bdf8' }} />
+                  <p className="text-sm leading-relaxed" style={{ color: '#CBD5E1' }}>{siswa.cv?.pendidikan}</p>
                 </div>
               </div>
 
-              {/* Pengalaman */}
-              <div className="bg-white rounded-3xl p-7 shadow-sm border border-gray-100">
+              <div className="rounded-2xl sm:rounded-3xl p-5 sm:p-7" style={cardStyle}>
                 <SectionTitle icon={Briefcase} title="Pengalaman" />
                 <div className="space-y-3">
                   {siswa.cv?.pengalaman?.map((p, i) => (
-                    <div key={i} className="flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100">
-                      <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 text-white font-bold text-sm shadow-sm"
-                        style={{ background: 'linear-gradient(135deg, #0F4C81, #38bdf8)' }}>
+                    <div key={i} className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl sm:rounded-2xl"
+                      style={{ background: '#0F172A', border: '1px solid rgba(255,255,255,0.06)' }}>
+                      <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 text-white font-bold text-sm shadow-sm"
+                        style={{ background: 'linear-gradient(135deg, #1E3A5F, #38bdf8)' }}>
                         {i + 1}
                       </div>
-                      <div>
-                        <p className="font-semibold text-gray-800 text-sm">{p.posisi}</p>
-                        <p className="text-gray-500 text-xs mt-0.5">{p.tempat}</p>
-                        <span className="inline-block mt-1.5 px-2.5 py-0.5 rounded-lg text-xs font-medium text-sky-700"
-                          style={{ background: 'rgba(14,165,233,0.1)' }}>
+                      <div className="min-w-0">
+                        <p className="font-semibold text-white text-sm">{p.posisi}</p>
+                        <p className="text-xs mt-0.5 truncate" style={{ color: '#CBD5E1' }}>{p.tempat}</p>
+                        <span className="inline-block mt-1 px-2 py-0.5 rounded-lg text-xs font-medium"
+                          style={{ background: 'rgba(56,189,248,0.1)', color: '#38bdf8' }}>
                           {p.periode}
                         </span>
                       </div>
@@ -260,102 +275,90 @@ const SiswaDetailPage = () => {
               </div>
             </motion.div>
 
-            {/* Organisasi + Prestasi */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="space-y-6"
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
+              className="space-y-5 sm:space-y-6"
             >
-              {/* Organisasi */}
-              <div className="bg-white rounded-3xl p-7 shadow-sm border border-gray-100">
+              <div className="rounded-2xl sm:rounded-3xl p-5 sm:p-7" style={cardStyle}>
                 <SectionTitle icon={User} title="Organisasi" />
                 <div className="space-y-2">
                   {siswa.cv?.organisasi?.map((o, i) => (
-                    <div key={i} className="flex items-center gap-3 p-3 rounded-xl bg-gray-50 border border-gray-100">
-                      <ChevronRight className="w-4 h-4 text-sky-500 shrink-0" strokeWidth={2.5} />
-                      <p className="text-gray-700 text-sm">{o}</p>
+                    <div key={i} className="flex items-center gap-3 p-2.5 sm:p-3 rounded-xl"
+                      style={{ background: '#0F172A', border: '1px solid rgba(255,255,255,0.06)' }}>
+                      <ChevronRight className="w-4 h-4 shrink-0" style={{ color: '#38bdf8' }} strokeWidth={2.5} />
+                      <p className="text-xs sm:text-sm" style={{ color: '#CBD5E1' }}>{o}</p>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Prestasi */}
-              <div className="bg-white rounded-3xl p-7 shadow-sm border border-gray-100">
+              <div className="rounded-2xl sm:rounded-3xl p-5 sm:p-7" style={cardStyle}>
                 <SectionTitle icon={Award} title="Prestasi" />
                 <div className="space-y-2">
                   {siswa.cv?.prestasi?.map((p, i) => (
-                    <div key={i} className="flex items-start gap-3 p-3 rounded-xl border"
-                      style={{ background: 'rgba(15,76,129,0.03)', borderColor: 'rgba(15,76,129,0.12)' }}>
-                      <Star className="w-4 h-4 text-yellow-400 shrink-0 mt-0.5" strokeWidth={2} fill="#facc15" />
-                      <p className="text-gray-700 text-sm leading-snug">{p}</p>
+                    <div key={i} className="flex items-start gap-2.5 p-2.5 sm:p-3 rounded-xl"
+                      style={{ background: 'rgba(56,189,248,0.05)', border: '1px solid rgba(56,189,248,0.12)' }}>
+                      <Star className="w-4 h-4 shrink-0 mt-0.5 text-yellow-400" strokeWidth={2} fill="#facc15" />
+                      <p className="text-xs sm:text-sm leading-snug" style={{ color: '#CBD5E1' }}>{p}</p>
                     </div>
                   ))}
                 </div>
               </div>
             </motion.div>
           </div>
+          )}
 
-          {/* Row 3: Sertifikat */}
+          {/* Sertifikat */}
+          {siswa.sertifikat?.length > 0 && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35 }}
-            className="bg-white rounded-3xl p-7 shadow-sm border border-gray-100"
+            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
+            className="rounded-2xl sm:rounded-3xl p-5 sm:p-7"
+            style={cardStyle}
           >
             <SectionTitle icon={Award} title={`Sertifikat (${siswa.sertifikat?.length})`} />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
               {siswa.sertifikat?.map((cert) => (
                 <motion.div
                   key={cert.id}
-                  whileHover={{ y: -5 }}
+                  whileHover={{ y: -4, boxShadow: '0 10px 30px rgba(0,0,0,0.25)' }}
                   onClick={() => setCertModal(cert)}
-                  className="group cursor-pointer rounded-2xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300"
+                  className="group cursor-pointer rounded-xl sm:rounded-2xl overflow-hidden transition-all duration-300"
+                  style={{ background: '#0F172A', border: '1px solid rgba(255,255,255,0.08)' }}
                 >
-                  {/* Thumbnail */}
-                  <div className="relative h-44 overflow-hidden bg-gray-100">
-                    <img
-                      src={cert.gambar}
-                      alt={cert.nama}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    {/* Hover overlay */}
+                  <div className="relative h-36 sm:h-44 overflow-hidden">
+                    <img src={cert.gambar} alt={cert.nama}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
                     <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={{ background: 'rgba(15,76,129,0.65)', backdropFilter: 'blur(3px)' }}>
-                      <ZoomIn className="w-8 h-8 text-white" strokeWidth={1.8} />
+                      style={{ background: 'rgba(15,23,42,0.75)', backdropFilter: 'blur(3px)' }}>
+                      <ZoomIn className="w-7 h-7 text-white" strokeWidth={1.8} />
                       <p className="text-white text-xs font-semibold">Lihat Sertifikat</p>
                     </div>
-                    {/* Year badge */}
-                    <span className="absolute top-3 right-3 px-2.5 py-1 rounded-lg text-xs font-bold text-white shadow"
-                      style={{ background: 'linear-gradient(135deg, #0F4C81, #38bdf8)' }}>
+                    <span className="absolute top-2 right-2 px-2 py-0.5 rounded-lg text-xs font-bold text-white shadow"
+                      style={{ background: 'linear-gradient(135deg, #1E3A5F, #38bdf8)' }}>
                       {cert.tahun}
                     </span>
                   </div>
-
-                  {/* Info */}
-                  <div className="p-4">
-                    <p className="font-semibold text-gray-800 text-sm leading-snug line-clamp-2 mb-2">{cert.nama}</p>
+                  <div className="p-3 sm:p-4">
+                    <p className="font-semibold text-white text-xs sm:text-sm leading-snug line-clamp-2 mb-2">{cert.nama}</p>
                     <div className="flex items-center gap-2">
                       <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
-                        style={{ background: 'linear-gradient(135deg, #0F4C81, #38bdf8)' }}>
+                        style={{ background: 'linear-gradient(135deg, #1E3A5F, #38bdf8)' }}>
                         <Award className="w-3 h-3 text-white" strokeWidth={2} />
                       </div>
-                      <p className="text-gray-400 text-xs truncate">{cert.penerbit}</p>
+                      <p className="text-xs truncate" style={{ color: '#CBD5E1' }}>{cert.penerbit}</p>
                     </div>
                   </div>
                 </motion.div>
               ))}
             </div>
           </motion.div>
+          )}
 
         </div>
       </div>
 
-      {/* Certificate zoom modal */}
       <AnimatePresence>
-        {certModal && (
-          <CertModal cert={certModal} onClose={() => setCertModal(null)} />
-        )}
+        {certModal && <CertModal cert={certModal} onClose={() => setCertModal(null)} />}
       </AnimatePresence>
     </>
   )

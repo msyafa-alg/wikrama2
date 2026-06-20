@@ -18,8 +18,6 @@ const MuridPage = () => {
   const [filterRombel, setFilterRombel] = useState('Semua')
   const [page, setPage] = useState(1)
 
-  const isKelas12 = kelas === 'kelas12'
-
   const allStudents = studentsData[kelas] || []
   const rombels = ['Semua', ...new Set(allStudents.map((s) => s.rombel))]
 
@@ -44,40 +42,34 @@ const MuridPage = () => {
   }, [search, filterRombel])
 
   const handleCardClick = (student) => {
-    if (!isKelas12) return
-    navigate(`/murid/kelas12/${student.id}`)
+    navigate(`/murid/${kelas}/${student.id}`)
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-20">
+    <div className="min-h-screen pt-20" style={{ background: '#0F172A' }}>
       {/* Header */}
-      <div className="py-14 px-4" style={{ background: 'linear-gradient(135deg, #0F4C81 0%, #0a3660 100%)' }}>
+      <div className="py-10 sm:py-14 px-4" style={{ background: 'linear-gradient(135deg, #1E3A5F 0%, #0F172A 100%)' }}>
         <div className="max-w-7xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium text-sky-300 mb-3"
-              style={{ background: 'rgba(56,189,248,0.15)', border: '1px solid rgba(56,189,248,0.3)' }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium mb-3"
+              style={{ background: 'rgba(56,189,248,0.12)', border: '1px solid rgba(56,189,248,0.3)', color: '#38bdf8' }}>
               Daftar Siswa
             </span>
-            <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">
+            <h1 className="text-2xl sm:text-4xl font-bold text-white mb-2">
               Daftar Murid {kelasLabels[kelas]}
             </h1>
-            <p className="text-blue-200 text-base">{allStudents.length} siswa terdaftar</p>
+            <p className="text-sm" style={{ color: '#CBD5E1' }}>{allStudents.length} siswa terdaftar</p>
           </motion.div>
 
           {/* Kelas tabs */}
-          <div className="flex flex-wrap justify-center gap-3 mt-8">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mt-6 sm:mt-8">
             {Object.entries(kelasLabels).map(([key, label]) => (
-              <Link
-                key={key}
-                to={`/murid/${key}`}
-                className={`px-5 py-2 rounded-xl text-sm font-semibold transition-all duration-200 ${
-                  kelas === key ? 'bg-white text-[#0F4C81] shadow-lg' : 'bg-white/10 text-white hover:bg-white/20 border border-white/20'
-                }`}
-              >
+              <Link key={key} to={`/murid/${key}`}
+                className="px-4 sm:px-5 py-2 rounded-xl text-sm font-semibold transition-all duration-200"
+                style={kelas === key
+                  ? { background: '#38bdf8', color: '#0F172A' }
+                  : { background: 'rgba(255,255,255,0.06)', color: '#ffffff', border: '1px solid rgba(255,255,255,0.12)' }
+                }>
                 {label}
               </Link>
             ))}
@@ -86,11 +78,11 @@ const MuridPage = () => {
       </div>
 
       {/* Filters */}
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="flex flex-col sm:flex-row gap-4 mb-8">
+      <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8">
+        <div className="flex flex-col sm:flex-row gap-3 mb-6 sm:mb-8">
           {/* Search */}
           <div className="relative flex-1">
-            <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: '#CBD5E1' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
             <input
@@ -98,8 +90,12 @@ const MuridPage = () => {
               placeholder="Cari nama atau alamat..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 text-sm"
-              style={{ '--tw-ring-color': '#0F4C81' }}
+              className="w-full pl-9 pr-4 py-2.5 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2"
+              style={{
+                background: '#1E293B',
+                border: '1px solid rgba(255,255,255,0.08)',
+                '--tw-ring-color': '#38bdf8',
+              }}
             />
           </div>
 
@@ -107,91 +103,103 @@ const MuridPage = () => {
           <select
             value={filterRombel}
             onChange={(e) => setFilterRombel(e.target.value)}
-            className="px-4 py-2.5 rounded-xl border border-gray-200 bg-white focus:outline-none text-sm text-gray-700 min-w-[160px]"
+            className="px-4 py-2.5 rounded-xl text-sm focus:outline-none min-w-[160px]"
+            style={{
+              background: '#1E293B',
+              border: '1px solid rgba(255,255,255,0.08)',
+              color: '#CBD5E1',
+            }}
           >
             {rombels.map((r) => (
-              <option key={r} value={r}>{r}</option>
+              <option key={r} value={r} style={{ background: '#1E293B' }}>{r}</option>
             ))}
           </select>
         </div>
 
         {/* Count */}
-        <p className="text-sm text-gray-500 mb-6">
+        <p className="text-sm mb-6" style={{ color: '#CBD5E1' }}>
           Menampilkan {paginated.length} dari {filtered.length} siswa
         </p>
 
-        {/* Info banner kelas 12 */}
-        {isKelas12 && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-6 flex items-center gap-3 px-4 py-3 rounded-xl text-sm"
-            style={{ background: 'rgba(15,76,129,0.06)', border: '1px solid rgba(15,76,129,0.15)' }}
-          >
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
-              style={{ background: 'rgba(15,76,129,0.1)' }}>
-              <svg className="w-4 h-4 text-[#0F4C81]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <p className="text-[#0F4C81] font-medium">
-              Klik kartu siswa untuk melihat profil lengkap, CV, dan sertifikat.
-            </p>
-          </motion.div>
-        )}
+        {/* Info banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-6 flex items-center gap-3 px-4 py-3 rounded-xl text-sm"
+          style={{ background: 'rgba(56,189,248,0.06)', border: '1px solid rgba(56,189,248,0.15)' }}
+        >
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0"
+            style={{ background: 'rgba(56,189,248,0.1)' }}>
+            <svg className="w-4 h-4" style={{ color: '#38bdf8' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <p className="font-medium" style={{ color: '#38bdf8' }}>
+            Klik kartu siswa untuk melihat profil lengkap.
+          </p>
+        </motion.div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-5">
           {paginated.map((student, i) => (
             <motion.div
               key={student.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              whileHover={{ y: -6 }}
+              whileHover={{ y: -4, boxShadow: '0 10px 30px rgba(0,0,0,0.25)' }}
               onClick={() => handleCardClick(student)}
-              className={`bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 group ${isKelas12 ? 'cursor-pointer' : ''}`}
+              className="rounded-2xl overflow-hidden transition-all duration-300 group cursor-pointer"
+              style={{ background: '#1E293B', border: '1px solid rgba(255,255,255,0.08)' }}
             >
-              <div className="relative h-48 overflow-hidden">
+              <div className="relative h-36 sm:h-48 overflow-hidden">
                 <img
                   src={student.foto}
                   alt={student.nama}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{ background: 'linear-gradient(to top, rgba(15,76,129,0.6), transparent)' }} />
-                {/* Kelas 12 badge */}
-                {isKelas12 && (
-                  <div className="absolute top-2 right-2 flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-semibold text-white shadow"
-                    style={{ background: 'linear-gradient(135deg, #0F4C81, #38bdf8)' }}>
-                    <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    Detail
-                  </div>
-                )}
-                {/* Kelas 12 hover overlay */}
-                {isKelas12 && (
-                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    style={{ background: 'rgba(15,76,129,0.55)', backdropFilter: 'blur(2px)' }}>
-                    <div className="text-white text-center px-3">
-                      <svg className="w-8 h-8 mx-auto mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                      </svg>
-                      <p className="text-xs font-semibold">Lihat Detail</p>
+                  style={{ background: 'linear-gradient(to top, rgba(15,23,42,0.7), transparent)' }} />
+                {/* Dev Web badge */}
+                {student.isDevWeb && (
+                  <div className="absolute top-2 left-2 z-10">
+                    <div className="relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-black text-white shadow-2xl overflow-hidden"
+                      style={{ background: 'linear-gradient(135deg, #4f46e5, #7c3aed, #a855f7)' }}>
+                      <div className="absolute inset-0 -translate-x-full"
+                        style={{ background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent)', animation: 'shimmer 2.5s infinite' }} />
+                      <div className="absolute inset-0 rounded-xl opacity-60 blur-sm"
+                        style={{ background: 'linear-gradient(135deg, #4f46e5, #a855f7)' }} />
+                      <span className="relative z-10 flex items-center gap-1.5">
+                        <svg className="w-3 h-3 text-purple-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                        <span className="tracking-wide">Web Dev</span>
+                      </span>
                     </div>
+                    <div className="absolute inset-0 rounded-xl blur-md opacity-70 -z-10"
+                      style={{ background: 'linear-gradient(135deg, #7c3aed, #a855f7)' }} />
                   </div>
                 )}
+                {/* Hover overlay */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: 'rgba(15,23,42,0.6)', backdropFilter: 'blur(2px)' }}>
+                  <div className="text-white text-center px-3">
+                    <svg className="w-8 h-8 mx-auto mb-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    <p className="text-xs font-semibold">Lihat Detail</p>
+                  </div>
+                </div>
               </div>
               <div className="p-4">
-                <h3 className="font-bold text-gray-900 text-sm mb-1 truncate">{student.nama}</h3>
-                <span className="inline-block px-2 py-0.5 rounded-lg text-xs font-medium text-[#0F4C81] mb-2"
-                  style={{ background: 'rgba(15,76,129,0.08)' }}>
+                <h3 className="font-bold text-white text-sm mb-1 truncate">{student.nama}</h3>
+                <span className="inline-block px-2 py-0.5 rounded-lg text-xs font-medium mb-2"
+                  style={{ background: 'rgba(56,189,248,0.1)', color: '#38bdf8' }}>
                   {student.rombel}
                 </span>
-                <p className="text-gray-400 text-xs flex items-start gap-1.5">
-                  <svg className="w-3 h-3 mt-0.5 shrink-0 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <p className="text-xs flex items-start gap-1.5" style={{ color: '#CBD5E1' }}>
+                  <svg className="w-3 h-3 mt-0.5 shrink-0" style={{ color: '#CBD5E1' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   </svg>
                   <span className="line-clamp-2">{student.alamat}</span>
@@ -203,9 +211,9 @@ const MuridPage = () => {
 
         {/* Empty state */}
         {filtered.length === 0 && (
-          <div className="text-center py-20 text-gray-400">
+          <div className="text-center py-20" style={{ color: '#CBD5E1' }}>
             <div className="flex justify-center mb-4">
-              <svg className="w-16 h-16 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-16 h-16" style={{ color: '#334155' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
@@ -220,7 +228,8 @@ const MuridPage = () => {
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1}
-              className="px-4 py-2 rounded-xl text-sm font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed bg-white border border-gray-200 text-gray-700 hover:bg-gray-50"
+              className="px-4 py-2 rounded-xl text-sm font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+              style={{ background: '#1E293B', border: '1px solid rgba(255,255,255,0.08)', color: '#CBD5E1' }}
             >
               ← Prev
             </button>
@@ -229,10 +238,11 @@ const MuridPage = () => {
               <button
                 key={p}
                 onClick={() => setPage(p)}
-                className={`w-9 h-9 rounded-xl text-sm font-medium transition-all ${
-                  page === p ? 'text-white shadow-lg' : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'
-                }`}
-                style={page === p ? { background: 'linear-gradient(135deg, #0F4C81, #38bdf8)' } : {}}
+                className="w-9 h-9 rounded-xl text-sm font-medium transition-all"
+                style={page === p
+                  ? { background: '#38bdf8', color: '#0F172A', fontWeight: 700 }
+                  : { background: '#1E293B', border: '1px solid rgba(255,255,255,0.08)', color: '#CBD5E1' }
+                }
               >
                 {p}
               </button>
@@ -241,7 +251,8 @@ const MuridPage = () => {
             <button
               onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
               disabled={page === totalPages}
-              className="px-4 py-2 rounded-xl text-sm font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed bg-white border border-gray-200 text-gray-700 hover:bg-gray-50"
+              className="px-4 py-2 rounded-xl text-sm font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+              style={{ background: '#1E293B', border: '1px solid rgba(255,255,255,0.08)', color: '#CBD5E1' }}
             >
               Next →
             </button>
