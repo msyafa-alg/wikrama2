@@ -120,9 +120,9 @@ const HeroSection = () => {
           className="flex flex-wrap items-center justify-center gap-3 sm:gap-4"
         >
           {[
-            { num: '360+', label: 'Murid' },
-            { num: '480+', label: 'Alumni' },
-            { num: '24', label: 'Prestasi' },
+            { num: '30+', label: 'Murid' },
+            { num: '100+', label: 'Alumni' },
+            { num: '20+', label: 'Prestasi' },
           ].map((stat, i) => (
             <div
               key={i}
