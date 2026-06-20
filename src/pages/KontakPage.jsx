@@ -1,0 +1,174 @@
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import { Mail, AtSign, MapPin, Clock } from 'lucide-react'
+
+const KontakPage = () => {
+  const [form, setForm] = useState({ nama: '', email: '', subjek: '', pesan: '' })
+  const [sent, setSent] = useState(false)
+
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setSent(true)
+    setTimeout(() => {
+      setSent(false)
+      setForm({ nama: '', email: '', subjek: '', pesan: '' })
+    }, 4000)
+  }
+
+  const contacts = [
+    { icon: Mail, label: 'Email', value: 'wikrama2@smkwikrama.sch.id', link: 'mailto:wikrama2@smkwikrama.sch.id' },
+    { icon: AtSign, label: 'Instagram', value: '@wikrama2_bogor', link: 'https://instagram.com/wikrama2_bogor' },
+    { icon: MapPin, label: 'Alamat', value: 'Jl. Raya Ciremai Ujung No.1, Bogor, Jawa Barat', link: null },
+    { icon: Clock, label: 'Jam Operasional', value: 'Senin–Jumat: 07.00 – 15.30 WIB', link: null },
+  ]
+
+  return (
+    <div className="min-h-screen bg-gray-50 pt-20">
+      {/* Header */}
+      <div className="py-14 px-4" style={{ background: 'linear-gradient(135deg, #0F4C81 0%, #0a3660 100%)' }}>
+        <div className="max-w-7xl mx-auto text-center">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+            <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium text-sky-300 mb-3"
+              style={{ background: 'rgba(56,189,248,0.15)', border: '1px solid rgba(56,189,248,0.3)' }}>
+              Hubungi Kami
+            </span>
+            <h1 className="text-3xl sm:text-4xl font-bold text-white">Kontak</h1>
+            <p className="text-blue-200 mt-2">Kami siap membantu. Jangan ragu untuk menghubungi kami.</p>
+          </motion.div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 py-14">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Form */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Kirim Pesan</h2>
+
+            {sent ? (
+              <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                className="bg-green-50 border border-green-200 rounded-2xl p-8 text-center"
+              >
+                <div className="flex justify-center mb-4">
+                  <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center">
+                    <svg className="w-8 h-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                </div>
+                <h3 className="font-bold text-green-800 text-lg mb-2">Pesan Terkirim!</h3>
+                <p className="text-green-600 text-sm">Terima kasih telah menghubungi kami. Kami akan segera merespons pesan Anda.</p>
+              </motion.div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1.5">Nama Lengkap</label>
+                    <input
+                      type="text" name="nama" required
+                      value={form.nama} onChange={handleChange}
+                      placeholder="Masukkan nama Anda"
+                      className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1.5">Email</label>
+                    <input
+                      type="email" name="email" required
+                      value={form.email} onChange={handleChange}
+                      placeholder="email@example.com"
+                      className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm transition-all"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Subjek</label>
+                  <input
+                    type="text" name="subjek" required
+                    value={form.subjek} onChange={handleChange}
+                    placeholder="Subjek pesan"
+                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm transition-all"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1.5">Pesan</label>
+                  <textarea
+                    name="pesan" required rows={5}
+                    value={form.pesan} onChange={handleChange}
+                    placeholder="Tulis pesan Anda di sini..."
+                    className="w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm transition-all resize-none"
+                  />
+                </div>
+
+                <motion.button
+                  type="submit"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full py-3 rounded-xl font-semibold text-white text-sm shadow-lg transition-all"
+                  style={{ background: 'linear-gradient(135deg, #0F4C81, #38bdf8)' }}
+                >
+                  Kirim Pesan →
+                </motion.button>
+              </form>
+            )}
+          </motion.div>
+
+          {/* Info */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="space-y-6"
+          >
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Informasi Kontak</h2>
+
+            {contacts.map((c, i) => (
+              <div key={i} className="flex items-start gap-4 p-4 bg-white rounded-2xl shadow-sm border border-gray-100">
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+                  style={{ background: 'rgba(15,76,129,0.06)' }}>
+                  <c.icon className="w-5 h-5 text-[#0F4C81]" strokeWidth={1.8} />
+                </div>
+                <div>
+                  <p className="text-xs text-gray-400 font-medium mb-0.5">{c.label}</p>
+                  {c.link ? (
+                    <a href={c.link} target="_blank" rel="noopener noreferrer"
+                      className="text-[#0F4C81] font-semibold text-sm hover:underline">
+                      {c.value}
+                    </a>
+                  ) : (
+                    <p className="text-gray-800 font-medium text-sm">{c.value}</p>
+                  )}
+                </div>
+              </div>
+            ))}
+
+            {/* Maps */}
+            <div className="rounded-2xl overflow-hidden shadow-lg border border-gray-100 mt-6">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4004.2953180831933!2d106.84130407504139!3d-6.645191993349424!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69c89505b4c37d%3A0x307fc4a38e65fa2b!2sSMK%20Wikrama%20Bogor!5e1!3m2!1sid!2sid!4v1781933306852!5m2!1sid!2sid"
+                width="100%"
+                height="240"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Peta Lokasi"
+              />
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default KontakPage

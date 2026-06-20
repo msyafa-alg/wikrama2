@@ -1,0 +1,44 @@
+{
+  "kelas10": [
+    { "id": 1, "nama": "Aldi Firmansyah", "rombel": "X RPL 1", "alamat": "Jl. Pajajaran No.12, Bogor", "foto": "https://i.pravatar.cc/150?img=1" },
+    { "id": 2, "nama": "Bunga Maharani", "rombel": "X RPL 1", "alamat": "Jl. Sudirman No.5, Bogor", "foto": "https://i.pravatar.cc/150?img=5" },
+    { "id": 3, "nama": "Cahya Ramadhan", "rombel": "X RPL 2", "alamat": "Jl. Merdeka No.8, Bogor", "foto": "https://i.pravatar.cc/150?img=3" },
+    { "id": 4, "nama": "Dewi Anggraini", "rombel": "X RPL 2", "alamat": "Jl. Veteran No.15, Bogor", "foto": "https://i.pravatar.cc/150?img=9" },
+    { "id": 5, "nama": "Eko Saputra", "rombel": "X TKJ 1", "alamat": "Jl. Ahmad Yani No.20, Bogor", "foto": "https://i.pravatar.cc/150?img=11" },
+    { "id": 6, "nama": "Fitri Nuraini", "rombel": "X TKJ 1", "alamat": "Jl. Cendana No.3, Bogor", "foto": "https://i.pravatar.cc/150?img=16" },
+    { "id": 7, "nama": "Galang Pratama", "rombel": "X TKJ 2", "alamat": "Jl. Siliwangi No.7, Bogor", "foto": "https://i.pravatar.cc/150?img=13" },
+    { "id": 8, "nama": "Hana Safitri", "rombel": "X TKJ 2", "alamat": "Jl. Bangbarung No.9, Bogor", "foto": "https://i.pravatar.cc/150?img=20" },
+    { "id": 9, "nama": "Irfan Maulana", "rombel": "X DKV 1", "alamat": "Jl. Taman Kencana No.4, Bogor", "foto": "https://i.pravatar.cc/150?img=15" },
+    { "id": 10, "nama": "Jasmine Putri", "rombel": "X DKV 1", "alamat": "Jl. Raya Tajur No.22, Bogor", "foto": "https://i.pravatar.cc/150?img=25" },
+    { "id": 11, "nama": "Kevin Nugroho", "rombel": "X DKV 2", "alamat": "Jl. Empang No.11, Bogor", "foto": "https://i.pravatar.cc/150?img=17" },
+    { "id": 12, "nama": "Laila Fauziah", "rombel": "X DKV 2", "alamat": "Jl. Lawang Gintung No.6, Bogor", "foto": "https://i.pravatar.cc/150?img=30" }
+  ],
+  "kelas11": [
+    { "id": 1, "nama": "Muhammad Rizal", "rombel": "XI RPL 1", "alamat": "Jl. Paledang No.18, Bogor", "foto": "https://i.pravatar.cc/150?img=33" },
+    { "id": 2, "nama": "Nabila Salsabila", "rombel": "XI RPL 1", "alamat": "Jl. Semeru No.2, Bogor", "foto": "https://i.pravatar.cc/150?img=35" },
+    { "id": 3, "nama": "Oscar Hidayat", "rombel": "XI RPL 2", "alamat": "Jl. Kenari No.10, Bogor", "foto": "https://i.pravatar.cc/150?img=36" },
+    { "id": 4, "nama": "Putri Rahayu", "rombel": "XI RPL 2", "alamat": "Jl. Anggrek No.14, Bogor", "foto": "https://i.pravatar.cc/150?img=44" },
+    { "id": 5, "nama": "Qodir Arifin", "rombel": "XI TKJ 1", "alamat": "Jl. Melati No.19, Bogor", "foto": "https://i.pravatar.cc/150?img=39" },
+    { "id": 6, "nama": "Rina Permata", "rombel": "XI TKJ 1", "alamat": "Jl. Mawar No.23, Bogor", "foto": "https://i.pravatar.cc/150?img=47" },
+    { "id": 7, "nama": "Satria Wibowo", "rombel": "XI TKJ 2", "alamat": "Jl. Flamboyan No.8, Bogor", "foto": "https://i.pravatar.cc/150?img=40" },
+    { "id": 8, "nama": "Tika Apriani", "rombel": "XI TKJ 2", "alamat": "Jl. Kamboja No.16, Bogor", "foto": "https://i.pravatar.cc/150?img=48" },
+    { "id": 9, "nama": "Usman Hakim", "rombel": "XI DKV 1", "alamat": "Jl. Dahlia No.21, Bogor", "foto": "https://i.pravatar.cc/150?img=41" },
+    { "id": 10, "nama": "Vina Aulia", "rombel": "XI DKV 1", "alamat": "Jl. Seroja No.13, Bogor", "foto": "https://i.pravatar.cc/150?img=49" },
+    { "id": 11, "nama": "Wahyu Setiawan", "rombel": "XI DKV 2", "alamat": "Jl. Teratai No.27, Bogor", "foto": "https://i.pravatar.cc/150?img=42" },
+    { "id": 12, "nama": "Xena Mahardhika", "rombel": "XI DKV 2", "alamat": "Jl. Cempaka No.5, Bogor", "foto": "https://i.pravatar.cc/150?img=50" }
+  ],
+  "kelas12": [
+    { "id": 1, "nama": "Yoga Pratama", "rombel": "XII RPL 1", "alamat": "Jl. Nusa Indah No.17, Bogor", "foto": "https://i.pravatar.cc/150?img=51" },
+    { "id": 2, "nama": "Zahra Amalia", "rombel": "XII RPL 1", "alamat": "Jl. Kramat Jati No.3, Bogor", "foto": "https://i.pravatar.cc/150?img=53" },
+    { "id": 3, "nama": "Arif Budiman", "rombel": "XII RPL 2", "alamat": "Jl. Tanah Baru No.24, Bogor", "foto": "https://i.pravatar.cc/150?img=52" },
+    { "id": 4, "nama": "Bella Novita", "rombel": "XII RPL 2", "alamat": "Jl. Loji No.6, Bogor", "foto": "https://i.pravatar.cc/150?img=56" },
+    { "id": 5, "nama": "Chandra Kusuma", "rombel": "XII TKJ 1", "alamat": "Jl. Menteng No.11, Bogor", "foto": "https://i.pravatar.cc/150?img=54" },
+    { "id": 6, "nama": "Dian Purnama", "rombel": "XII TKJ 1", "alamat": "Jl. Kebun Raya No.9, Bogor", "foto": "https://i.pravatar.cc/150?img=58" },
+    { "id": 7, "nama": "Erwin Santoso", "rombel": "XII TKJ 2", "alamat": "Jl. Pengadilan No.28, Bogor", "foto": "https://i.pravatar.cc/150?img=55" },
+    { "id": 8, "nama": "Farida Hanum", "rombel": "XII TKJ 2", "alamat": "Jl. Ciwaringin No.15, Bogor", "foto": "https://i.pravatar.cc/150?img=60" },
+    { "id": 9, "nama": "Gilang Ramadhan", "rombel": "XII DKV 1", "alamat": "Jl. Sempur No.20, Bogor", "foto": "https://i.pravatar.cc/150?img=57" },
+    { "id": 10, "nama": "Hesti Lestari", "rombel": "XII DKV 1", "alamat": "Jl. Surya Kencana No.7, Bogor", "foto": "https://i.pravatar.cc/150?img=62" },
+    { "id": 11, "nama": "Ivan Permana", "rombel": "XII DKV 2", "alamat": "Jl. Pangrango No.12, Bogor", "foto": "https://i.pravatar.cc/150?img=59" },
+    { "id": 12, "nama": "Julia Wulandari", "rombel": "XII DKV 2", "alamat": "Jl. Bondongan No.31, Bogor", "foto": "https://i.pravatar.cc/150?img=63" }
+  ]
+}
