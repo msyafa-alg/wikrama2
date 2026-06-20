@@ -11,7 +11,7 @@ const HeroSection = () => {
   return (
     <section ref={ref} className="relative h-screen min-h-[580px] flex items-center justify-center overflow-hidden">
       {/* Background */}
-      <motion.div style={{ y }} className="absolute inset-0 z-0">
+      <motion.div style={{ y }} className="absolute inset-0 z-0 hidden sm:block">
         <img
           src="https://files.catbox.moe/5oq0eb.png"
           alt="Wikrama 2"
@@ -20,6 +20,17 @@ const HeroSection = () => {
         <div className="absolute inset-0"
           style={{ background: 'linear-gradient(135deg, rgba(15,23,42,0.90) 0%, rgba(30,58,95,0.75) 50%, rgba(15,23,42,0.80) 100%)' }} />
       </motion.div>
+
+      {/* Background mobile (no parallax) */}
+      <div className="absolute inset-0 z-0 sm:hidden">
+        <img
+          src="https://files.catbox.moe/5oq0eb.png"
+          alt="Wikrama 2"
+          className="hero-bg-img w-full object-cover object-center"
+        />
+        <div className="absolute inset-0"
+          style={{ background: 'linear-gradient(135deg, rgba(15,23,42,0.90) 0%, rgba(30,58,95,0.75) 50%, rgba(15,23,42,0.80) 100%)' }} />
+      </div>
 
       {/* Decorative blobs */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">

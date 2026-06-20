@@ -32,6 +32,11 @@ img {
   height: auto;
 }
 
+/* Hero background image harus full height */
+.hero-bg-img {
+  height: 100% !important;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: #1E293B; }
