@@ -21,7 +21,7 @@ const KontakPage = () => {
     { icon: Mail, label: 'Email', value: 'wikrama2@smkwikrama.sch.id', link: 'mailto:wikrama2@smkwikrama.sch.id' },
     { icon: AtSign, label: 'Instagram', value: '@wikrama2_bogor', link: 'https://instagram.com/wikrama2_bogor' },
     { icon: MapPin, label: 'Alamat', value: 'Jl. Raya Wangun, RT.01/RW.06, Sindangsari, Kec. Bogor Tim., Kota Bogor, Jawa Barat 16146', link: null },
-    { icon: Clock, label: 'Jam Operasional', value: 'Senin–Jumat: 07.00 – 15.30 WIB', link: null },
+    { icon: Clock, label: 'Jam Operasional', value: 'Senin–Jumat: 07.00 – 16.00 WIB', link: null },
   ]
 
   const inputStyle = {
