@@ -11,17 +11,17 @@ const AlumniPage = () => {
   const alumni = alumniData[key] || []
 
   return (
-    <div className="min-h-screen pt-20" style={{ background: '#0F172A' }}>
+    <div className="min-h-screen pt-20" style={{ background: '#020817' }}>
       {/* Header */}
-      <div className="py-14 px-4" style={{ background: 'linear-gradient(135deg, #1E3A5F 0%, #0F172A 100%)' }}>
+      <div className="py-14 px-4" style={{ background: 'linear-gradient(135deg, #0F172A 0%, #020817 100%)' }}>
         <div className="max-w-7xl mx-auto text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium mb-3"
-              style={{ background: 'rgba(56,189,248,0.12)', border: '1px solid rgba(56,189,248,0.3)', color: '#38bdf8' }}>
+              style={{ background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(59,130,246,0.2)', color: '#3B82F6' }}>
               Alumni Wikrama 2
             </span>
             <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">Foto Alumni {tahun}</h1>
-            <p style={{ color: '#CBD5E1' }}>{alumni.length} alumni angkatan {tahun}</p>
+            <p style={{ color: '#94A3B8' }}>{alumni.length} alumni angkatan {tahun}</p>
           </motion.div>
 
           <div className="flex justify-center gap-3 mt-8">
@@ -31,8 +31,8 @@ const AlumniPage = () => {
                 to={`/alumni/${y}`}
                 className="px-5 py-2 rounded-xl text-sm font-semibold transition-all"
                 style={tahun === y
-                  ? { background: '#38bdf8', color: '#0F172A' }
-                  : { background: 'rgba(255,255,255,0.06)', color: '#ffffff', border: '1px solid rgba(255,255,255,0.12)' }
+                  ? { background: '#3B82F6', color: '#ffffff' }
+                  : { background: 'rgba(255,255,255,0.06)', color: '#ffffff', border: '1px solid rgba(255,255,255,0.1)' }
                 }
               >
                 Alumni {y}
@@ -51,12 +51,12 @@ const AlumniPage = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: i * 0.07 }}
-              whileHover={{ y: -4, boxShadow: '0 10px 30px rgba(0,0,0,0.25)' }}
+              whileHover={{ y: -4, boxShadow: '0 10px 30px rgba(0,0,0,0.3)' }}
               className="group cursor-pointer"
               onClick={() => setSelected(item)}
             >
               <div className="rounded-2xl overflow-hidden transition-all duration-300"
-                style={{ background: '#1E293B', border: '1px solid rgba(255,255,255,0.08)' }}>
+                style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.06)' }}>
                 <div className="relative aspect-square overflow-hidden">
                   <img
                     src={item.foto}
@@ -64,7 +64,7 @@ const AlumniPage = () => {
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-                    style={{ background: 'rgba(15,23,42,0.65)', backdropFilter: 'blur(2px)' }}>
+                    style={{ background: 'rgba(2,8,23,0.65)', backdropFilter: 'blur(2px)' }}>
                     <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -73,7 +73,7 @@ const AlumniPage = () => {
                 </div>
                 <div className="p-3 text-center">
                   <p className="font-semibold text-white text-sm truncate">{item.nama}</p>
-                  <p className="text-xs mt-0.5" style={{ color: '#38bdf8' }}>Angkatan {item.angkatan}</p>
+                  <p className="text-xs mt-0.5" style={{ color: '#3B82F6' }}>Angkatan {item.angkatan}</p>
                 </div>
               </div>
             </motion.div>
@@ -96,12 +96,12 @@ const AlumniPage = () => {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.85, y: 20 }}
               className="rounded-3xl overflow-hidden shadow-2xl max-w-sm w-full"
-              style={{ background: '#1E293B', border: '1px solid rgba(255,255,255,0.08)' }}
+              style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.06)' }}
               onClick={(e) => e.stopPropagation()}
             >
               <div className="relative">
                 <img src={selected.foto} alt={selected.nama} className="w-full h-64 object-cover" />
-                <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(15,23,42,0.9), transparent 60%)' }} />
+                <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(2,8,23,0.9), transparent 60%)' }} />
                 <button
                   onClick={() => setSelected(null)}
                   className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center text-white transition-colors"
@@ -116,12 +116,12 @@ const AlumniPage = () => {
               <div className="p-6">
                 <h3 className="text-xl font-bold text-white mb-1">{selected.nama}</h3>
                 <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold text-white mb-4"
-                  style={{ background: 'linear-gradient(135deg, #1E3A5F, #38bdf8)' }}>
+                  style={{ background: 'linear-gradient(135deg, #1d4ed8, #3B82F6)' }}>
                   Angkatan {selected.angkatan}
                 </span>
 
-                <div className="pt-4" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-                  <p className="text-xs font-medium mb-1" style={{ color: '#CBD5E1' }}>Aktivitas Sekarang</p>
+                <div className="pt-4" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+                  <p className="text-xs font-medium mb-1" style={{ color: '#94A3B8' }}>Aktivitas Sekarang</p>
                   <p className="text-sm leading-relaxed text-white">{selected.aktivitas}</p>
                 </div>
               </div>

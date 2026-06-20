@@ -15,7 +15,7 @@ const GallerySection = () => {
     : galleryData.filter((g) => g.kategori === activeCategory)
 
   return (
-    <section ref={ref} id="gallery" className="py-20 px-4" style={{ background: '#1E293B' }}>
+    <section ref={ref} id="gallery" className="py-20 px-4" style={{ background: '#020817' }}>
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -24,11 +24,11 @@ const GallerySection = () => {
           className="text-center mb-12"
         >
           <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium mb-3"
-            style={{ background: 'rgba(56,189,248,0.1)', border: '1px solid rgba(56,189,248,0.25)', color: '#38bdf8' }}>
+            style={{ background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(59,130,246,0.2)', color: '#3B82F6' }}>
             Foto & Dokumentasi
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-white">Gallery Rayon</h2>
-          <p className="mt-3" style={{ color: '#CBD5E1' }}>Momen berharga perjalanan Wikrama 2</p>
+          <p className="mt-3" style={{ color: '#94A3B8' }}>Momen berharga perjalanan Wikrama 2</p>
         </motion.div>
 
         {/* Category filter */}
@@ -44,8 +44,8 @@ const GallerySection = () => {
               onClick={() => setActiveCategory(cat)}
               className="px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200"
               style={activeCategory === cat
-                ? { background: '#38bdf8', color: '#0F172A', fontWeight: 700 }
-                : { background: 'rgba(255,255,255,0.05)', color: '#CBD5E1', border: '1px solid rgba(255,255,255,0.08)' }
+                ? { background: '#3B82F6', color: '#ffffff', fontWeight: 700 }
+                : { background: 'rgba(255,255,255,0.04)', color: '#94A3B8', border: '1px solid rgba(255,255,255,0.06)' }
               }
             >
               {cat}
@@ -75,12 +75,12 @@ const GallerySection = () => {
                   loading="lazy"
                 />
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center"
-                  style={{ background: 'rgba(15,23,42,0.75)', backdropFilter: 'blur(2px)' }}>
+                  style={{ background: 'rgba(2,8,23,0.75)', backdropFilter: 'blur(2px)' }}>
                   <svg className="w-8 h-8 text-white mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                   <p className="text-white text-xs font-medium text-center px-2">{item.judul}</p>
-                  <span className="mt-1 px-2 py-0.5 rounded-full text-xs" style={{ color: '#38bdf8', background: 'rgba(56,189,248,0.15)' }}>{item.kategori}</span>
+                  <span className="mt-1 px-2 py-0.5 rounded-full text-xs" style={{ color: '#ffffff', background: 'rgba(59,130,246,0.6)' }}>{item.kategori}</span>
                 </div>
               </div>
             </motion.div>
@@ -109,7 +109,7 @@ const GallerySection = () => {
               <div className="mt-3 flex items-center justify-between">
                 <div>
                   <p className="text-white font-semibold">{selectedImg.judul}</p>
-                  <span className="text-sm" style={{ color: '#38bdf8' }}>{selectedImg.kategori}</span>
+                  <span className="text-sm" style={{ color: '#3B82F6' }}>{selectedImg.kategori}</span>
                 </div>
               </div>
               <button

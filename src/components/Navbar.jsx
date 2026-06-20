@@ -53,11 +53,11 @@ const Navbar = () => {
       className="fixed top-0 left-0 w-full z-[100] transition-all duration-300"
       style={{
         background: scrolled
-          ? 'rgba(15,23,42,0.92)'
-          : 'rgba(15,23,42,0.55)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.08)' : '1px solid transparent',
+          ? 'rgba(2,8,23,0.8)'
+          : 'rgba(2,8,23,0.0)',
+        backdropFilter: scrolled ? 'blur(20px)' : 'none',
+        WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
         boxShadow: scrolled ? '0 4px 30px rgba(0,0,0,0.3)' : 'none',
       }}
     >
@@ -65,12 +65,10 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16 lg:h-18">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl overflow-hidden shadow-lg">
-              <img src="/favicon.png" alt="Logo Wikrama 2" className="w-full h-full object-cover" />
-            </div>
+            <img src="/favicon.png" alt="Logo Wikrama 2" className="w-9 h-9 rounded-lg object-cover" />
             <div>
               <p className="font-bold text-lg leading-tight text-white tracking-wide">WIKRAMA 2</p>
-              <p className="text-xs leading-tight" style={{ color: '#CBD5E1' }}>SMK Wikrama Bogor</p>
+              <p className="text-xs leading-tight" style={{ color: '#94A3B8' }}>SMK Wikrama Bogor</p>
             </div>
           </Link>
 
@@ -90,7 +88,8 @@ const Navbar = () => {
                     else setAlumniDropdown(false)
                   }}
                 >
-                  <button className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-white hover:text-[#38bdf8]"
+                  <button
+                    className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-white"
                     style={{ background: 'transparent' }}
                     onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.06)'}
                     onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
@@ -110,9 +109,9 @@ const Navbar = () => {
                         transition={{ duration: 0.15 }}
                         className="absolute top-full left-0 mt-2 w-44 rounded-xl overflow-hidden"
                         style={{
-                          background: 'rgba(15,23,42,0.95)',
+                          background: '#0F172A',
                           backdropFilter: 'blur(20px)',
-                          border: '1px solid rgba(255,255,255,0.08)',
+                          border: '1px solid rgba(255,255,255,0.06)',
                           boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
                         }}
                       >
@@ -121,9 +120,9 @@ const Navbar = () => {
                             key={item.href}
                             to={item.href}
                             className="block px-4 py-2.5 text-sm font-medium transition-colors duration-150"
-                            style={{ color: '#CBD5E1' }}
-                            onMouseEnter={e => { e.currentTarget.style.color = '#38bdf8'; e.currentTarget.style.background = 'rgba(56,189,248,0.08)' }}
-                            onMouseLeave={e => { e.currentTarget.style.color = '#CBD5E1'; e.currentTarget.style.background = 'transparent' }}
+                            style={{ color: '#94A3B8' }}
+                            onMouseEnter={e => { e.currentTarget.style.color = '#3B82F6'; e.currentTarget.style.background = 'rgba(59,130,246,0.1)' }}
+                            onMouseLeave={e => { e.currentTarget.style.color = '#94A3B8'; e.currentTarget.style.background = 'transparent' }}
                           >
                             {item.label}
                           </Link>
@@ -138,12 +137,12 @@ const Navbar = () => {
                   to={link.href}
                   className="px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200"
                   style={{
-                    color: isActive(link.href) ? '#38bdf8' : '#ffffff',
-                    background: isActive(link.href) ? 'rgba(56,189,248,0.1)' : 'transparent',
+                    color: isActive(link.href) ? '#3B82F6' : '#ffffff',
+                    background: isActive(link.href) ? 'rgba(59,130,246,0.1)' : 'transparent',
                   }}
                   onMouseEnter={e => {
                     if (!isActive(link.href)) {
-                      e.currentTarget.style.color = '#38bdf8'
+                      e.currentTarget.style.color = '#3B82F6'
                       e.currentTarget.style.background = 'rgba(255,255,255,0.06)'
                     }
                   }}
@@ -186,21 +185,24 @@ const Navbar = () => {
             transition={{ duration: 0.25 }}
             className="lg:hidden overflow-hidden"
             style={{
-              background: 'rgba(15,23,42,0.98)',
-              borderTop: '1px solid rgba(255,255,255,0.08)',
+              background: 'rgba(2,8,23,0.95)',
+              backdropFilter: 'blur(20px)',
+              borderTop: '1px solid rgba(255,255,255,0.06)',
             }}
           >
             <div className="px-4 py-4 space-y-1">
               {navLinks.map((link) =>
                 link.dropdown ? (
                   <div key={link.label}>
-                    <p className="px-3 py-2 text-sm font-semibold" style={{ color: '#38bdf8' }}>{link.label}</p>
+                    <p className="px-3 py-2 text-sm font-semibold" style={{ color: '#3B82F6' }}>{link.label}</p>
                     {link.dropdown.map((item) => (
                       <Link
                         key={item.href}
                         to={item.href}
                         className="block px-6 py-2 text-sm rounded-lg transition-colors"
-                        style={{ color: '#CBD5E1' }}
+                        style={{ color: '#94A3B8' }}
+                        onMouseEnter={e => e.currentTarget.style.color = '#ffffff'}
+                        onMouseLeave={e => e.currentTarget.style.color = '#94A3B8'}
                       >
                         {item.label}
                       </Link>
@@ -212,8 +214,8 @@ const Navbar = () => {
                     to={link.href}
                     className="block px-3 py-2 text-sm font-medium rounded-lg transition-colors"
                     style={{
-                      color: isActive(link.href) ? '#38bdf8' : '#CBD5E1',
-                      background: isActive(link.href) ? 'rgba(56,189,248,0.1)' : 'transparent',
+                      color: isActive(link.href) ? '#3B82F6' : '#94A3B8',
+                      background: isActive(link.href) ? 'rgba(59,130,246,0.1)' : 'transparent',
                     }}
                   >
                     {link.label}

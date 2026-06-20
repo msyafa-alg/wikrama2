@@ -22,7 +22,7 @@ const ScrollProgress = () => {
         className="h-full rounded-r-full"
         style={{
           width: `${progress}%`,
-          background: 'linear-gradient(90deg, #1E3A5F, #38bdf8)',
+          background: 'linear-gradient(90deg, #1d4ed8, #3B82F6)',
         }}
         transition={{ ease: 'linear' }}
       />

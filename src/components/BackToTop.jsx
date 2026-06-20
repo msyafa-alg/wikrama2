@@ -24,8 +24,10 @@ const BackToTop = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-6 z-50 w-12 h-12 rounded-full shadow-2xl flex items-center justify-center text-white cursor-pointer"
-          style={{ background: 'linear-gradient(135deg, #1E3A5F, #38bdf8)', border: '1px solid rgba(56,189,248,0.3)' }}
+          className="fixed bottom-8 right-6 z-50 w-12 h-12 rounded-full shadow-2xl flex items-center justify-center text-white cursor-pointer transition-colors duration-200"
+          style={{ background: '#3B82F6', border: '1px solid rgba(59,130,246,0.4)' }}
+          onMouseEnter={e => e.currentTarget.style.background = '#2563EB'}
+          onMouseLeave={e => e.currentTarget.style.background = '#3B82F6'}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           aria-label="Kembali ke atas"

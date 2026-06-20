@@ -38,7 +38,7 @@ const TentangSection = () => {
           className="text-center mb-14"
         >
           <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium mb-3"
-            style={{ background: 'rgba(56,189,248,0.1)', border: '1px solid rgba(56,189,248,0.25)', color: '#38bdf8' }}>
+            style={{ background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(59,130,246,0.2)', color: '#3B82F6' }}>
             Mengenal Kami
           </span>
           <h2 className="text-3xl sm:text-4xl font-bold text-white">Tentang Rayon</h2>
@@ -53,7 +53,7 @@ const TentangSection = () => {
             className="relative"
           >
             <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3]"
-              style={{ border: '1px solid rgba(255,255,255,0.08)' }}>
+              style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
               {carouselImages.map((img, i) => (
                 <motion.div
                   key={i}
@@ -64,7 +64,7 @@ const TentangSection = () => {
                 >
                   <img src={img.src} alt={img.caption} className="w-full h-full object-cover" />
                   <div className="absolute bottom-0 left-0 right-0 p-4"
-                    style={{ background: 'linear-gradient(to top, rgba(15,23,42,0.85), transparent)' }}>
+                    style={{ background: 'linear-gradient(to top, rgba(2,8,23,0.85), transparent)' }}>
                     <p className="text-white text-sm font-medium">{img.caption}</p>
                   </div>
                 </motion.div>
@@ -74,13 +74,17 @@ const TentangSection = () => {
                   <button
                     key={i}
                     onClick={() => setCurrent(i)}
-                    className={`h-1.5 rounded-full transition-all ${i === current ? 'w-6 bg-sky-400' : 'w-1.5 bg-white/30'}`}
+                    className={`h-1.5 rounded-full transition-all`}
+                    style={{
+                      width: i === current ? '1.5rem' : '0.375rem',
+                      background: i === current ? '#3B82F6' : 'rgba(255,255,255,0.3)',
+                    }}
                   />
                 ))}
               </div>
             </div>
             <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-2xl shadow-xl overflow-hidden hidden sm:block"
-              style={{ border: '1px solid rgba(255,255,255,0.08)' }}>
+              style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
               <img src="https://picsum.photos/seed/rayon5/200/200" alt="" className="w-full h-full object-cover" />
             </div>
           </motion.div>
@@ -94,10 +98,10 @@ const TentangSection = () => {
           >
             <h3 className="text-2xl sm:text-3xl font-bold text-white leading-snug">
               Rayon Wikrama 2 –<br/>
-              <span style={{ color: '#38bdf8' }}>Keluarga Besar yang Berprestasi</span>
+              <span style={{ color: '#3B82F6' }}>Keluarga Besar yang Berprestasi</span>
             </h3>
 
-            <p className="leading-relaxed text-base sm:text-lg" style={{ color: '#CBD5E1' }}>
+            <p className="leading-relaxed text-base sm:text-lg" style={{ color: '#94A3B8' }}>
               Rayon Wikrama 2 merupakan keluarga besar siswa yang menjunjung tinggi kedisiplinan, kebersamaan, tanggung jawab, dan prestasi. Menjadi tempat berkembangnya karakter serta wadah untuk saling mendukung dalam perjalanan belajar di SMK Wikrama Bogor.
             </p>
 
@@ -109,11 +113,11 @@ const TentangSection = () => {
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.5 + i * 0.1 }}
                   className="flex items-center gap-3 p-3 rounded-xl transition-all duration-300"
-                  style={{ background: '#1E293B', border: '1px solid rgba(255,255,255,0.08)' }}
+                  style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.06)' }}
                 >
                   <div className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
-                    style={{ background: 'rgba(56,189,248,0.1)' }}>
-                    <f.icon className="w-5 h-5" style={{ color: '#38bdf8' }} strokeWidth={1.8} />
+                    style={{ background: 'rgba(59,130,246,0.1)' }}>
+                    <f.icon className="w-5 h-5" style={{ color: '#3B82F6' }} strokeWidth={1.8} />
                   </div>
                   <span className="font-medium text-sm text-white">{f.label}</span>
                 </motion.div>

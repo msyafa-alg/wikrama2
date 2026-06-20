@@ -25,23 +25,23 @@ const KontakPage = () => {
   ]
 
   const inputStyle = {
-    background: '#1E293B',
-    border: '1px solid rgba(255,255,255,0.08)',
+    background: '#111827',
+    border: '1px solid rgba(255,255,255,0.06)',
     color: '#ffffff',
   }
 
   return (
-    <div className="min-h-screen pt-20" style={{ background: '#0F172A' }}>
+    <div className="min-h-screen pt-20" style={{ background: '#020817' }}>
       {/* Header */}
-      <div className="py-14 px-4" style={{ background: 'linear-gradient(135deg, #1E3A5F 0%, #0F172A 100%)' }}>
+      <div className="py-14 px-4" style={{ background: 'linear-gradient(135deg, #0F172A 0%, #020817 100%)' }}>
         <div className="max-w-7xl mx-auto text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <span className="inline-block px-4 py-1.5 rounded-full text-sm font-medium mb-3"
-              style={{ background: 'rgba(56,189,248,0.12)', border: '1px solid rgba(56,189,248,0.3)', color: '#38bdf8' }}>
+              style={{ background: 'rgba(59,130,246,0.1)', border: '1px solid rgba(59,130,246,0.2)', color: '#3B82F6' }}>
               Hubungi Kami
             </span>
             <h1 className="text-3xl sm:text-4xl font-bold text-white">Kontak</h1>
-            <p className="mt-2" style={{ color: '#CBD5E1' }}>Kami siap membantu. Jangan ragu untuk menghubungi kami.</p>
+            <p className="mt-2" style={{ color: '#94A3B8' }}>Kami siap membantu. Jangan ragu untuk menghubungi kami.</p>
           </motion.div>
         </div>
       </div>
@@ -72,52 +72,52 @@ const KontakPage = () => {
                   </div>
                 </div>
                 <h3 className="font-bold text-emerald-400 text-lg mb-2">Pesan Terkirim!</h3>
-                <p className="text-sm" style={{ color: '#CBD5E1' }}>Terima kasih telah menghubungi kami. Kami akan segera merespons pesan Anda.</p>
+                <p className="text-sm" style={{ color: '#94A3B8' }}>Terima kasih telah menghubungi kami. Kami akan segera merespons pesan Anda.</p>
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium mb-1.5" style={{ color: '#CBD5E1' }}>Nama Lengkap</label>
+                    <label className="block text-sm font-medium mb-1.5" style={{ color: '#94A3B8' }}>Nama Lengkap</label>
                     <input
                       type="text" name="nama" required
                       value={form.nama} onChange={handleChange}
                       placeholder="Masukkan nama Anda"
-                      className="w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 transition-all placeholder-slate-500"
-                      style={{ ...inputStyle, '--tw-ring-color': '#38bdf8' }}
+                      className="w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 transition-all"
+                      style={{ ...inputStyle, '--tw-ring-color': '#3B82F6' }}
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium mb-1.5" style={{ color: '#CBD5E1' }}>Email</label>
+                    <label className="block text-sm font-medium mb-1.5" style={{ color: '#94A3B8' }}>Email</label>
                     <input
                       type="email" name="email" required
                       value={form.email} onChange={handleChange}
                       placeholder="email@example.com"
-                      className="w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 transition-all placeholder-slate-500"
-                      style={{ ...inputStyle, '--tw-ring-color': '#38bdf8' }}
+                      className="w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 transition-all"
+                      style={{ ...inputStyle, '--tw-ring-color': '#3B82F6' }}
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1.5" style={{ color: '#CBD5E1' }}>Subjek</label>
+                  <label className="block text-sm font-medium mb-1.5" style={{ color: '#94A3B8' }}>Subjek</label>
                   <input
                     type="text" name="subjek" required
                     value={form.subjek} onChange={handleChange}
                     placeholder="Subjek pesan"
-                    className="w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 transition-all placeholder-slate-500"
-                    style={{ ...inputStyle, '--tw-ring-color': '#38bdf8' }}
+                    className="w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 transition-all"
+                    style={{ ...inputStyle, '--tw-ring-color': '#3B82F6' }}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-1.5" style={{ color: '#CBD5E1' }}>Pesan</label>
+                  <label className="block text-sm font-medium mb-1.5" style={{ color: '#94A3B8' }}>Pesan</label>
                   <textarea
                     name="pesan" required rows={5}
                     value={form.pesan} onChange={handleChange}
                     placeholder="Tulis pesan Anda di sini..."
-                    className="w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 transition-all resize-none placeholder-slate-500"
-                    style={{ ...inputStyle, '--tw-ring-color': '#38bdf8' }}
+                    className="w-full px-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-2 transition-all resize-none"
+                    style={{ ...inputStyle, '--tw-ring-color': '#3B82F6' }}
                   />
                 </div>
 
@@ -125,8 +125,10 @@ const KontakPage = () => {
                   type="submit"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full py-3 rounded-xl font-semibold text-sm shadow-lg transition-all"
-                  style={{ background: '#38bdf8', color: '#0F172A' }}
+                  className="w-full py-3 rounded-xl font-semibold text-sm text-white shadow-lg transition-all"
+                  style={{ background: '#3B82F6' }}
+                  onMouseEnter={e => e.currentTarget.style.background = '#2563EB'}
+                  onMouseLeave={e => e.currentTarget.style.background = '#3B82F6'}
                 >
                   Kirim Pesan →
                 </motion.button>
@@ -145,16 +147,16 @@ const KontakPage = () => {
 
             {contacts.map((c, i) => (
               <div key={i} className="flex items-start gap-4 p-4 rounded-2xl"
-                style={{ background: '#1E293B', border: '1px solid rgba(255,255,255,0.08)' }}>
+                style={{ background: '#111827', border: '1px solid rgba(255,255,255,0.06)' }}>
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
-                  style={{ background: 'rgba(56,189,248,0.1)' }}>
-                  <c.icon className="w-5 h-5" style={{ color: '#38bdf8' }} strokeWidth={1.8} />
+                  style={{ background: 'rgba(59,130,246,0.1)' }}>
+                  <c.icon className="w-5 h-5" style={{ color: '#3B82F6' }} strokeWidth={1.8} />
                 </div>
                 <div>
-                  <p className="text-xs font-medium mb-0.5" style={{ color: '#CBD5E1' }}>{c.label}</p>
+                  <p className="text-xs font-medium mb-0.5" style={{ color: '#94A3B8' }}>{c.label}</p>
                   {c.link ? (
                     <a href={c.link} target="_blank" rel="noopener noreferrer"
-                      className="font-semibold text-sm hover:underline" style={{ color: '#38bdf8' }}>
+                      className="font-semibold text-sm hover:underline" style={{ color: '#3B82F6' }}>
                       {c.value}
                     </a>
                   ) : (
@@ -166,7 +168,7 @@ const KontakPage = () => {
 
             {/* Maps */}
             <div className="rounded-2xl overflow-hidden shadow-lg mt-6"
-              style={{ border: '1px solid rgba(255,255,255,0.08)' }}>
+              style={{ border: '1px solid rgba(255,255,255,0.06)' }}>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4004.2953180831933!2d106.84130407504139!3d-6.645191993349424!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69c89505b4c37d%3A0x307fc4a38e65fa2b!2sSMK%20Wikrama%20Bogor!5e1!3m2!1sid!2sid!4v1781933306852!5m2!1sid!2sid"
                 width="100%"
