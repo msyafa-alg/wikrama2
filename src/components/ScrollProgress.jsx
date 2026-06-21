@@ -11,7 +11,6 @@ const ScrollProgress = () => {
       const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0
       setProgress(percent)
     }
-
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -20,10 +19,7 @@ const ScrollProgress = () => {
     <div className="fixed top-0 left-0 w-full h-0.5 z-[9998] bg-transparent">
       <motion.div
         className="h-full rounded-r-full"
-        style={{
-          width: `${progress}%`,
-          background: 'linear-gradient(90deg, #1d4ed8, #3B82F6)',
-        }}
+        style={{ width: `${progress}%`, background: '#F59E0B' }}
         transition={{ ease: 'linear' }}
       />
     </div>

@@ -5,16 +5,12 @@ const BackToTop = () => {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setVisible(window.scrollY > 400)
-    }
+    const handleScroll = () => setVisible(window.scrollY > 400)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
 
   return (
     <AnimatePresence>
@@ -24,10 +20,10 @@ const BackToTop = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-6 z-50 w-12 h-12 rounded-full shadow-2xl flex items-center justify-center text-white cursor-pointer transition-colors duration-200"
-          style={{ background: '#3B82F6', border: '1px solid rgba(59,130,246,0.4)' }}
-          onMouseEnter={e => e.currentTarget.style.background = '#2563EB'}
-          onMouseLeave={e => e.currentTarget.style.background = '#3B82F6'}
+          className="fixed bottom-8 right-6 z-50 w-12 h-12 rounded-full shadow-lg flex items-center justify-center text-white cursor-pointer transition-colors duration-200"
+          style={{ background: '#1E3A5F' }}
+          onMouseEnter={e => e.currentTarget.style.background = '#152d4a'}
+          onMouseLeave={e => e.currentTarget.style.background = '#1E3A5F'}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           aria-label="Kembali ke atas"

@@ -9,6 +9,8 @@ const Navbar = () => {
   const [alumniDropdown, setAlumniDropdown] = useState(false)
   const location = useLocation()
 
+  const isHomePage = location.pathname === '/'
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 60)
     window.addEventListener('scroll', handleScroll)
@@ -20,6 +22,8 @@ const Navbar = () => {
     setStudentDropdown(false)
     setAlumniDropdown(false)
   }, [location])
+
+  const transparent = isHomePage && !scrolled
 
   const navLinks = [
     { label: 'Beranda', href: '/' },
@@ -45,6 +49,9 @@ const Navbar = () => {
 
   const isActive = (href) => location.pathname === href
 
+  const textColor = transparent ? '#ffffff' : '#0F172A'
+  const subtitleColor = transparent ? 'rgba(255,255,255,0.55)' : '#64748B'
+
   return (
     <motion.nav
       initial={{ y: -80, opacity: 0 }}
@@ -52,23 +59,21 @@ const Navbar = () => {
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className="fixed top-0 left-0 w-full z-[100] transition-all duration-300"
       style={{
-        background: scrolled
-          ? 'rgba(2,8,23,0.8)'
-          : 'rgba(2,8,23,0.0)',
-        backdropFilter: scrolled ? 'blur(20px)' : 'none',
-        WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
-        boxShadow: scrolled ? '0 4px 30px rgba(0,0,0,0.3)' : 'none',
+        background: transparent ? 'transparent' : 'rgba(255,255,255,0.95)',
+        backdropFilter: transparent ? 'none' : 'blur(20px)',
+        WebkitBackdropFilter: transparent ? 'none' : 'blur(20px)',
+        borderBottom: transparent ? '1px solid transparent' : '1px solid #E2E8F0',
+        boxShadow: transparent ? 'none' : '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06)',
       }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-18">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
-            <img src="/favicon.png" alt="Logo Wikrama 2" className="w-9 h-9 rounded-lg object-cover" />
+            <img src="/favicon.png" alt="Logo Wikrama 2" className="w-9 h-9 rounded-xl object-cover" />
             <div>
-              <p className="font-bold text-lg leading-tight text-white tracking-wide">WIKRAMA 2</p>
-              <p className="text-xs leading-tight" style={{ color: '#94A3B8' }}>SMK Wikrama Bogor</p>
+              <p className="font-extrabold text-lg leading-tight tracking-wide" style={{ color: textColor }}>WIKRAMA 2</p>
+              <p className="text-xs leading-tight" style={{ color: subtitleColor }}>SMK Wikrama Bogor</p>
             </div>
           </Link>
 
@@ -89,10 +94,10 @@ const Navbar = () => {
                   }}
                 >
                   <button
-                    className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-white"
-                    style={{ background: 'transparent' }}
-                    onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.06)'}
-                    onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                    className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200"
+                    style={{ color: textColor }}
+                    onMouseEnter={e => e.currentTarget.style.color = '#1E3A5F'}
+                    onMouseLeave={e => e.currentTarget.style.color = textColor}
                   >
                     {link.label}
                     <svg className="w-3.5 h-3.5 mt-0.5 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -109,10 +114,9 @@ const Navbar = () => {
                         transition={{ duration: 0.15 }}
                         className="absolute top-full left-0 mt-2 w-44 rounded-xl overflow-hidden"
                         style={{
-                          background: '#0F172A',
-                          backdropFilter: 'blur(20px)',
-                          border: '1px solid rgba(255,255,255,0.06)',
-                          boxShadow: '0 20px 40px rgba(0,0,0,0.4)',
+                          background: '#FFFFFF',
+                          border: '1px solid #E2E8F0',
+                          boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06)',
                         }}
                       >
                         {link.dropdown.map((item) => (
@@ -120,9 +124,9 @@ const Navbar = () => {
                             key={item.href}
                             to={item.href}
                             className="block px-4 py-2.5 text-sm font-medium transition-colors duration-150"
-                            style={{ color: '#94A3B8' }}
-                            onMouseEnter={e => { e.currentTarget.style.color = '#3B82F6'; e.currentTarget.style.background = 'rgba(59,130,246,0.1)' }}
-                            onMouseLeave={e => { e.currentTarget.style.color = '#94A3B8'; e.currentTarget.style.background = 'transparent' }}
+                            style={{ color: '#0F172A' }}
+                            onMouseEnter={e => { e.currentTarget.style.color = '#1E3A5F'; e.currentTarget.style.background = '#F8FAFC' }}
+                            onMouseLeave={e => { e.currentTarget.style.color = '#0F172A'; e.currentTarget.style.background = 'transparent' }}
                           >
                             {item.label}
                           </Link>
@@ -135,23 +139,13 @@ const Navbar = () => {
                 <Link
                   key={link.href}
                   to={link.href}
-                  className="px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200"
+                  className="px-3 py-2 rounded-lg text-sm transition-all duration-200"
                   style={{
-                    color: isActive(link.href) ? '#3B82F6' : '#ffffff',
-                    background: isActive(link.href) ? 'rgba(59,130,246,0.1)' : 'transparent',
+                    color: isActive(link.href) ? '#1E3A5F' : textColor,
+                    fontWeight: isActive(link.href) ? 700 : 500,
                   }}
-                  onMouseEnter={e => {
-                    if (!isActive(link.href)) {
-                      e.currentTarget.style.color = '#3B82F6'
-                      e.currentTarget.style.background = 'rgba(255,255,255,0.06)'
-                    }
-                  }}
-                  onMouseLeave={e => {
-                    if (!isActive(link.href)) {
-                      e.currentTarget.style.color = '#ffffff'
-                      e.currentTarget.style.background = 'transparent'
-                    }
-                  }}
+                  onMouseEnter={e => { if (!isActive(link.href)) e.currentTarget.style.color = '#1E3A5F' }}
+                  onMouseLeave={e => { if (!isActive(link.href)) e.currentTarget.style.color = textColor }}
                 >
                   {link.label}
                 </Link>
@@ -162,14 +156,17 @@ const Navbar = () => {
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden p-2 rounded-lg transition-colors text-white"
-            style={{ background: 'rgba(255,255,255,0.06)' }}
+            className="lg:hidden p-2 rounded-lg transition-colors"
+            style={{ color: textColor }}
             aria-label="Toggle menu"
           >
             <div className="w-5 h-4 flex flex-col justify-between">
-              <span className={`block h-0.5 rounded bg-white transition-all duration-300 ${mobileOpen ? 'rotate-45 translate-y-1.5' : ''}`} />
-              <span className={`block h-0.5 rounded bg-white transition-all duration-300 ${mobileOpen ? 'opacity-0' : ''}`} />
-              <span className={`block h-0.5 rounded bg-white transition-all duration-300 ${mobileOpen ? '-rotate-45 -translate-y-2.5' : ''}`} />
+              <span className={`block h-0.5 rounded transition-all duration-300 ${mobileOpen ? 'rotate-45 translate-y-1.5' : ''}`}
+                style={{ background: textColor }} />
+              <span className={`block h-0.5 rounded transition-all duration-300 ${mobileOpen ? 'opacity-0' : ''}`}
+                style={{ background: textColor }} />
+              <span className={`block h-0.5 rounded transition-all duration-300 ${mobileOpen ? '-rotate-45 -translate-y-2.5' : ''}`}
+                style={{ background: textColor }} />
             </div>
           </button>
         </div>
@@ -184,25 +181,21 @@ const Navbar = () => {
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25 }}
             className="lg:hidden overflow-hidden"
-            style={{
-              background: 'rgba(2,8,23,0.95)',
-              backdropFilter: 'blur(20px)',
-              borderTop: '1px solid rgba(255,255,255,0.06)',
-            }}
+            style={{ background: '#FFFFFF', borderTop: '1px solid #E2E8F0' }}
           >
             <div className="px-4 py-4 space-y-1">
               {navLinks.map((link) =>
                 link.dropdown ? (
                   <div key={link.label}>
-                    <p className="px-3 py-2 text-sm font-semibold" style={{ color: '#3B82F6' }}>{link.label}</p>
+                    <p className="px-3 py-2 text-sm font-semibold" style={{ color: '#1E3A5F' }}>{link.label}</p>
                     {link.dropdown.map((item) => (
                       <Link
                         key={item.href}
                         to={item.href}
                         className="block px-6 py-2 text-sm rounded-lg transition-colors"
-                        style={{ color: '#94A3B8' }}
-                        onMouseEnter={e => e.currentTarget.style.color = '#ffffff'}
-                        onMouseLeave={e => e.currentTarget.style.color = '#94A3B8'}
+                        style={{ color: '#0F172A' }}
+                        onMouseEnter={e => e.currentTarget.style.background = '#F8FAFC'}
+                        onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                       >
                         {item.label}
                       </Link>
@@ -212,11 +205,14 @@ const Navbar = () => {
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="block px-3 py-2 text-sm font-medium rounded-lg transition-colors"
+                    className="block px-3 py-2 text-sm rounded-lg transition-colors"
                     style={{
-                      color: isActive(link.href) ? '#3B82F6' : '#94A3B8',
-                      background: isActive(link.href) ? 'rgba(59,130,246,0.1)' : 'transparent',
+                      color: isActive(link.href) ? '#1E3A5F' : '#0F172A',
+                      background: isActive(link.href) ? '#F8FAFC' : 'transparent',
+                      fontWeight: isActive(link.href) ? 700 : 500,
                     }}
+                    onMouseEnter={e => { if (!isActive(link.href)) e.currentTarget.style.background = '#F8FAFC' }}
+                    onMouseLeave={e => { if (!isActive(link.href)) e.currentTarget.style.background = 'transparent' }}
                   >
                     {link.label}
                   </Link>

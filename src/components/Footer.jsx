@@ -3,26 +3,26 @@ import { MapPin, Mail, AtSign } from 'lucide-react'
 
 const Footer = () => {
   return (
-    <footer style={{ background: '#020817', borderTop: '1px solid rgba(255,255,255,0.06)' }} className="text-white">
+    <footer style={{ background: '#1E3A5F', borderTop: '1px solid rgba(255,255,255,0.08)' }} className="text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <img src="/favicon.png" alt="Logo Wikrama 2" className="w-10 h-10 rounded-lg object-cover" />
+              <img src="/favicon.png" alt="Logo Wikrama 2" className="w-12 h-12 rounded-xl object-cover" />
               <div>
                 <h3 className="font-bold text-xl text-white">Wikrama 2</h3>
-                <p className="text-xs" style={{ color: '#94A3B8' }}>SMK Wikrama Bogor</p>
+                <p className="text-xs" style={{ color: 'rgba(255,255,255,0.55)' }}>SMK Wikrama Bogor</p>
               </div>
             </div>
-            <p className="text-sm leading-relaxed" style={{ color: '#94A3B8' }}>
+            <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.6)' }}>
               Tempat Bertumbuh, Berkarya, dan Menginspirasi Bersama. Rayon kebanggaan SMK Wikrama Bogor.
             </p>
           </div>
 
           {/* Links */}
           <div>
-            <h4 className="font-semibold text-lg mb-4 text-white">Menu Utama</h4>
+            <h4 className="font-semibold text-base mb-4 text-white">Menu Utama</h4>
             <ul className="space-y-2">
               {[
                 { label: 'Beranda', href: '/' },
@@ -31,9 +31,10 @@ const Footer = () => {
                 { label: 'Kontak', href: '/kontak' },
               ].map((item) => (
                 <li key={item.href}>
-                  <Link to={item.href} className="text-sm transition-colors flex items-center gap-2 hover:text-white"
-                    style={{ color: '#94A3B8' }}>
-                    <span className="w-1 h-1 rounded-full" style={{ background: '#3B82F6' }} />
+                  <Link to={item.href}
+                    className="text-sm transition-colors flex items-center gap-2 hover:text-white"
+                    style={{ color: 'rgba(255,255,255,0.6)' }}>
+                    <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: '#F59E0B' }} />
                     {item.label}
                   </Link>
                 </li>
@@ -43,7 +44,7 @@ const Footer = () => {
 
           {/* Kelas */}
           <div>
-            <h4 className="font-semibold text-lg mb-4 text-white">Daftar Murid</h4>
+            <h4 className="font-semibold text-base mb-4 text-white">Daftar Murid</h4>
             <ul className="space-y-2">
               {[
                 { label: 'Kelas 10', href: '/murid/kelas10' },
@@ -53,9 +54,10 @@ const Footer = () => {
                 { label: 'Alumni 2024', href: '/alumni/2024' },
               ].map((item) => (
                 <li key={item.href}>
-                  <Link to={item.href} className="text-sm transition-colors flex items-center gap-2 hover:text-white"
-                    style={{ color: '#94A3B8' }}>
-                    <span className="w-1 h-1 rounded-full" style={{ background: '#3B82F6' }} />
+                  <Link to={item.href}
+                    className="text-sm transition-colors flex items-center gap-2 hover:text-white"
+                    style={{ color: 'rgba(255,255,255,0.6)' }}>
+                    <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: '#F59E0B' }} />
                     {item.label}
                   </Link>
                 </li>
@@ -65,18 +67,18 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="font-semibold text-lg mb-4 text-white">Kontak</h4>
+            <h4 className="font-semibold text-base mb-4 text-white">Kontak</h4>
             <ul className="space-y-3">
-              <li className="flex items-start gap-3 text-sm" style={{ color: '#94A3B8' }}>
-                <MapPin className="w-4 h-4 mt-0.5 shrink-0" style={{ color: '#3B82F6' }} strokeWidth={1.8} />
+              <li className="flex items-start gap-3 text-sm" style={{ color: 'rgba(255,255,255,0.6)' }}>
+                <MapPin className="w-4 h-4 mt-0.5 shrink-0" style={{ color: '#F59E0B' }} strokeWidth={1.8} />
                 Jl. Raya Wangun, RT.01/RW.06, Sindangsari, Kec. Bogor Tim., Kota Bogor, Jawa Barat 16146
               </li>
-              <li className="flex items-center gap-3 text-sm" style={{ color: '#94A3B8' }}>
-                <Mail className="w-4 h-4 shrink-0" style={{ color: '#3B82F6' }} strokeWidth={1.8} />
+              <li className="flex items-center gap-3 text-sm" style={{ color: 'rgba(255,255,255,0.6)' }}>
+                <Mail className="w-4 h-4 shrink-0" style={{ color: '#F59E0B' }} strokeWidth={1.8} />
                 wikrama2@smkwikrama.sch.id
               </li>
-              <li className="flex items-center gap-3 text-sm" style={{ color: '#94A3B8' }}>
-                <AtSign className="w-4 h-4 shrink-0" style={{ color: '#3B82F6' }} strokeWidth={1.8} />
+              <li className="flex items-center gap-3 text-sm" style={{ color: 'rgba(255,255,255,0.6)' }}>
+                <AtSign className="w-4 h-4 shrink-0" style={{ color: '#F59E0B' }} strokeWidth={1.8} />
                 @wikrama2_bogor
               </li>
             </ul>
@@ -85,13 +87,10 @@ const Footer = () => {
       </div>
 
       {/* Bottom bar */}
-      <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+      <div style={{ borderTop: '1px solid rgba(255,255,255,0.1)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <p className="text-xs" style={{ color: '#94A3B8' }}>
+          <p className="text-xs" style={{ color: 'rgba(255,255,255,0.5)' }}>
             © {new Date().getFullYear()} WIKRAMA 2 - SMK Wikrama Bogor. All rights reserved.
-          </p>
-          <p className="text-xs" style={{ color: '#3B82F6' }}>
-            Dibuat Oleh Syafa
           </p>
         </div>
       </div>

@@ -1,24 +1,11 @@
 {
   "kelas10": [
-    { "id": 1, "nama": "Aldi Firmansyah", "rombel": "X RPL 1", "alamat": "Jl. Pajajaran No.12, Bogor", "foto": "https://i.pravatar.cc/150?img=1" },
-    { "id": 2, "nama": "Bunga Maharani", "rombel": "X RPL 1", "alamat": "Jl. Sudirman No.5, Bogor", "foto": "https://i.pravatar.cc/150?img=5" },
-    { "id": 3, "nama": "Cahya Ramadhan", "rombel": "X RPL 2", "alamat": "Jl. Merdeka No.8, Bogor", "foto": "https://i.pravatar.cc/150?img=3" },
-    { "id": 4, "nama": "Dewi Anggraini", "rombel": "X RPL 2", "alamat": "Jl. Veteran No.15, Bogor", "foto": "https://i.pravatar.cc/150?img=9" },
-    { "id": 5, "nama": "Eko Saputra", "rombel": "X TKJ 1", "alamat": "Jl. Ahmad Yani No.20, Bogor", "foto": "https://i.pravatar.cc/150?img=11" },
-    { "id": 6, "nama": "Fitri Nuraini", "rombel": "X TKJ 1", "alamat": "Jl. Cendana No.3, Bogor", "foto": "https://i.pravatar.cc/150?img=16" },
-    { "id": 7, "nama": "Galang Pratama", "rombel": "X TKJ 2", "alamat": "Jl. Siliwangi No.7, Bogor", "foto": "https://i.pravatar.cc/150?img=13" },
-    { "id": 8, "nama": "Hana Safitri", "rombel": "X TKJ 2", "alamat": "Jl. Bangbarung No.9, Bogor", "foto": "https://i.pravatar.cc/150?img=20" },
-    { "id": 9, "nama": "Irfan Maulana", "rombel": "X DKV 1", "alamat": "Jl. Taman Kencana No.4, Bogor", "foto": "https://i.pravatar.cc/150?img=15" },
-    { "id": 10, "nama": "Jasmine Putri", "rombel": "X DKV 1", "alamat": "Jl. Raya Tajur No.22, Bogor", "foto": "https://i.pravatar.cc/150?img=25" },
-    { "id": 11, "nama": "Kevin Nugroho", "rombel": "X DKV 2", "alamat": "Jl. Empang No.11, Bogor", "foto": "https://i.pravatar.cc/150?img=17" },
-    { "id": 12, "nama": "Laila Fauziah", "rombel": "X DKV 2", "alamat": "Jl. Lawang Gintung No.6, Bogor", "foto": "https://i.pravatar.cc/150?img=30" }
+    
   ],
   "kelas11": [
-    { "id": 1, "nama": "Muhammad Rizal", "rombel": "XI RPL 1", "alamat": "Jl. Paledang No.18, Bogor", "foto": "https://i.pravatar.cc/150?img=33" },
     { "id": 2, "nama": "Muhammad Syafa Algiffari", "rombel": "PPLG XI-2", "alamat": "Citeureup, Bogor", "foto": "/students/11/syafa.jpeg", "isDevWeb": true }
   ],
   "kelas12": [
-    { "id": 1, "nama": "Anindia Shabirina Praske Aqilamayza", "rombel": "XII RPL 1", "alamat": "Dewi Sri III RT. 03 RW. 12 No. 5 Pasir Kuda Kec. Bogor Barat", "foto": "/students/12/anindia.jpg" },
-    { "id": 2, "nama": "Zahra Amalia", "rombel": "XII RPL 1", "alamat": "Jl. Kramat Jati No.3, Bogor", "foto": "https://i.pravatar.cc/150?img=53" }
+    { "id": 1, "nama": "Anindia Shabirina Praske Aqilamayza", "rombel": "XII RPL 1", "alamat": "Dewi Sri III RT. 03 RW. 12 No. 5 Pasir Kuda Kec. Bogor Barat", "foto": "/students/12/anindia.jpg" }
   ]
 }
