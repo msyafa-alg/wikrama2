@@ -1,12 +1,10 @@
-import { useState } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import alumniData from '../data/alumni.json'
 
 const AlumniPage = () => {
   const { tahun } = useParams()
   const navigate = useNavigate()
-  const [selected, setSelected] = useState(null)
 
   const key = `alumni${tahun}`
   const alumni = alumniData[key] || []
@@ -67,7 +65,7 @@ const AlumniPage = () => {
               transition={{ duration: 0.4, delay: i * 0.07 }}
               whileHover={{ y: -2 }}
               className="group cursor-pointer"
-              onClick={() => setSelected(item)}
+              onClick={() => navigate(`/alumni/${tahun}/${item.id}`)}
             >
               <div className="rounded-2xl overflow-hidden transition-all duration-300"
                 style={{
@@ -102,69 +100,6 @@ const AlumniPage = () => {
         </div>
         )}
       </div>
-
-      {/* Modal */}
-      <AnimatePresence>
-        {selected && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[200] bg-black/80 flex items-center justify-center p-4"
-            onClick={() => setSelected(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.85, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.85, y: 20 }}
-              className="rounded-3xl overflow-hidden shadow-2xl max-w-sm w-full"
-              style={{ background: '#FFFFFF' }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="relative">
-                <img src={selected.foto} alt={selected.nama} className="w-full h-64 object-cover" />
-                <div className="absolute inset-0"
-                  style={{ background: 'linear-gradient(to top, rgba(30,58,95,0.8), transparent 60%)' }} />
-                <button
-                  onClick={() => setSelected(null)}
-                  className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center text-white transition-colors"
-                  style={{ background: 'rgba(0,0,0,0.4)' }}
-                >
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-1" style={{ color: '#0F172A' }}>{selected.nama}</h3>
-                <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold text-white mb-4"
-                  style={{ background: '#1E3A5F' }}>
-                  Angkatan {selected.angkatan}
-                </span>
-
-                <div className="pt-4" style={{ borderTop: '1px solid #E2E8F0' }}>
-                  <p className="text-xs font-medium mb-1" style={{ color: '#94A3B8' }}>Aktivitas Sekarang</p>
-                  <p className="text-sm leading-relaxed" style={{ color: '#0F172A' }}>{selected.aktivitas}</p>
-                </div>
-
-                <button
-                  onClick={() => {
-                    setSelected(null)
-                    navigate(`/alumni/${tahun}/${selected.id}`)
-                  }}
-                  className="w-full mt-4 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all"
-                  style={{ background: '#1E3A5F', color: '#ffffff' }}
-                  onMouseEnter={e => e.currentTarget.style.background = '#0F172A'}
-                  onMouseLeave={e => e.currentTarget.style.background = '#1E3A5F'}
-                >
-                  Lihat Detail
-                </button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   )
 }
