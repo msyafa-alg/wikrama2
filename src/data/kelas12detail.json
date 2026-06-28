@@ -1,6 +1,6 @@
 [
   {
-    "id": 2,
+    "id": 1,
     "nama": "Muhammad Syafa Algiffari",
     "rombel": "PPLG XI-2",
     "alamat": "Citeureup, Bogor",
@@ -9,7 +9,7 @@
     "nisn": "",
     "email": "",
     "no_hp": "",
-    "tentang": "Saya adalah Muhammad Syafa Algiffari, siswa SMK Wikrama Bogor jurusan PPLG (Pengembangan Perangkat Lunak dan Gim) angkatan 2026. Saya memiliki minat yang besar di bidang pemrograman dan pengembangan web. Selama bersekolah, saya aktif belajar berbagai bahasa pemrograman dan teknologi web terkini.",
+    "tentang": "Saya adalah Muhammad Syafa Algiffari, siswa SMK Wikrama Bogor jurusan PPLG (Pengembangan Perangkat Lunak dan Gim) angkatan 2024. Saya memiliki minat yang besar di bidang pemrograman dan pengembangan web. Selama bersekolah, saya aktif belajar berbagai bahasa pemrograman dan teknologi web terkini.",
     "keahlian": ["Web Development", "JavaScript", "React"],
     "cvLink": "/students/12/syafa/cv.pdf",
     "portoLink": "https://www.syafapersonalweb.my.id/",
@@ -37,7 +37,7 @@
       }
     ],
     "cv": {
-      "pendidikan": "SMK Wikrama Bogor - Jurusan Pengembangan Perangkat Lunak dan Gim (2023 - 2026)",
+      "pendidikan": "SMK Wikrama Bogor - Jurusan Pengembangan Perangkat Lunak dan Gim (2024 - 2027)",
       "pengalaman": [],
       "organisasi": [],
       "prestasi": []
