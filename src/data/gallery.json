@@ -1,6 +1,6 @@
 [
   { "id": 1, "kategori": "Kegiatan", "judul": "MPLS", "foto": "/gallery/mpls.jpg" },
-  { "id": 2, "kategori": "Kegiatan", "judul": "Pengajian Malam", "foto": "/gallery/pengajianmalam.jpg" },
+  { "id": 2, "kategori": "Kegiatan", "judul": "Perkemahan Bantara 30", "foto": "/gallery/pengajianmalam.jpg" },
   { "id": 3, "kategori": "Kebersamaan", "judul": "Foto Bersama Setelah Kumpul Rayon", "foto": "/gallery/fotobersamasetelahkumpulrayon.jpg" },
   { "id": 4, "kategori": "Kegiatan", "judul": "Piket", "foto": "/gallery/piket.jpg" },
   { "id": 5, "kategori": "Kegiatan", "judul": "Piket 1", "foto": "/gallery/piket1.jpg" },
