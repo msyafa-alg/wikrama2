@@ -4,7 +4,7 @@
     "nama": "Anindia Shabirina Praske Aqilamayza",
     "rombel": "XII RPL 1",
     "alamat": "Dewi Sri III RT. 03 RW. 12 No. 5 Pasir Kuda Kec. Bogor Barat",
-    "foto": "/students/12/anindia.jpg",
+    "foto": "/students/12/anindia/anindia.jpg",
     "ttl": "",
     "nisn": "",
     "email": "",
@@ -21,22 +21,45 @@
   },
   {
     "id": 2,
-    "nama": "Zahra Amalia",
-    "rombel": "XII RPL 1",
-    "alamat": "Jl. Kramat Jati No.3, Bogor",
-    "foto": "https://i.pravatar.cc/300?img=53",
+    "nama": "Mochamad Fahrezqi Qolbinoor",
+    "rombel": "DKV XII",
+    "alamat": "Bogor, West Java, Indonesia",
+    "foto": "/students/12/fahrezqi/fahrezqi.jpg",
     "ttl": "",
     "nisn": "",
     "email": "",
     "no_hp": "",
-    "tentang": "",
-    "keahlian": [],
-    "sertifikat": [],
+    "tentang": "Saya adalah Mochamad Fahrezqi Qolbinoor, siswa SMK Wikrama Bogor jurusan Desain Komunikasi Visual (DKV) angkatan 2025. Sejak awal masuk sekolah, saya sudah tertarik dengan dunia desain visual dan pengembangan web. Selama bersekolah, saya aktif mengikuti berbagai kegiatan sekolah dan pengembangan diri, termasuk lomba desain dan proyek kolaborasi. Saya percaya bahwa desain yang baik bukan hanya soal estetika, tetapi juga tentang menyampaikan pesan dan solusi secara efektif.Ke depannya, saya ingin terus mengasah kemampuan di bidang UI/UX design dan web development agar dapat berkontribusi di industri kreatif.",
+    "keahlian": ["UI/UX Design", "Web Design", "Graphic Design"],
+    "cvLink": "/students/12/fahrezqi/CV Mochamad Fahrezqi Qolbinoor.pdf",
+    "portoLink": "/students/12/fahrezqi/Portofolio Fahrezqi (2).pdf",
+    "sertifikat": [
+      {
+        "id": 1,
+        "nama": "Sertifikat Kompetensi 1",
+        "gambar": "/students/12/fahrezqi/sertif1.jpg",
+        "penerbit": "BNSP",
+        "tahun": "2024"
+      },
+      {
+        "id": 2,
+        "nama": "Sertifikat Kompetensi 2",
+        "gambar": "/students/12/fahrezqi/sertif.jpg",
+        "penerbit": "BNSP",
+        "tahun": "2024"
+      }
+    ],
     "cv": {
-      "pendidikan": "",
-      "pengalaman": [],
-      "organisasi": [],
-      "prestasi": []
+      "pendidikan": "SMK Wikrama Bogor - Jurusan Desain Komunikasi Visual (2022 - 2025)",
+      "pengalaman": [
+        {
+          "posisi": "Design Intern",
+          "tempat": "Studio Desain",
+          "periode": "2024 - Sekarang"
+        }
+      ],
+      "organisasi": ["OSIS SMK Wikrama Bogor", "Komunitas Desain"],
+      "prestasi": ["Juara 1 Lomba Desain Poster Tingkat Kota"]
     }
   }
 ]

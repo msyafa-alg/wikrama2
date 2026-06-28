@@ -3,10 +3,10 @@ import { motion, useInView } from 'framer-motion'
 import { Target, Users, ShieldCheck, Award } from 'lucide-react'
 
 const carouselImages = [
-  { src: 'https://picsum.photos/seed/rayon1/600/400', caption: 'Kegiatan Belajar Mengajar' },
-  { src: 'https://picsum.photos/seed/rayon2/600/400', caption: 'Upacara Bendera' },
-  { src: 'https://picsum.photos/seed/rayon3/600/400', caption: 'Lomba Antar Rayon' },
-  { src: 'https://picsum.photos/seed/rayon4/600/400', caption: 'Outbound Bersama' },
+  { src: '/gallery/mpls.jpg', caption: 'MPLS' },
+  { src: '/gallery/pengajianmalam.jpg', caption: 'Pengajian Malam' },
+  { src: '/gallery/fotobersamasetelahkumpulrayon.jpg', caption: 'Foto Bersama Rayon' },
+  { src: '/gallery/pramuka.jpg', caption: 'Kegiatan Pramuka' },
 ]
 
 const TentangSection = () => {
@@ -82,7 +82,7 @@ const TentangSection = () => {
             </div>
             <div className="absolute -bottom-6 -right-6 w-32 h-32 rounded-xl shadow-md overflow-hidden hidden sm:block"
               style={{ border: '1px solid #E2E8F0' }}>
-              <img src="https://picsum.photos/seed/rayon5/200/200" alt="" className="w-full h-full object-cover" />
+              <img src="/gallery/jumsih.jpg" alt="" className="w-full h-full object-cover" />
             </div>
           </motion.div>
 

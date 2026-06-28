@@ -3,8 +3,8 @@ import { motion, useInView } from 'framer-motion'
 import { Users, GraduationCap, Trophy, Camera } from 'lucide-react'
 
 const stats = [
-  { icon: Users,          label: 'Total Murid',    value: 360, suffix: '+', iconColor: '#93C5FD', iconBg: 'rgba(147,197,253,0.15)' },
-  { icon: GraduationCap,  label: 'Total Alumni',   value: 480, suffix: '+', iconColor: '#BAE6FD', iconBg: 'rgba(186,230,253,0.15)' },
+  { icon: Users,          label: 'Total Murid',    value: 30, suffix: '+', iconColor: '#93C5FD', iconBg: 'rgba(147,197,253,0.15)' },
+  { icon: GraduationCap,  label: 'Total Alumni',   value: 100, suffix: '+', iconColor: '#BAE6FD', iconBg: 'rgba(186,230,253,0.15)' },
   { icon: Trophy,         label: 'Prestasi',       value: 24,  suffix: '',  iconColor: '#F59E0B', iconBg: 'rgba(245,158,11,0.18)' },
   { icon: Camera,         label: 'Dokumentasi',    value: 120, suffix: '+', iconColor: '#6EE7B7', iconBg: 'rgba(110,231,183,0.15)' },
 ]

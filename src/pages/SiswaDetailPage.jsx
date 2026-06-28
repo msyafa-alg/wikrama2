@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
   ArrowLeft, MapPin, Mail, Phone, Hash, CalendarDays,
   BookOpen, Briefcase, Award, Star, ChevronRight,
-  ZoomIn, User, X, GraduationCap
+  ZoomIn, User, X, GraduationCap, Download, Eye
 } from 'lucide-react'
 import kelas12DetailData from '../data/kelas12detail.json'
 import studentsData from '../data/students.json'
@@ -169,18 +169,51 @@ const SiswaDetailPage = () => {
                 </div>
               </div>
 
-              {/* Mini stats */}
-              <div className="flex sm:flex-col gap-3 shrink-0">
-                {[
-                  { val: siswa.sertifikat?.length ?? '-', label: 'Sertifikat' },
-                  { val: siswa.cv?.pengalaman?.length ?? '-', label: 'Pengalaman' },
-                ].map((s, i) => (
-                  <div key={i} className="text-center px-4 py-2.5 rounded-2xl"
-                    style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.14)' }}>
-                    <p className="text-xl sm:text-2xl font-black text-white">{s.val}</p>
-                    <p className="text-xs font-medium" style={{ color: '#F59E0B' }}>{s.label}</p>
-                  </div>
-                ))}
+              {/* Mini stats + Download CV */}
+              <div className="flex flex-col gap-3 shrink-0">
+                <div className="flex sm:flex-col gap-3">
+                  {[
+                    { val: siswa.sertifikat?.length ?? '-', label: 'Sertifikat' },
+                    { val: siswa.cv?.pengalaman?.length ?? '-', label: 'Pengalaman' },
+                  ].map((s, i) => (
+                    <div key={i} className="text-center px-4 py-2.5 rounded-2xl"
+                      style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.14)' }}>
+                      <p className="text-xl sm:text-2xl font-black text-white">{s.val}</p>
+                      <p className="text-xs font-medium" style={{ color: '#F59E0B' }}>{s.label}</p>
+                    </div>
+                  ))}
+                </div>
+                {siswa.cvLink && (
+                  <a
+                    href={siswa.cvLink}
+                    download
+                    className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl font-semibold text-sm transition-all duration-300 hover:scale-105"
+                    style={{
+                      background: '#F59E0B',
+                      color: '#0F172A',
+                      border: '1px solid rgba(255,255,255,0.2)',
+                    }}
+                  >
+                    <Download className="w-4 h-4" strokeWidth={2.5} />
+                    Download CV
+                  </a>
+                )}
+                {siswa.portoLink && (
+                  <a
+                    href={siswa.portoLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl font-semibold text-sm transition-all duration-300 hover:scale-105"
+                    style={{
+                      background: 'rgba(255,255,255,0.15)',
+                      color: '#ffffff',
+                      border: '1px solid rgba(255,255,255,0.25)',
+                    }}
+                  >
+                    <Eye className="w-4 h-4" strokeWidth={2.5} />
+                    Lihat Porto
+                  </a>
+                )}
               </div>
             </motion.div>
           </div>
