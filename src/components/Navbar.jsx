@@ -38,8 +38,7 @@ const Navbar = () => {
     {
       label: 'Foto Alumni',
       dropdown: [
-        { label: 'Alumni 2025', href: '/alumni/2025' },
-        { label: 'Alumni 2024', href: '/alumni/2024' },
+        { label: 'Alumni 2026', href: '/alumni/2026' },
       ],
     },
     { label: 'Gallery', href: '/gallery' },

@@ -3,10 +3,9 @@
     
   ],
   "kelas11": [
-    { "id": 2, "nama": "Muhammad Syafa Algiffari", "rombel": "PPLG XI-2", "alamat": "Citeureup, Bogor", "foto": "/students/11/syafa.jpeg", "isDevWeb": true }
+    
   ],
   "kelas12": [
-    { "id": 1, "nama": "Anindia Shabirina Praske Aqilamayza", "rombel": "XII RPL 1", "alamat": "Dewi Sri III RT. 03 RW. 12 No. 5 Pasir Kuda Kec. Bogor Barat", "foto": "/students/12/anindia/anindia.jpg" },
-    { "id": 2, "nama": "Mochamad Fahrezqi Qolbinoor", "rombel": "DKV XII", "alamat": "Bogor, West Java, Indonesia", "foto": "/students/12/fahrezqi/fahrezqi.jpg" }
+    { "id": 2, "nama": "Muhammad Syafa Algiffari", "rombel": "PPLG XI-2", "alamat": "Citeureup, Bogor", "foto": "/students/12/syafa/syafa.jpg", "isDevWeb": true, "isCreator": true }
   ]
 }

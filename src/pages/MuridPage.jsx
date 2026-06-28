@@ -26,6 +26,24 @@ const DevWebBadge = () => (
   </div>
 )
 
+const CreatorBadge = () => (
+  <div className="absolute top-2 left-2 z-10">
+    <div
+      className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-semibold tracking-wide"
+      style={{
+        background: 'linear-gradient(135deg, #1E3A5F 0%, #2d5a8e 100%)',
+        borderLeft: '3px solid #F59E0B',
+        boxShadow: '0 2px 8px rgba(30,58,95,0.3)',
+      }}
+    >
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
+      </svg>
+      <span style={{ color: '#F59E0B' }}>Creator</span>
+    </div>
+  </div>
+)
+
 const MuridPage = () => {
   const { kelas } = useParams()
   const navigate = useNavigate()
@@ -179,8 +197,8 @@ const MuridPage = () => {
                   alt={student.nama}
                   className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500"
                 />
-                {/* Dev Web badge — clean, no glow/blur */}
-                {student.isDevWeb && <DevWebBadge />}
+                {/* Badge — Creator or Dev Web */}
+                {student.isCreator ? <CreatorBadge /> : student.isDevWeb && <DevWebBadge />}
                 {/* Hover overlay */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   style={{ background: 'rgba(30,58,95,0.58)' }}>

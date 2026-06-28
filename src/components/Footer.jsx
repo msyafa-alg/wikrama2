@@ -50,8 +50,7 @@ const Footer = () => {
                 { label: 'Kelas 10', href: '/murid/kelas10' },
                 { label: 'Kelas 11', href: '/murid/kelas11' },
                 { label: 'Kelas 12', href: '/murid/kelas12' },
-                { label: 'Alumni 2025', href: '/alumni/2025' },
-                { label: 'Alumni 2024', href: '/alumni/2024' },
+                { label: 'Alumni 2026', href: '/alumni/2026' },
               ].map((item) => (
                 <li key={item.href}>
                   <Link to={item.href}

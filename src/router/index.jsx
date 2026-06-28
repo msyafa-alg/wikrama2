@@ -3,6 +3,7 @@ import Layout from '../components/Layout'
 import HomePage from '../pages/HomePage'
 import MuridPage from '../pages/MuridPage'
 import AlumniPage from '../pages/AlumniPage'
+import AlumniDetailPage from '../pages/AlumniDetailPage'
 import GalleryPage from '../pages/GalleryPage'
 import TentangPage from '../pages/TentangPage'
 import KontakPage from '../pages/KontakPage'
@@ -18,7 +19,8 @@ const router = createBrowserRouter([
       { path: 'murid/:kelas/:id', element: <SiswaDetailPage /> },
       { path: 'murid/:kelas', element: <MuridPage /> },
       { path: 'alumni/:tahun', element: <AlumniPage /> },
-      { path: 'alumni', element: <Navigate to="/alumni/2025" replace /> },
+      { path: 'alumni/:tahun/:id', element: <AlumniDetailPage /> },
+      { path: 'alumni', element: <Navigate to="/alumni/2026" replace /> },
       { path: 'gallery', element: <GalleryPage /> },
       { path: 'tentang', element: <TentangPage /> },
       { path: 'kontak', element: <KontakPage /> },

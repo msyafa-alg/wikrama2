@@ -1,65 +1,46 @@
 [
   {
-    "id": 1,
-    "nama": "Anindia Shabirina Praske Aqilamayza",
-    "rombel": "XII RPL 1",
-    "alamat": "Dewi Sri III RT. 03 RW. 12 No. 5 Pasir Kuda Kec. Bogor Barat",
-    "foto": "/students/12/anindia/anindia.jpg",
-    "ttl": "",
-    "nisn": "",
-    "email": "",
-    "no_hp": "",
-    "tentang": "",
-    "keahlian": [],
-    "sertifikat": [],
-    "cv": {
-      "pendidikan": "",
-      "pengalaman": [],
-      "organisasi": [],
-      "prestasi": []
-    }
-  },
-  {
     "id": 2,
-    "nama": "Mochamad Fahrezqi Qolbinoor",
-    "rombel": "DKV XII",
-    "alamat": "Bogor, West Java, Indonesia",
-    "foto": "/students/12/fahrezqi/fahrezqi.jpg",
+    "nama": "Muhammad Syafa Algiffari",
+    "rombel": "PPLG XI-2",
+    "alamat": "Citeureup, Bogor",
+    "foto": "/students/12/syafa/syafa.jpg",
     "ttl": "",
     "nisn": "",
     "email": "",
     "no_hp": "",
-    "tentang": "Saya adalah Mochamad Fahrezqi Qolbinoor, siswa SMK Wikrama Bogor jurusan Desain Komunikasi Visual (DKV) angkatan 2025. Sejak awal masuk sekolah, saya sudah tertarik dengan dunia desain visual dan pengembangan web. Selama bersekolah, saya aktif mengikuti berbagai kegiatan sekolah dan pengembangan diri, termasuk lomba desain dan proyek kolaborasi. Saya percaya bahwa desain yang baik bukan hanya soal estetika, tetapi juga tentang menyampaikan pesan dan solusi secara efektif.Ke depannya, saya ingin terus mengasah kemampuan di bidang UI/UX design dan web development agar dapat berkontribusi di industri kreatif.",
-    "keahlian": ["UI/UX Design", "Web Design", "Graphic Design"],
-    "cvLink": "/students/12/fahrezqi/CV Mochamad Fahrezqi Qolbinoor.pdf",
-    "portoLink": "/students/12/fahrezqi/Portofolio Fahrezqi (2).pdf",
+    "tentang": "Saya adalah Muhammad Syafa Algiffari, siswa SMK Wikrama Bogor jurusan PPLG (Pengembangan Perangkat Lunak dan Gim) angkatan 2026. Saya memiliki minat yang besar di bidang pemrograman dan pengembangan web. Selama bersekolah, saya aktif belajar berbagai bahasa pemrograman dan teknologi web terkini.",
+    "keahlian": ["Web Development", "JavaScript", "React"],
+    "cvLink": "/students/12/syafa/cv.pdf",
+    "portoLink": "https://www.syafapersonalweb.my.id/",
     "sertifikat": [
       {
         "id": 1,
-        "nama": "Sertifikat Kompetensi 1",
-        "gambar": "/students/12/fahrezqi/sertif1.jpg",
-        "penerbit": "BNSP",
-        "tahun": "2024"
+        "nama": "Sertifikat K3",
+        "gambar": "/students/12/syafa/sertifikatK3.png",
+        "penerbit": "-",
+        "tahun": "2025"
       },
       {
         "id": 2,
-        "nama": "Sertifikat Kompetensi 2",
-        "gambar": "/students/12/fahrezqi/sertif.jpg",
-        "penerbit": "BNSP",
-        "tahun": "2024"
+        "nama": "Dicoding 1",
+        "gambar": "/students/12/syafa/dicoding1.png",
+        "penerbit": "Dicoding",
+        "tahun": "2025"
+      },
+      {
+        "id": 3,
+        "nama": "Dicoding 2",
+        "gambar": "/students/12/syafa/dicoding2.png",
+        "penerbit": "Dicoding",
+        "tahun": "2025"
       }
     ],
     "cv": {
-      "pendidikan": "SMK Wikrama Bogor - Jurusan Desain Komunikasi Visual (2022 - 2025)",
-      "pengalaman": [
-        {
-          "posisi": "Design Intern",
-          "tempat": "Studio Desain",
-          "periode": "2024 - Sekarang"
-        }
-      ],
-      "organisasi": ["OSIS SMK Wikrama Bogor", "Komunitas Desain"],
-      "prestasi": ["Juara 1 Lomba Desain Poster Tingkat Kota"]
+      "pendidikan": "SMK Wikrama Bogor - Jurusan Pengembangan Perangkat Lunak dan Gim (2023 - 2026)",
+      "pengalaman": [],
+      "organisasi": [],
+      "prestasi": []
     }
   }
 ]

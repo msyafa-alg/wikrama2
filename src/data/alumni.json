@@ -1,22 +1,6 @@
 {
-  "alumni2025": [
-    { "id": 1, "nama": "Andi Prasetyo", "angkatan": "2025", "aktivitas": "Mahasiswa Universitas Indonesia - Teknik Informatika", "foto": "https://i.pravatar.cc/300?img=64" },
-    { "id": 2, "nama": "Bintang Cahaya", "angkatan": "2025", "aktivitas": "Bekerja di PT. Telkom Indonesia sebagai IT Support", "foto": "https://i.pravatar.cc/300?img=65" },
-    { "id": 3, "nama": "Citra Dewi", "angkatan": "2025", "aktivitas": "Mahasiswi Universitas Pakuan - Manajemen Informatika", "foto": "https://i.pravatar.cc/300?img=66" },
-    { "id": 4, "nama": "Dafa Nugraha", "angkatan": "2025", "aktivitas": "Freelance Web Developer", "foto": "https://i.pravatar.cc/300?img=67" },
-    { "id": 5, "nama": "Elsa Rahmawati", "angkatan": "2025", "aktivitas": "Mahasiswi IPB University - Sistem Informasi", "foto": "https://i.pravatar.cc/300?img=68" },
-    { "id": 6, "nama": "Fajar Hidayat", "angkatan": "2025", "aktivitas": "Bekerja di Gojek sebagai Driver Partner", "foto": "https://i.pravatar.cc/300?img=69" },
-    { "id": 7, "nama": "Gita Permatasari", "angkatan": "2025", "aktivitas": "Graphic Designer di Studio Kreatif Bogor", "foto": "https://i.pravatar.cc/300?img=70" },
-    { "id": 8, "nama": "Hadi Wibowo", "angkatan": "2025", "aktivitas": "Mahasiswa Universitas Gunadarma - Teknik Komputer", "foto": "https://i.pravatar.cc/300?img=71" }
-  ],
-  "alumni2024": [
-    { "id": 1, "nama": "Indra Kurniawan", "angkatan": "2024", "aktivitas": "Software Engineer di Tokopedia", "foto": "https://i.pravatar.cc/300?img=72" },
-    { "id": 2, "nama": "Jihan Fauziah", "angkatan": "2024", "aktivitas": "UI/UX Designer di Startup Digital Jakarta", "foto": "https://i.pravatar.cc/300?img=73" },
-    { "id": 3, "nama": "Krisna Bayu", "angkatan": "2024", "aktivitas": "Network Engineer di ISP Lokal Bogor", "foto": "https://i.pravatar.cc/300?img=74" },
-    { "id": 4, "nama": "Leni Marlina", "angkatan": "2024", "aktivitas": "Mahasiswi Binus University - Computer Science", "foto": "https://i.pravatar.cc/300?img=75" },
-    { "id": 5, "nama": "Mirza Alfarizi", "angkatan": "2024", "aktivitas": "Content Creator & Videographer", "foto": "https://i.pravatar.cc/300?img=76" },
-    { "id": 6, "nama": "Nadia Sari", "angkatan": "2024", "aktivitas": "Digital Marketing Specialist", "foto": "https://i.pravatar.cc/300?img=77" },
-    { "id": 7, "nama": "Omar Fauzi", "angkatan": "2024", "aktivitas": "Game Developer Indie", "foto": "https://i.pravatar.cc/300?img=78" },
-    { "id": 8, "nama": "Priya Maharani", "angkatan": "2024", "aktivitas": "Mahasiswi Universitas Telkom - DKV", "foto": "https://i.pravatar.cc/300?img=79" }
+  "alumni2026": [
+    { "id": 1, "nama": "Anindia Shabirina Praske Aqilamayza", "angkatan": "2026", "aktivitas": "-", "foto": "/students/alumni/2026/anindia/anindia.jpg" },
+    { "id": 2, "nama": "Mochamad Fahrezqi Qolbinoor", "angkatan": "2026", "aktivitas": "-", "foto": "/students/alumni/2026/fahrezqi/fahrezqi.jpg" }
   ]
 }

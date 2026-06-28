@@ -6,43 +6,8 @@ import {
   BookOpen, Briefcase, Award, Star, ChevronRight,
   ZoomIn, User, X, GraduationCap, Download, Eye
 } from 'lucide-react'
-import kelas12DetailData from '../data/kelas12detail.json'
-import studentsData from '../data/students.json'
-
-const kelasLabels = {
-  kelas10: 'Kelas 10',
-  kelas11: 'Kelas 11',
-  kelas12: 'Kelas 12',
-}
-
-const DevWebBadge = () => (
-  <div
-    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white tracking-wide"
-    style={{
-      background: '#1E3A5F',
-      borderLeft: '3px solid #F59E0B',
-    }}
-  >
-    <span style={{ color: '#ffffff', fontFamily: 'monospace', fontSize: '0.7rem' }}>&lt;/&gt;</span>
-    <span>Dev Web</span>
-  </div>
-)
-
-const CreatorBadge = () => (
-  <div
-    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold tracking-wide"
-    style={{
-      background: 'linear-gradient(135deg, #1E3A5F 0%, #2d5a8e 100%)',
-      borderLeft: '3px solid #F59E0B',
-      boxShadow: '0 2px 8px rgba(30,58,95,0.3)',
-    }}
-  >
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
-    </svg>
-    <span style={{ color: '#F59E0B' }}>Website Creator</span>
-  </div>
-)
+import alumni2026DetailData from '../data/alumni2026detail.json'
+import alumniData from '../data/alumni.json'
 
 const CertModal = ({ cert, onClose }) => (
   <motion.div
@@ -89,22 +54,23 @@ const cardStyle = {
   boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06)',
 }
 
-const SiswaDetailPage = () => {
-  const { kelas, id } = useParams()
+const AlumniDetailPage = () => {
+  const { id } = useParams()
   const navigate = useNavigate()
   const [certModal, setCertModal] = useState(null)
 
-  const basicData = (studentsData[kelas] || []).find((s) => s.id === parseInt(id))
-  const detailData = kelas === 'kelas12' ? kelas12DetailData.find((s) => s.id === parseInt(id)) : null
+  const alumniList = alumniData.alumni2026 || []
+  const basicData = alumniList.find((s) => s.id === parseInt(id))
+  const detailData = alumni2026DetailData.find((s) => s.id === parseInt(id))
   const siswa = detailData ? { ...basicData, ...detailData } : basicData
 
   if (!siswa) {
     return (
       <div className="min-h-screen pt-20 flex items-center justify-center px-4" style={{ background: '#FFFFFF' }}>
         <div className="text-center">
-          <p className="text-lg font-medium mb-4" style={{ color: '#94A3B8' }}>Siswa tidak ditemukan</p>
-          <Link to={`/murid/${kelas}`} className="font-semibold hover:underline" style={{ color: '#1E3A5F' }}>
-            ← Kembali ke Daftar {kelasLabels[kelas] || 'Murid'}
+          <p className="text-lg font-medium mb-4" style={{ color: '#94A3B8' }}>Alumni tidak ditemukan</p>
+          <Link to="/alumni/2026" className="font-semibold hover:underline" style={{ color: '#1E3A5F' }}>
+            ← Kembali ke Daftar Alumni
           </Link>
         </div>
       </div>
@@ -117,7 +83,6 @@ const SiswaDetailPage = () => {
 
         {/* ── HERO — biru tua ── */}
         <div className="relative overflow-hidden" style={{ background: '#1E3A5F' }}>
-          {/* Subtle light orbs */}
           <div className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-8 pointer-events-none"
             style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.15), transparent)', transform: 'translate(30%,-30%)' }} />
           <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full opacity-6 pointer-events-none"
@@ -128,14 +93,14 @@ const SiswaDetailPage = () => {
             <motion.button
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
-              onClick={() => navigate(`/murid/${kelas}`)}
+              onClick={() => navigate('/alumni/2026')}
               className="flex items-center gap-2 text-sm font-medium mb-6 transition-colors group"
               style={{ color: 'rgba(255,255,255,0.65)' }}
               onMouseEnter={e => e.currentTarget.style.color = '#ffffff'}
               onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.65)'}
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" strokeWidth={2} />
-              Kembali ke Daftar {kelasLabels[kelas] || 'Murid'}
+              Kembali ke Daftar Alumni
             </motion.button>
 
             {/* Profile */}
@@ -151,7 +116,7 @@ const SiswaDetailPage = () => {
                   style={{ border: '2px solid rgba(255,255,255,0.2)' }}>
                   <img src={siswa.foto} alt={siswa.nama} className="w-full h-full object-cover" />
                 </div>
-                <div className="absolute -bottom-2 -right-2 w-7 h-7 rounded-full bg-green-400 shadow"
+                <div className="absolute -bottom-2 -right-2 w-7 h-7 rounded-full bg-yellow-400 shadow"
                   style={{ border: '3px solid #1E3A5F' }} />
               </div>
 
@@ -162,14 +127,10 @@ const SiswaDetailPage = () => {
                     style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.2)' }}>
                     {siswa.rombel}
                   </span>
-                  {siswa.nisn && (
-                    <span className="px-2.5 py-1 rounded-full text-xs font-semibold text-white"
-                      style={{ background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.2)' }}>
-                      NISN {siswa.nisn}
-                    </span>
-                  )}
-                  {/* Badge — Creator or Dev Web */}
-                  {siswa.isCreator ? <CreatorBadge /> : siswa.isDevWeb && <DevWebBadge />}
+                  <span className="px-2.5 py-1 rounded-full text-xs font-semibold text-white"
+                    style={{ background: 'rgba(245,158,11,0.3)', border: '1px solid rgba(245,158,11,0.5)' }}>
+                    Alumni {siswa.angkatan}
+                  </span>
                 </div>
                 <h1 className="text-2xl sm:text-4xl font-black text-white mb-1 leading-tight">{siswa.nama}</h1>
                 <p className="text-xs sm:text-sm mb-3" style={{ color: 'rgba(255,255,255,0.6)' }}>
@@ -247,7 +208,7 @@ const SiswaDetailPage = () => {
             >
               <SectionTitle icon={User} title="Tentang Saya" />
               <p className="leading-relaxed text-sm sm:text-base" style={{ color: '#64748B' }}>{siswa.tentang || 'Tidak ada informasi.'}</p>
-              {siswa.keahlian && (
+              {siswa.keahlian?.length > 0 && (
                 <div className="mt-5">
                   <p className="text-xs font-semibold uppercase tracking-wide mb-3" style={{ color: '#94A3B8' }}>Keahlian</p>
                   <div className="flex flex-wrap gap-2">
@@ -275,6 +236,7 @@ const SiswaDetailPage = () => {
                   { icon: Mail,         label: 'Email',      value: siswa.email },
                   { icon: Phone,        label: 'No. HP',     value: siswa.no_hp },
                   { icon: BookOpen,     label: 'Kelas',      value: siswa.rombel },
+                  { icon: GraduationCap, label: 'Angkatan',  value: siswa.angkatan },
                 ].filter(item => item.value).map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
@@ -287,17 +249,30 @@ const SiswaDetailPage = () => {
                     </div>
                   </div>
                 ))}
+                {siswa.aktivitas && (
+                  <div className="flex items-start gap-3">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center shrink-0 mt-0.5"
+                      style={{ background: 'rgba(30,58,95,0.07)' }}>
+                      <Briefcase className="w-3.5 h-3.5 sm:w-4 sm:h-4" style={{ color: '#1E3A5F' }} strokeWidth={1.8} />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-xs" style={{ color: '#94A3B8' }}>Aktivitas Sekarang</p>
+                      <p className="text-xs sm:text-sm font-medium break-words" style={{ color: '#0F172A' }}>{siswa.aktivitas}</p>
+                    </div>
+                  </div>
+                )}
               </div>
             </motion.div>
           </div>
 
           {/* CV */}
-          {(siswa.cv || siswa.sertifikat) && (
+          {(siswa.cv?.pendidikan || siswa.cv?.pengalaman?.length > 0) && (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}
               className="lg:col-span-2 space-y-5 sm:space-y-6"
             >
+              {siswa.cv?.pendidikan && (
               <div className="rounded-2xl sm:rounded-3xl p-5 sm:p-7" style={cardStyle}>
                 <SectionTitle icon={GraduationCap} title="Pendidikan" />
                 <div className="flex items-start gap-3 p-3 sm:p-4 rounded-xl sm:rounded-2xl"
@@ -306,7 +281,9 @@ const SiswaDetailPage = () => {
                   <p className="text-sm leading-relaxed" style={{ color: '#64748B' }}>{siswa.cv?.pendidikan}</p>
                 </div>
               </div>
+              )}
 
+              {siswa.cv?.pengalaman?.length > 0 && (
               <div className="rounded-2xl sm:rounded-3xl p-5 sm:p-7" style={cardStyle}>
                 <SectionTitle icon={Briefcase} title="Pengalaman" />
                 <div className="space-y-3">
@@ -329,12 +306,14 @@ const SiswaDetailPage = () => {
                   ))}
                 </div>
               </div>
+              )}
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
               className="space-y-5 sm:space-y-6"
             >
+              {siswa.cv?.organisasi?.length > 0 && (
               <div className="rounded-2xl sm:rounded-3xl p-5 sm:p-7" style={cardStyle}>
                 <SectionTitle icon={User} title="Organisasi" />
                 <div className="space-y-2">
@@ -347,7 +326,9 @@ const SiswaDetailPage = () => {
                   ))}
                 </div>
               </div>
+              )}
 
+              {siswa.cv?.prestasi?.length > 0 && (
               <div className="rounded-2xl sm:rounded-3xl p-5 sm:p-7" style={cardStyle}>
                 <SectionTitle icon={Award} title="Prestasi" />
                 <div className="space-y-2">
@@ -360,6 +341,7 @@ const SiswaDetailPage = () => {
                   ))}
                 </div>
               </div>
+              )}
             </motion.div>
           </div>
           )}
@@ -393,7 +375,6 @@ const SiswaDetailPage = () => {
                       <ZoomIn className="w-7 h-7 text-white" strokeWidth={1.8} />
                       <p className="text-white text-xs font-semibold">Lihat Sertifikat</p>
                     </div>
-                    {/* Kuning accent */}
                     <span className="absolute top-2 right-2 px-2 py-0.5 rounded-lg text-xs font-bold"
                       style={{ background: '#F59E0B', color: '#0F172A' }}>
                       {cert.tahun}
@@ -425,4 +406,4 @@ const SiswaDetailPage = () => {
   )
 }
 
-export default SiswaDetailPage
+export default AlumniDetailPage
