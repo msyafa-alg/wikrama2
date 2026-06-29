@@ -26,6 +26,7 @@ const initialDetail = {
   tentang: '',
   keahlian: [],
   porto_link: '',
+  portofolio_pdf: '',
   sertifikat: [],
   cv: {
     pendidikan: '',
@@ -44,6 +45,7 @@ const SiswaForm = () => {
   const [detail, setDetail] = useState(initialDetail)
   const [fotoFile, setFotoFile] = useState(null)
   const [cvFile, setCvFile] = useState(null)
+  const [portofolioPdfFile, setPortofolioPdfFile] = useState(null)
   const [fotoPreview, setFotoPreview] = useState(null)
   const [saving, setSaving] = useState(false)
   const [loading, setLoading] = useState(isEdit)
@@ -70,6 +72,7 @@ const SiswaForm = () => {
           tentang: d.tentang || '',
           keahlian: d.keahlian || [],
           porto_link: d.porto_link || '',
+          portofolio_pdf: d.portofolio_pdf || '',
           sertifikat: d.sertifikat || [],
           cv: d.cv || initialDetail.cv,
         })
@@ -206,6 +209,8 @@ const SiswaForm = () => {
       cvLink = urlData.publicUrl
     }
 
+
+
     const siswaPayload = {
       nama: siswa.nama,
       rombel: siswa.rombel,
@@ -263,6 +268,16 @@ const SiswaForm = () => {
       updatedSertifikat.push({ ...sert, gambar: gambarUrl, file_pdf: pdfUrl })
     }
 
+    let portofolioPdfUrl = detail.portofolio_pdf || ''
+    if (portofolioPdfFile) {
+      const ext = portofolioPdfFile.name.split('.').pop()
+      const path = `portofolio/${siswaId}/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`
+      const { error: upErr } = await supabase.storage.from('student-files').upload(path, portofolioPdfFile)
+      if (upErr) { alert('Gagal upload PDF portofolio: ' + upErr.message); setSaving(false); return }
+      const { data: urlData } = supabase.storage.from('student-files').getPublicUrl(path)
+      portofolioPdfUrl = urlData.publicUrl
+    }
+
     const detailPayload = {
       ttl: detail.ttl,
       nisn: detail.nisn,
@@ -271,6 +286,7 @@ const SiswaForm = () => {
       tentang: detail.tentang,
       keahlian: detail.keahlian,
       porto_link: detail.porto_link,
+      portofolio_pdf: portofolioPdfUrl,
       cv_link: cvLink,
       sertifikat: updatedSertifikat,
       cv: detail.cv,
@@ -421,6 +437,12 @@ const SiswaForm = () => {
                 className="w-full px-3 py-2 rounded-xl text-sm focus:outline-none"
                 style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', color: '#0F172A' }}
               />
+            </div>
+            <div>
+              <label className="block text-xs font-medium mb-1" style={{ color: '#64748B' }}>Portfolio PDF</label>
+              {portofolioPdfFile && <p className="text-xs mb-1" style={{ color: '#64748B' }}>{portofolioPdfFile.name}</p>}
+              <input type="file" accept=".pdf" onChange={(e) => { const f = e.target.files?.[0]; if (f) setPortofolioPdfFile(f) }}
+                className="text-sm w-full" style={{ color: '#64748B' }} />
             </div>
           </div>
         </div>

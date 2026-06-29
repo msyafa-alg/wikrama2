@@ -226,6 +226,22 @@ const AlumniDetailPage = () => {
                     Lihat Porto
                   </a>
                 )}
+                {siswa.portofolio_pdf && (
+                  <a
+                    href={siswa.portofolio_pdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl font-semibold text-sm transition-all duration-300 hover:scale-105"
+                    style={{
+                      background: 'rgba(220,38,38,0.15)',
+                      color: '#ffffff',
+                      border: '1px solid rgba(220,38,38,0.25)',
+                    }}
+                  >
+                    <FileText className="w-4 h-4" strokeWidth={2.5} />
+                    Porto PDF
+                  </a>
+                )}
               </div>
             </motion.div>
           </div>
