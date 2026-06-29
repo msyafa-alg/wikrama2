@@ -49,6 +49,7 @@ const SiswaForm = () => {
   const [loading, setLoading] = useState(isEdit)
   const [keahlianInput, setKeahlianInput] = useState('')
   const [sertifikatFiles, setSertifikatFiles] = useState({})
+  const [sertifikatPdfFiles, setSertifikatPdfFiles] = useState({})
 
   useEffect(() => {
     if (!isEdit) return
@@ -108,9 +109,10 @@ const SiswaForm = () => {
     const id = Date.now()
     setDetail({
       ...detail,
-      sertifikat: [...detail.sertifikat, { id, nama: '', penerbit: '', tahun: '', gambar: '' }],
+      sertifikat: [...detail.sertifikat, { id, nama: '', penerbit: '', tahun: '', gambar: '', file_pdf: '' }],
     })
     setSertifikatFiles(prev => ({ ...prev, [id]: null }))
+    setSertifikatPdfFiles(prev => ({ ...prev, [id]: null }))
   }
 
   const updateSertifikat = (idx, field, value) => {
@@ -123,9 +125,14 @@ const SiswaForm = () => {
     setSertifikatFiles(prev => ({ ...prev, [id]: file }))
   }
 
+  const handleSertifikatPdf = (id, file) => {
+    setSertifikatPdfFiles(prev => ({ ...prev, [id]: file }))
+  }
+
   const removeSertifikat = (idx) => {
     const removed = detail.sertifikat[idx]
     setSertifikatFiles(prev => { const n = { ...prev }; delete n[removed.id]; return n })
+    setSertifikatPdfFiles(prev => { const n = { ...prev }; delete n[removed.id]; return n })
     setDetail({ ...detail, sertifikat: detail.sertifikat.filter((_, i) => i !== idx) })
   }
 
@@ -231,20 +238,29 @@ const SiswaForm = () => {
     const updatedSertifikat = []
     for (const sert of detail.sertifikat) {
       const file = sertifikatFiles[sert.id]
+      const pdfFile = sertifikatPdfFiles[sert.id]
+      let gambarUrl = sert.gambar || ''
+      let pdfUrl = sert.file_pdf || ''
+
       if (file) {
         const ext = file.name.split('.').pop()
         const path = `sertifikat/${siswaId}/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`
-        const { error: uploadErr } = await supabase.storage.from('student-files').upload(path, file)
-        if (uploadErr) {
-          alert('Gagal upload gambar sertifikat: ' + uploadErr.message)
-          setSaving(false)
-          return
-        }
+        const { error: upErr } = await supabase.storage.from('student-files').upload(path, file)
+        if (upErr) { alert('Gagal upload gambar sertifikat: ' + upErr.message); setSaving(false); return }
         const { data: urlData } = supabase.storage.from('student-files').getPublicUrl(path)
-        updatedSertifikat.push({ ...sert, gambar: urlData.publicUrl })
-      } else {
-        updatedSertifikat.push({ ...sert, gambar: sert.gambar || '' })
+        gambarUrl = urlData.publicUrl
       }
+
+      if (pdfFile) {
+        const ext = pdfFile.name.split('.').pop()
+        const path = `sertifikat/${siswaId}/pdf/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`
+        const { error: upErr } = await supabase.storage.from('student-files').upload(path, pdfFile)
+        if (upErr) { alert('Gagal upload PDF sertifikat: ' + upErr.message); setSaving(false); return }
+        const { data: urlData } = supabase.storage.from('student-files').getPublicUrl(path)
+        pdfUrl = urlData.publicUrl
+      }
+
+      updatedSertifikat.push({ ...sert, gambar: gambarUrl, file_pdf: pdfUrl })
     }
 
     const detailPayload = {
@@ -479,6 +495,12 @@ const SiswaForm = () => {
                         <input type="file" accept="image/*" className="hidden"
                           onChange={(e) => { const f = e.target.files?.[0]; if (f) handleSertifikatFile(sert.id, f) }} />
                         {sert.gambar || sertifikatFiles[sert.id] ? 'Ganti' : 'Foto'}
+                      </label>
+                      <label className="shrink-0 px-2 py-1.5 rounded-lg text-xs font-medium cursor-pointer"
+                        style={{ background: 'rgba(220,38,38,0.1)', border: '1px solid rgba(220,38,38,0.2)', color: '#DC2626' }}>
+                        <input type="file" accept=".pdf" className="hidden"
+                          onChange={(e) => { const f = e.target.files?.[0]; if (f) handleSertifikatPdf(sert.id, f) }} />
+                        {sert.file_pdf || sertifikatPdfFiles[sert.id] ? 'PDF' : 'PDF'}
                       </label>
                     </div>
                   </div>

@@ -13,21 +13,10 @@ const HeroSection = () => {
       className="relative flex items-center justify-center overflow-hidden"
       style={{ minHeight: '100vh' }}
     >
-      {/* Background image — desktop */}
-      <div className="absolute inset-0 z-0 hidden sm:block">
+      {/* Background image */}
+      <div className="absolute inset-0 z-0">
         <img
-          src="https://files.catbox.moe/5oq0eb.png"
-          alt="Wikrama 2"
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
-        />
-        <div className="absolute inset-0"
-          style={{ background: 'linear-gradient(to bottom, rgba(30,58,95,0.78) 0%, rgba(30,58,95,0.58) 40%, rgba(30,58,95,0.88) 100%)' }} />
-      </div>
-
-      {/* Background image — mobile */}
-      <div className="absolute inset-0 z-0 sm:hidden">
-        <img
-          src="https://files.catbox.moe/5oq0eb.png"
+          src="/gallery/20251003_155849.jpg"
           alt="Wikrama 2"
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
         />

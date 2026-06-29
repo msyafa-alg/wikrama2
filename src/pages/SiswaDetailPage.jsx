@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
   ArrowLeft, MapPin, Mail, Phone, Hash, CalendarDays,
   BookOpen, Briefcase, Award, Star, ChevronRight,
-  ZoomIn, User, X, GraduationCap, Download, Eye
+  ZoomIn, User, X, GraduationCap, Download, Eye, FileText
 } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import kelas12DetailData from '../data/kelas12detail.json'
@@ -60,7 +60,23 @@ const CertModal = ({ cert, onClose }) => (
       className="relative w-full max-w-2xl"
       onClick={(e) => e.stopPropagation()}
     >
-      <img src={cert.gambar} alt={cert.nama} className="w-full rounded-2xl shadow-2xl" />
+      {cert.gambar ? (
+        <img src={cert.gambar} alt={cert.nama} className="w-full rounded-2xl shadow-2xl" />
+      ) : cert.file_pdf ? (
+        <div className="w-full rounded-2xl shadow-2xl bg-white p-8 sm:p-12 flex flex-col items-center justify-center min-h-[300px]">
+          <div className="w-20 h-20 rounded-2xl flex items-center justify-center mb-4"
+            style={{ background: '#FEF2F2' }}>
+            <FileText className="w-10 h-10" style={{ color: '#DC2626' }} strokeWidth={1.5} />
+          </div>
+          <p className="font-semibold text-sm text-center mb-1" style={{ color: '#0F172A' }}>{cert.nama}</p>
+          <p className="text-xs mb-4" style={{ color: '#64748B' }}>{cert.penerbit} · {cert.tahun}</p>
+          <a href={cert.file_pdf} download target="_blank" rel="noopener noreferrer"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:scale-105"
+            style={{ background: '#DC2626' }}>
+            <Download className="w-4 h-4" /> Buka PDF
+          </a>
+        </div>
+      ) : null}
       <div className="mt-3 text-center px-2">
         <p className="text-white font-semibold text-sm sm:text-base">{cert.nama}</p>
         <p className="text-xs sm:text-sm mt-1" style={{ color: '#F59E0B' }}>{cert.penerbit} · {cert.tahun}</p>
@@ -233,9 +249,9 @@ const SiswaDetailPage = () => {
                     </div>
                   ))}
                 </div>
-                {siswa.cv_link && (
+                {(siswa.cv_link || siswa.cvLink) && (
                   <a
-                    href={siswa.cv_link}
+                    href={siswa.cv_link || siswa.cvLink}
                     download
                     className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl font-semibold text-sm transition-all duration-300 hover:scale-105"
                     style={{
@@ -248,9 +264,9 @@ const SiswaDetailPage = () => {
                     Download CV
                   </a>
                 )}
-                {siswa.porto_link && (
+                {(siswa.porto_link || siswa.portoLink) && (
                   <a
-                    href={siswa.porto_link}
+                    href={siswa.porto_link || siswa.portoLink}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl font-semibold text-sm transition-all duration-300 hover:scale-105"
@@ -414,7 +430,7 @@ const SiswaDetailPage = () => {
                 <motion.div
                   key={cert.id}
                   whileHover={{ y: -2, boxShadow: '0 8px 24px rgba(0,0,0,0.1)' }}
-                  onClick={() => setCertModal(cert)}
+                  onClick={() => cert.gambar ? setCertModal(cert) : cert.file_pdf && window.open(cert.file_pdf, '_blank')}
                   className="group cursor-pointer rounded-xl sm:rounded-2xl overflow-hidden transition-all duration-300"
                   style={{
                     background: '#FFFFFF',
@@ -422,27 +438,48 @@ const SiswaDetailPage = () => {
                     boxShadow: '0 1px 3px rgba(0,0,0,0.08)',
                   }}
                 >
-                  <div className="relative h-36 sm:h-44 overflow-hidden">
-                    <img src={cert.gambar} alt={cert.nama}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                      style={{ background: 'rgba(30,58,95,0.68)' }}>
-                      <ZoomIn className="w-7 h-7 text-white" strokeWidth={1.8} />
-                      <p className="text-white text-xs font-semibold">Lihat Sertifikat</p>
+                  {cert.gambar ? (
+                    <div className="relative h-36 sm:h-44 overflow-hidden">
+                      <img src={cert.gambar} alt={cert.nama}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                      <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        style={{ background: 'rgba(30,58,95,0.68)' }}>
+                        <ZoomIn className="w-7 h-7 text-white" strokeWidth={1.8} />
+                        <p className="text-white text-xs font-semibold">Lihat Sertifikat</p>
+                      </div>
+                      <span className="absolute top-2 right-2 px-2 py-0.5 rounded-lg text-xs font-bold"
+                        style={{ background: '#F59E0B', color: '#0F172A' }}>
+                        {cert.tahun}
+                      </span>
                     </div>
-                    <span className="absolute top-2 right-2 px-2 py-0.5 rounded-lg text-xs font-bold"
-                      style={{ background: '#F59E0B', color: '#0F172A' }}>
-                      {cert.tahun}
-                    </span>
-                  </div>
+                  ) : (
+                    <div className="relative h-36 sm:h-44 flex flex-col items-center justify-center"
+                      style={{ background: '#FEF2F2' }}>
+                      <FileText className="w-12 h-12 sm:w-16 sm:h-16" style={{ color: '#DC2626' }} strokeWidth={1.5} />
+                      <p className="text-xs font-medium mt-2" style={{ color: '#DC2626' }}>File PDF</p>
+                      <span className="absolute top-2 right-2 px-2 py-0.5 rounded-lg text-xs font-bold"
+                        style={{ background: '#F59E0B', color: '#0F172A' }}>
+                        {cert.tahun}
+                      </span>
+                    </div>
+                  )}
                   <div className="p-3 sm:p-4">
                     <p className="font-semibold text-xs sm:text-sm leading-snug line-clamp-2 mb-2" style={{ color: '#0F172A' }}>{cert.nama}</p>
-                    <div className="flex items-center gap-2">
-                      <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
-                        style={{ background: '#1E3A5F' }}>
-                        <Award className="w-3 h-3 text-white" strokeWidth={2} />
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
+                          style={{ background: '#1E3A5F' }}>
+                          <Award className="w-3 h-3 text-white" strokeWidth={2} />
+                        </div>
+                        <p className="text-xs truncate" style={{ color: '#94A3B8' }}>{cert.penerbit}</p>
                       </div>
-                      <p className="text-xs truncate" style={{ color: '#94A3B8' }}>{cert.penerbit}</p>
+                      {cert.file_pdf && (
+                        <a href={cert.file_pdf} download target="_blank" rel="noopener noreferrer"
+                          className="shrink-0 flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-medium transition-all hover:scale-105 text-white"
+                          style={{ background: '#DC2626' }}>
+                          <Download className="w-3 h-3" /> PDF
+                        </a>
+                      )}
                     </div>
                   </div>
                 </motion.div>
