@@ -1,11 +1,12 @@
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   ArrowLeft, MapPin, Mail, Phone, Hash, CalendarDays,
   BookOpen, Briefcase, Award, Star, ChevronRight,
   ZoomIn, User, X, GraduationCap, Download, Eye
 } from 'lucide-react'
+import { supabase } from '../lib/supabase'
 import alumni2026DetailData from '../data/alumni2026detail.json'
 import alumniData from '../data/alumni.json'
 
@@ -55,21 +56,47 @@ const cardStyle = {
 }
 
 const AlumniDetailPage = () => {
-  const { id } = useParams()
+  const { id, tahun } = useParams()
   const navigate = useNavigate()
   const [certModal, setCertModal] = useState(null)
+  const [siswa, setSiswa] = useState(null)
+  const [loading, setLoading] = useState(true)
 
-  const alumniList = alumniData.alumni2026 || []
-  const basicData = alumniList.find((s) => s.id === parseInt(id))
-  const detailData = alumni2026DetailData.find((s) => s.id === parseInt(id))
-  const siswa = detailData ? { ...basicData, ...detailData } : basicData
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true)
+      const { data: basic } = await supabase.from('alumni').select('*').eq('id', id).maybeSingle()
+      let merged = null
+      if (basic) {
+        const { data: detail } = await supabase.from('alumni_details').select('*').eq('id', id).maybeSingle()
+        merged = detail ? { ...basic, ...detail } : basic
+      }
+      if (!merged) {
+        const fallbackList = alumniData[`alumni${tahun}`] || []
+        const fallbackBasic = fallbackList.find((s) => s.id === parseInt(id))
+        const fallbackDetail = alumni2026DetailData.find((s) => s.id === parseInt(id))
+        merged = fallbackDetail ? { ...fallbackBasic, ...fallbackDetail } : fallbackBasic
+      }
+      setSiswa(merged)
+      setLoading(false)
+    }
+    fetchData()
+  }, [id, tahun])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen pt-20 flex items-center justify-center" style={{ background: '#FFFFFF' }}>
+        <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: '#1E3A5F', borderTopColor: 'transparent' }} />
+      </div>
+    )
+  }
 
   if (!siswa) {
     return (
       <div className="min-h-screen pt-20 flex items-center justify-center px-4" style={{ background: '#FFFFFF' }}>
         <div className="text-center">
           <p className="text-lg font-medium mb-4" style={{ color: '#94A3B8' }}>Alumni tidak ditemukan</p>
-          <Link to="/alumni/2026" className="font-semibold hover:underline" style={{ color: '#1E3A5F' }}>
+          <Link to={`/alumni/${tahun}`} className="font-semibold hover:underline" style={{ color: '#1E3A5F' }}>
             ← Kembali ke Daftar Alumni
           </Link>
         </div>

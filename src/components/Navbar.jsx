@@ -44,6 +44,7 @@ const Navbar = () => {
     { label: 'Gallery', href: '/gallery' },
     { label: 'Tentang Rayon', href: '/tentang' },
     { label: 'Kontak', href: '/kontak' },
+    { label: 'Admin', href: '/admin/login' },
   ]
 
   const isActive = (href) => location.pathname === href

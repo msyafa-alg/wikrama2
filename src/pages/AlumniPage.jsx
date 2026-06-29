@@ -1,13 +1,33 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { supabase } from '../lib/supabase'
 import alumniData from '../data/alumni.json'
 
 const AlumniPage = () => {
   const { tahun } = useParams()
   const navigate = useNavigate()
+  const [alumni, setAlumni] = useState([])
+  const [loading, setLoading] = useState(true)
 
-  const key = `alumni${tahun}`
-  const alumni = alumniData[key] || []
+  useEffect(() => {
+    const fetch = async () => {
+      setLoading(true)
+      const { data } = await supabase
+        .from('alumni')
+        .select('*')
+        .eq('angkatan', tahun)
+        .order('nama')
+      if (data && data.length > 0) {
+        setAlumni(data)
+      } else {
+        const key = `alumni${tahun}`
+        setAlumni(alumniData[key] || [])
+      }
+      setLoading(false)
+    }
+    fetch()
+  }, [tahun])
 
   return (
     <div className="min-h-screen pt-20" style={{ background: '#FFFFFF' }}>
@@ -20,7 +40,7 @@ const AlumniPage = () => {
               Alumni Wikrama 2
             </span>
             <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2 mt-2">Foto Alumni {tahun}</h1>
-            <p style={{ color: 'rgba(255,255,255,0.65)' }}>{alumni.length} alumni angkatan {tahun}</p>
+            {!loading && <p style={{ color: 'rgba(255,255,255,0.65)' }}>{alumni.length} alumni angkatan {tahun}</p>}
           </motion.div>
 
           <div className="flex justify-center gap-3 mt-8">
@@ -45,7 +65,11 @@ const AlumniPage = () => {
 
       {/* Grid */}
       <div className="max-w-7xl mx-auto px-4 py-12">
-        {alumni.length === 0 ? (
+        {loading ? (
+          <div className="flex justify-center py-20">
+            <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: '#1E3A5F', borderTopColor: 'transparent' }} />
+          </div>
+        ) : alumni.length === 0 ? (
           <div className="text-center py-20">
             <div className="flex justify-center mb-4">
               <svg className="w-16 h-16" style={{ color: '#CBD5E1' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -1,11 +1,12 @@
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   ArrowLeft, MapPin, Mail, Phone, Hash, CalendarDays,
   BookOpen, Briefcase, Award, Star, ChevronRight,
   ZoomIn, User, X, GraduationCap, Download, Eye
 } from 'lucide-react'
+import { supabase } from '../lib/supabase'
 import kelas12DetailData from '../data/kelas12detail.json'
 import studentsData from '../data/students.json'
 
@@ -93,10 +94,50 @@ const SiswaDetailPage = () => {
   const { kelas, id } = useParams()
   const navigate = useNavigate()
   const [certModal, setCertModal] = useState(null)
+  const [siswa, setSiswa] = useState(null)
+  const [loading, setLoading] = useState(true)
 
-  const basicData = (studentsData[kelas] || []).find((s) => s.id === parseInt(id))
-  const detailData = kelas === 'kelas12' ? kelas12DetailData.find((s) => s.id === parseInt(id)) : null
-  const siswa = detailData ? { ...basicData, ...detailData } : basicData
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true)
+
+      const { data: basic } = await supabase
+        .from('students')
+        .select('*')
+        .eq('id', id)
+        .maybeSingle()
+
+      let merged = null
+
+      if (basic) {
+        const { data: detail } = await supabase
+          .from('student_details')
+          .select('*')
+          .eq('id', id)
+          .maybeSingle()
+
+        merged = detail ? { ...basic, ...detail } : basic
+      }
+
+      if (!merged) {
+        const fallbackBasic = (studentsData[kelas] || []).find((s) => s.id === parseInt(id))
+        const fallbackDetail = kelas === 'kelas12' ? kelas12DetailData.find((s) => s.id === parseInt(id)) : null
+        merged = fallbackDetail ? { ...fallbackBasic, ...fallbackDetail } : fallbackBasic
+      }
+
+      setSiswa(merged)
+      setLoading(false)
+    }
+    fetchData()
+  }, [kelas, id])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen pt-20 flex items-center justify-center" style={{ background: '#FFFFFF' }}>
+        <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: '#1E3A5F', borderTopColor: 'transparent' }} />
+      </div>
+    )
+  }
 
   if (!siswa) {
     return (
@@ -117,14 +158,12 @@ const SiswaDetailPage = () => {
 
         {/* ── HERO — biru tua ── */}
         <div className="relative overflow-hidden" style={{ background: '#1E3A5F' }}>
-          {/* Subtle light orbs */}
           <div className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-8 pointer-events-none"
             style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.15), transparent)', transform: 'translate(30%,-30%)' }} />
           <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full opacity-6 pointer-events-none"
             style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.1), transparent)', transform: 'translate(-30%,30%)' }} />
 
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 relative z-10">
-            {/* Back */}
             <motion.button
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
@@ -138,14 +177,12 @@ const SiswaDetailPage = () => {
               Kembali ke Daftar {kelasLabels[kelas] || 'Murid'}
             </motion.button>
 
-            {/* Profile */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               className="flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-6"
             >
-              {/* Photo */}
               <div className="relative shrink-0">
                 <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl"
                   style={{ border: '2px solid rgba(255,255,255,0.2)' }}>
@@ -155,7 +192,6 @@ const SiswaDetailPage = () => {
                   style={{ border: '3px solid #1E3A5F' }} />
               </div>
 
-              {/* Info */}
               <div className="flex-1 text-center sm:text-left min-w-0">
                 <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-2">
                   <span className="px-2.5 py-1 rounded-full text-xs font-semibold text-white"
@@ -168,15 +204,14 @@ const SiswaDetailPage = () => {
                       NISN {siswa.nisn}
                     </span>
                   )}
-                  {/* Badge — Creator or Dev Web */}
-                  {siswa.isCreator ? <CreatorBadge /> : siswa.isDevWeb && <DevWebBadge />}
+                  {siswa.is_creator ? <CreatorBadge /> : siswa.is_dev_web && <DevWebBadge />}
                 </div>
                 <h1 className="text-2xl sm:text-4xl font-black text-white mb-1 leading-tight">{siswa.nama}</h1>
                 <p className="text-xs sm:text-sm mb-3" style={{ color: 'rgba(255,255,255,0.6)' }}>
                   SMK Wikrama Bogor · Wikrama 2
                 </p>
                 <div className="flex flex-wrap justify-center sm:justify-start gap-2">
-                  {siswa.keahlian?.map((k) => (
+                  {(siswa.keahlian || []).map((k) => (
                     <span key={k} className="px-2.5 py-1 rounded-xl text-xs font-medium text-white"
                       style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.18)' }}>
                       {k}
@@ -185,7 +220,6 @@ const SiswaDetailPage = () => {
                 </div>
               </div>
 
-              {/* Mini stats + Download CV */}
               <div className="flex flex-col gap-3 shrink-0">
                 <div className="flex sm:flex-col gap-3">
                   {[
@@ -199,9 +233,9 @@ const SiswaDetailPage = () => {
                     </div>
                   ))}
                 </div>
-                {siswa.cvLink && (
+                {siswa.cv_link && (
                   <a
-                    href={siswa.cvLink}
+                    href={siswa.cv_link}
                     download
                     className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl font-semibold text-sm transition-all duration-300 hover:scale-105"
                     style={{
@@ -214,9 +248,9 @@ const SiswaDetailPage = () => {
                     Download CV
                   </a>
                 )}
-                {siswa.portoLink && (
+                {siswa.porto_link && (
                   <a
-                    href={siswa.portoLink}
+                    href={siswa.porto_link}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl font-semibold text-sm transition-all duration-300 hover:scale-105"
@@ -238,7 +272,6 @@ const SiswaDetailPage = () => {
         {/* ── CONTENT ── */}
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 space-y-6 sm:space-y-8">
 
-          {/* Tentang + Info Pribadi */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
@@ -247,11 +280,11 @@ const SiswaDetailPage = () => {
             >
               <SectionTitle icon={User} title="Tentang Saya" />
               <p className="leading-relaxed text-sm sm:text-base" style={{ color: '#64748B' }}>{siswa.tentang || 'Tidak ada informasi.'}</p>
-              {siswa.keahlian && (
+              {siswa.keahlian && siswa.keahlian.length > 0 && (
                 <div className="mt-5">
                   <p className="text-xs font-semibold uppercase tracking-wide mb-3" style={{ color: '#94A3B8' }}>Keahlian</p>
                   <div className="flex flex-wrap gap-2">
-                    {siswa.keahlian?.map((k) => (
+                    {siswa.keahlian.map((k) => (
                       <span key={k} className="px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold"
                         style={{ background: 'rgba(30,58,95,0.07)', border: '1px solid #E2E8F0', color: '#1E3A5F' }}>
                         {k}
@@ -291,7 +324,6 @@ const SiswaDetailPage = () => {
             </motion.div>
           </div>
 
-          {/* CV */}
           {(siswa.cv || siswa.sertifikat) && (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6">
             <motion.div
@@ -307,10 +339,11 @@ const SiswaDetailPage = () => {
                 </div>
               </div>
 
+              {(siswa.cv?.pengalaman?.length > 0) && (
               <div className="rounded-2xl sm:rounded-3xl p-5 sm:p-7" style={cardStyle}>
                 <SectionTitle icon={Briefcase} title="Pengalaman" />
                 <div className="space-y-3">
-                  {siswa.cv?.pengalaman?.map((p, i) => (
+                  {siswa.cv.pengalaman.map((p, i) => (
                     <div key={i} className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl sm:rounded-2xl"
                       style={{ background: '#F8FAFC', border: '1px solid #E2E8F0' }}>
                       <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 text-white font-bold text-sm"
@@ -329,16 +362,18 @@ const SiswaDetailPage = () => {
                   ))}
                 </div>
               </div>
+              )}
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
               className="space-y-5 sm:space-y-6"
             >
+              {(siswa.cv?.organisasi?.length > 0) && (
               <div className="rounded-2xl sm:rounded-3xl p-5 sm:p-7" style={cardStyle}>
                 <SectionTitle icon={User} title="Organisasi" />
                 <div className="space-y-2">
-                  {siswa.cv?.organisasi?.map((o, i) => (
+                  {siswa.cv.organisasi.map((o, i) => (
                     <div key={i} className="flex items-center gap-3 p-2.5 sm:p-3 rounded-xl"
                       style={{ background: '#F8FAFC', border: '1px solid #E2E8F0' }}>
                       <ChevronRight className="w-4 h-4 shrink-0" style={{ color: '#1E3A5F' }} strokeWidth={2.5} />
@@ -347,11 +382,13 @@ const SiswaDetailPage = () => {
                   ))}
                 </div>
               </div>
+              )}
 
+              {(siswa.cv?.prestasi?.length > 0) && (
               <div className="rounded-2xl sm:rounded-3xl p-5 sm:p-7" style={cardStyle}>
                 <SectionTitle icon={Award} title="Prestasi" />
                 <div className="space-y-2">
-                  {siswa.cv?.prestasi?.map((p, i) => (
+                  {siswa.cv.prestasi.map((p, i) => (
                     <div key={i} className="flex items-start gap-2.5 p-2.5 sm:p-3 rounded-xl"
                       style={{ background: '#FFFBEB', border: '1px solid rgba(245,158,11,0.2)' }}>
                       <Star className="w-4 h-4 shrink-0 mt-0.5" style={{ color: '#F59E0B' }} strokeWidth={2} fill="#F59E0B" />
@@ -360,20 +397,20 @@ const SiswaDetailPage = () => {
                   ))}
                 </div>
               </div>
+              )}
             </motion.div>
           </div>
           )}
 
-          {/* Sertifikat */}
           {siswa.sertifikat?.length > 0 && (
           <motion.div
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
             className="rounded-2xl sm:rounded-3xl p-5 sm:p-7"
             style={cardStyle}
           >
-            <SectionTitle icon={Award} title={`Sertifikat (${siswa.sertifikat?.length})`} />
+            <SectionTitle icon={Award} title={`Sertifikat (${siswa.sertifikat.length})`} />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-              {siswa.sertifikat?.map((cert) => (
+              {siswa.sertifikat.map((cert) => (
                 <motion.div
                   key={cert.id}
                   whileHover={{ y: -2, boxShadow: '0 8px 24px rgba(0,0,0,0.1)' }}
@@ -393,7 +430,6 @@ const SiswaDetailPage = () => {
                       <ZoomIn className="w-7 h-7 text-white" strokeWidth={1.8} />
                       <p className="text-white text-xs font-semibold">Lihat Sertifikat</p>
                     </div>
-                    {/* Kuning accent */}
                     <span className="absolute top-2 right-2 px-2 py-0.5 rounded-lg text-xs font-bold"
                       style={{ background: '#F59E0B', color: '#0F172A' }}>
                       {cert.tahun}

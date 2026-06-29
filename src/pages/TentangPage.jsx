@@ -1,10 +1,7 @@
-import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ScrollText, Rocket, Star, GraduationCap, Building2 } from 'lucide-react'
+import { ScrollText, Rocket, Star, GraduationCap } from 'lucide-react'
 
 const TentangPage = () => {
-  const [zoomed, setZoomed] = useState(false)
-
   const visi = 'Menjadi rayon unggulan yang mencetak generasi berkarakter, berprestasi, dan berdaya saing tinggi dalam era global.'
 
   const misi = [
@@ -131,85 +128,40 @@ Dengan semangat kebersamaan dan jiwa kompetitif yang sehat, rayon ini telah mela
             </span>
             Pembimbing Rayon
           </h2>
-          <div className="rounded-2xl p-7 flex flex-col sm:flex-row items-center gap-6" style={cardStyle}>
-            <img
-              src="https://i.pravatar.cc/200?img=12"
-              alt="Rizky Kurniawan"
-              className="w-28 h-28 rounded-2xl object-cover"
-              style={{ border: '2px solid #E2E8F0' }}
-            />
-            <div>
-              <h3 className="text-xl font-bold" style={{ color: '#0F172A' }}>Rizky Kurniawan S.Pd</h3>
-              <p className="font-medium mb-3" style={{ color: '#1E3A5F' }}>Pembimbing Rayon Wikrama 2</p>
-              {/* Quote border kuning */}
-              <blockquote className="text-sm italic leading-relaxed pl-4"
-                style={{ color: '#64748B', borderLeft: '3px solid #F59E0B' }}>
-                "Mendidik bukan hanya mengajar, tetapi membentuk karakter untuk masa depan."
+          <div className="rounded-3xl p-6 sm:p-10 flex flex-col sm:flex-row items-center gap-6 sm:gap-8"
+            style={{
+              background: '#1E3A5F',
+              border: '1px solid rgba(255,255,255,0.12)',
+            }}>
+            <div className="relative shrink-0">
+              <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl overflow-hidden shadow-2xl"
+                style={{ border: '2px solid rgba(245,158,11,0.4)' }}>
+                <img
+                  src="https://files.catbox.moe/vle4fm.png"
+                  alt="Rizky Kurniawan"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+            <div className="text-center sm:text-left flex-1">
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-1">Rizky Kurniawan</h3>
+              <p className="font-medium mb-4 text-sm sm:text-base" style={{ color: '#F59E0B' }}>
+                Pembimbing Rayon Wikrama 2
+              </p>
+              <blockquote className="relative">
+                <span className="text-4xl font-serif leading-none" style={{ color: '#F59E0B' }}>"</span>
+                <p className="text-sm sm:text-base leading-relaxed italic -mt-2 px-3"
+                  style={{ color: 'rgba(255,255,255,0.7)' }}>
+                  Mendidik bukan hanya mengajar, tetapi membentuk karakter untuk masa depan.
+                </p>
+                <span className="text-4xl font-serif leading-none float-right" style={{ color: '#F59E0B' }}>"</span>
+                <div className="clear-both" />
               </blockquote>
             </div>
           </div>
         </motion.section>
 
-        {/* Struktur */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-2xl font-bold mb-5 flex items-center gap-3" style={{ color: '#0F172A' }}>
-            <span className="w-8 h-8 rounded-lg flex items-center justify-center text-white shrink-0"
-              style={{ background: '#1E3A5F' }}>
-              <Building2 className="w-4 h-4" strokeWidth={2} />
-            </span>
-            Struktur Organisasi
-          </h2>
-          <div className="relative group cursor-zoom-in rounded-2xl overflow-hidden"
-            style={{
-              border: '1px solid #E2E8F0',
-              boxShadow: '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06)',
-            }}
-            onClick={() => setZoomed(true)}>
-            <img
-              src="https://picsum.photos/seed/struktur/1200/700"
-              alt="Struktur Organisasi"
-              className="w-full object-cover group-hover:scale-105 transition-transform duration-700"
-            />
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
-              style={{ background: 'rgba(30,58,95,0.45)' }}>
-              <p className="text-white font-medium">Klik untuk perbesar</p>
-            </div>
-          </div>
-        </motion.section>
       </div>
-
-      {/* Zoom modal */}
-      {zoomed && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="fixed inset-0 z-[200] bg-black/90 flex items-center justify-center p-4 cursor-zoom-out"
-          onClick={() => setZoomed(false)}
-        >
-          <motion.img
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            src="https://picsum.photos/seed/struktur/1200/700"
-            alt="Struktur Organisasi"
-            className="max-w-full max-h-full rounded-xl shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          />
-          <button
-            className="absolute top-4 right-4 text-white rounded-full p-2 transition-colors"
-            style={{ background: 'rgba(255,255,255,0.12)' }}
-            onClick={() => setZoomed(false)}
-          >
-            <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </motion.div>
-      )}
     </div>
   )
 }

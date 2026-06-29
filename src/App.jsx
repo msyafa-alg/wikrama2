@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { RouterProvider } from 'react-router-dom'
+import { AuthProvider } from './context/AuthContext'
 import router from './router'
 import LoadingScreen from './components/LoadingScreen'
 
@@ -16,7 +17,9 @@ const App = () => {
   return (
     <>
       <LoadingScreen isLoading={isLoading} />
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </>
   )
 }
