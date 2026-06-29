@@ -7,8 +7,6 @@ import {
   ZoomIn, User, X, GraduationCap, Download, Eye, FileText
 } from 'lucide-react'
 import { supabase } from '../lib/supabase'
-import kelas12DetailData from '../data/kelas12detail.json'
-import studentsData from '../data/students.json'
 
 const kelasLabels = {
   kelas10: 'Kelas 10',
@@ -133,12 +131,6 @@ const SiswaDetailPage = () => {
           .maybeSingle()
 
         merged = detail ? { ...basic, ...detail } : basic
-      }
-
-      if (!merged) {
-        const fallbackBasic = (studentsData[kelas] || []).find((s) => s.id === parseInt(id))
-        const fallbackDetail = kelas === 'kelas12' ? kelas12DetailData.find((s) => s.id === parseInt(id)) : null
-        merged = fallbackDetail ? { ...fallbackBasic, ...fallbackDetail } : fallbackBasic
       }
 
       setSiswa(merged)

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { supabase } from '../lib/supabase'
-import studentsData from '../data/students.json'
 
 const ITEMS_PER_PAGE = 8
 
@@ -63,11 +62,7 @@ const MuridPage = () => {
         .eq('kelas', kelas)
         .order('nama')
 
-      if (data && data.length > 0) {
-        setStudents(data)
-      } else {
-        setStudents(studentsData[kelas] || [])
-      }
+      setStudents(data || [])
       setLoading(false)
     }
     fetchStudents()

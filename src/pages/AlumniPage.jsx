@@ -2,7 +2,6 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { supabase } from '../lib/supabase'
-import alumniData from '../data/alumni.json'
 
 const AlumniPage = () => {
   const { tahun } = useParams()
@@ -18,12 +17,7 @@ const AlumniPage = () => {
         .select('*')
         .eq('angkatan', tahun)
         .order('nama')
-      if (data && data.length > 0) {
-        setAlumni(data)
-      } else {
-        const key = `alumni${tahun}`
-        setAlumni(alumniData[key] || [])
-      }
+      setAlumni(data || [])
       setLoading(false)
     }
     fetch()

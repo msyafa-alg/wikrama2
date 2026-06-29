@@ -7,8 +7,6 @@ import {
   ZoomIn, User, X, GraduationCap, Download, Eye, FileText
 } from 'lucide-react'
 import { supabase } from '../lib/supabase'
-import alumni2026DetailData from '../data/alumni2026detail.json'
-import alumniData from '../data/alumni.json'
 
 const CertModal = ({ cert, onClose }) => (
   <motion.div
@@ -86,12 +84,6 @@ const AlumniDetailPage = () => {
       if (basic) {
         const { data: detail } = await supabase.from('alumni_details').select('*').eq('id', id).maybeSingle()
         merged = detail ? { ...basic, ...detail } : basic
-      }
-      if (!merged) {
-        const fallbackList = alumniData[`alumni${tahun}`] || []
-        const fallbackBasic = fallbackList.find((s) => s.id === parseInt(id))
-        const fallbackDetail = alumni2026DetailData.find((s) => s.id === parseInt(id))
-        merged = fallbackDetail ? { ...fallbackBasic, ...fallbackDetail } : fallbackBasic
       }
       setSiswa(merged)
       setLoading(false)
