@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { ArrowLeft, Save, X, Plus, Trash2 } from 'lucide-react'
 import { supabase } from '../../lib/supabase'
+import { useToast } from '../../components/Toast'
 
 const initialAlumni = {
   nama: '',
@@ -42,6 +43,7 @@ const AlumniForm = () => {
   const [fotoPreview, setFotoPreview] = useState(null)
   const [saving, setSaving] = useState(false)
   const [loading, setLoading] = useState(isEdit)
+  const toast = useToast()
   const [keahlianInput, setKeahlianInput] = useState('')
   const [sertifikatFiles, setSertifikatFiles] = useState({})
   const [sertifikatPdfFiles, setSertifikatPdfFiles] = useState({})
@@ -228,6 +230,7 @@ const AlumniForm = () => {
     }
 
     setSaving(false)
+    toast(isEdit ? 'Alumni berhasil diperbarui' : 'Alumni berhasil ditambahkan', 'success')
     navigate('/admin/alumni')
   }
 

@@ -7,6 +7,9 @@ import {
   ZoomIn, User, X, GraduationCap, Download, Eye, FileText
 } from 'lucide-react'
 import { supabase } from '../lib/supabase'
+import { DetailSkeleton } from '../components/Skeleton'
+import FotoPlaceholder from '../components/FotoPlaceholder'
+import PdfModal from '../components/PdfModal'
 
 const kelasLabels = {
   kelas10: 'Kelas 10',
@@ -43,7 +46,10 @@ const CreatorBadge = () => (
   </div>
 )
 
-const CertModal = ({ cert, onClose }) => (
+const CertModal = ({ cert, onClose }) => {
+  const [showPdf, setShowPdf] = useState(false)
+
+  return (
   <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
@@ -55,24 +61,52 @@ const CertModal = ({ cert, onClose }) => (
       initial={{ scale: 0.85 }}
       animate={{ scale: 1 }}
       exit={{ scale: 0.85 }}
-      className="relative w-full max-w-2xl"
+      className="relative w-full max-w-4xl"
       onClick={(e) => e.stopPropagation()}
     >
-      {cert.gambar ? (
-        <img src={cert.gambar} alt={cert.nama} className="w-full rounded-2xl shadow-2xl" />
-      ) : cert.file_pdf ? (
-        <div className="w-full rounded-2xl shadow-2xl bg-white p-8 sm:p-12 flex flex-col items-center justify-center min-h-[300px]">
-          <div className="w-20 h-20 rounded-2xl flex items-center justify-center mb-4"
-            style={{ background: '#FEF2F2' }}>
-            <FileText className="w-10 h-10" style={{ color: '#DC2626' }} strokeWidth={1.5} />
+      {cert.file_pdf && showPdf ? (
+        <div className="w-full rounded-2xl overflow-hidden shadow-2xl" style={{ background: '#FFFFFF', height: '70vh' }}>
+          <div className="flex items-center justify-between px-4 py-2 shrink-0" style={{ background: '#F8FAFC', borderBottom: '1px solid #E2E8F0' }}>
+            <span className="text-sm font-medium truncate" style={{ color: '#0F172A' }}>{cert.nama} - PDF</span>
+            <div className="flex items-center gap-2">
+              {cert.gambar && (
+                <button onClick={() => setShowPdf(false)}
+                  className="text-xs font-semibold px-3 py-1.5 rounded-lg"
+                  style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', color: '#1E3A5F' }}>
+                  Lihat Gambar
+                </button>
+              )}
+              <a href={cert.file_pdf} target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white"
+                style={{ background: '#DC2626' }}>
+                <Download className="w-3.5 h-3.5" /> Download
+              </a>
+            </div>
           </div>
-          <p className="font-semibold text-sm text-center mb-1" style={{ color: '#0F172A' }}>{cert.nama}</p>
-          <p className="text-xs mb-4" style={{ color: '#64748B' }}>{cert.penerbit} · {cert.tahun}</p>
-          <a href={cert.file_pdf} download target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white transition-all hover:scale-105"
-            style={{ background: '#DC2626' }}>
-            <Download className="w-4 h-4" /> Buka PDF
-          </a>
+          <iframe src={cert.file_pdf} className="w-full h-[calc(70vh-44px)]" title={cert.nama} />
+        </div>
+      ) : cert.gambar ? (
+        <div className="relative">
+          <img src={cert.gambar} alt={cert.nama} className="w-full rounded-2xl shadow-2xl" />
+          {cert.file_pdf && (
+            <button onClick={() => setShowPdf(true)}
+              className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white shadow-lg transition-all hover:scale-105"
+              style={{ background: '#DC2626' }}>
+              <FileText className="w-3.5 h-3.5" /> Lihat PDF
+            </button>
+          )}
+        </div>
+      ) : cert.file_pdf ? (
+        <div className="w-full rounded-2xl overflow-hidden shadow-2xl" style={{ background: '#FFFFFF', height: '70vh' }}>
+          <div className="flex items-center justify-between px-4 py-2 shrink-0" style={{ background: '#F8FAFC', borderBottom: '1px solid #E2E8F0' }}>
+            <span className="text-sm font-medium truncate" style={{ color: '#0F172A' }}>{cert.nama}</span>
+            <a href={cert.file_pdf} target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white"
+              style={{ background: '#DC2626' }}>
+              <Download className="w-3.5 h-3.5" /> Download
+            </a>
+          </div>
+          <iframe src={cert.file_pdf} className="w-full h-[calc(70vh-44px)]" title={cert.nama} />
         </div>
       ) : null}
       <div className="mt-3 text-center px-2">
@@ -86,7 +120,8 @@ const CertModal = ({ cert, onClose }) => (
       </button>
     </motion.div>
   </motion.div>
-)
+  )
+}
 
 const SectionTitle = ({ icon: Icon, title }) => (
   <div className="flex items-center gap-3 mb-5">
@@ -108,6 +143,7 @@ const SiswaDetailPage = () => {
   const { kelas, id } = useParams()
   const navigate = useNavigate()
   const [certModal, setCertModal] = useState(null)
+  const [pdfModal, setPdfModal] = useState(null)
   const [siswa, setSiswa] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -141,8 +177,8 @@ const SiswaDetailPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen pt-20 flex items-center justify-center" style={{ background: '#FFFFFF' }}>
-        <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: '#1E3A5F', borderTopColor: 'transparent' }} />
+      <div className="min-h-screen pt-20 max-w-4xl mx-auto px-4 py-10" style={{ background: '#FFFFFF' }}>
+        <DetailSkeleton />
       </div>
     )
   }
@@ -192,10 +228,14 @@ const SiswaDetailPage = () => {
               className="flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-6"
             >
               <div className="relative shrink-0">
-                <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl"
-                  style={{ border: '2px solid rgba(255,255,255,0.2)' }}>
-                  <img src={siswa.foto} alt={siswa.nama} className="w-full h-full object-cover" />
-                </div>
+                  <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl"
+                    style={{ border: '2px solid rgba(255,255,255,0.2)' }}>
+                    {siswa.foto ? (
+                      <img src={siswa.foto} alt={siswa.nama} className="w-full h-full object-cover" />
+                    ) : (
+                      <FotoPlaceholder nama={siswa.nama} className="w-full h-full text-4xl" />
+                    )}
+                  </div>
                 <div className="absolute -bottom-2 -right-2 w-7 h-7 rounded-full bg-green-400 shadow"
                   style={{ border: '3px solid #1E3A5F' }} />
               </div>
@@ -242,19 +282,18 @@ const SiswaDetailPage = () => {
                   ))}
                 </div>
                 {(siswa.cv_link || siswa.cvLink) && (
-                  <a
-                    href={siswa.cv_link || siswa.cvLink}
-                    download
-                    className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl font-semibold text-sm transition-all duration-300 hover:scale-105"
+                  <button
+                    onClick={() => setPdfModal({ url: siswa.cv_link || siswa.cvLink, title: `CV ${siswa.nama}` })}
+                    className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl font-semibold text-sm transition-all duration-300 hover:scale-105 w-full"
                     style={{
                       background: '#F59E0B',
                       color: '#0F172A',
                       border: '1px solid rgba(255,255,255,0.2)',
                     }}
                   >
-                    <Download className="w-4 h-4" strokeWidth={2.5} />
-                    Download CV
-                  </a>
+                    <Eye className="w-4 h-4" strokeWidth={2.5} />
+                    Lihat CV
+                  </button>
                 )}
                 {(siswa.porto_link || siswa.portoLink) && (
                   <a
@@ -273,11 +312,9 @@ const SiswaDetailPage = () => {
                   </a>
                 )}
                 {siswa.portofolio_pdf && (
-                  <a
-                    href={siswa.portofolio_pdf}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl font-semibold text-sm transition-all duration-300 hover:scale-105"
+                  <button
+                    onClick={() => setPdfModal({ url: siswa.portofolio_pdf, title: `Portofolio ${siswa.nama}` })}
+                    className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl font-semibold text-sm transition-all duration-300 hover:scale-105 w-full"
                     style={{
                       background: 'rgba(220,38,38,0.15)',
                       color: '#ffffff',
@@ -286,7 +323,7 @@ const SiswaDetailPage = () => {
                   >
                     <FileText className="w-4 h-4" strokeWidth={2.5} />
                     Porto PDF
-                  </a>
+                  </button>
                 )}
               </div>
             </motion.div>
@@ -501,6 +538,7 @@ const SiswaDetailPage = () => {
 
       <AnimatePresence>
         {certModal && <CertModal cert={certModal} onClose={() => setCertModal(null)} />}
+        {pdfModal && <PdfModal url={pdfModal.url} title={pdfModal.title} onClose={() => setPdfModal(null)} />}
       </AnimatePresence>
     </>
   )

@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { Users } from 'lucide-react'
 import { supabase } from '../lib/supabase'
+import { CardSkeleton } from '../components/Skeleton'
+import FotoPlaceholder from '../components/FotoPlaceholder'
 
 const ITEMS_PER_PAGE = 8
 
@@ -127,8 +130,16 @@ const MuridPage = () => {
 
       <div className="max-w-7xl mx-auto px-4 py-6 sm:py-8">
         {loading ? (
-          <div className="flex justify-center py-20">
-            <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: '#1E3A5F', borderTopColor: 'transparent' }} />
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+            {Array.from({ length: 8 }).map((_, i) => <CardSkeleton key={i} />)}
+          </div>
+        ) : filtered.length === 0 && !loading ? (
+          <div className="text-center py-20">
+            <div className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center" style={{ background: '#F1F5F9' }}>
+              <Users className="w-8 h-8" style={{ color: '#94A3B8' }} />
+            </div>
+            <p className="font-medium" style={{ color: '#94A3B8' }}>Tidak ada siswa ditemukan</p>
+            <p className="text-sm mt-1" style={{ color: '#CBD5E1' }}>Coba ubah kata kunci atau filter</p>
           </div>
         ) : (
           <>
@@ -198,11 +209,17 @@ const MuridPage = () => {
                   onMouseLeave={e => e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06)'}
                 >
                   <div className="relative h-36 sm:h-48 overflow-hidden">
-                    <img
-                      src={student.foto}
-                      alt={student.nama}
-                      className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500"
-                    />
+                    {student.foto ? (
+                      <img
+                        src={student.foto}
+                        alt={student.nama}
+                        className="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-500"
+                        onError={e => { e.target.style.display = 'none'; e.target.nextElementSibling.style.display = 'flex' }}
+                      />
+                    ) : null}
+                    <div className="w-full h-full absolute inset-0" style={{ display: student.foto ? 'none' : 'flex' }}>
+                      <FotoPlaceholder nama={student.nama} className="w-full h-full" />
+                    </div>
                     {student.is_creator ? <CreatorBadge /> : student.is_dev_web && <DevWebBadge />}
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       style={{ background: 'rgba(30,58,95,0.58)' }}>

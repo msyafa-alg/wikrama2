@@ -14,6 +14,8 @@ import AdminDashboard from '../pages/admin/Dashboard'
 import AdminSiswaForm from '../pages/admin/SiswaForm'
 import AdminAlumniList from '../pages/admin/AlumniList'
 import AdminAlumniForm from '../pages/admin/AlumniForm'
+import AdminSiswaList from '../pages/admin/SiswaList'
+import NotFoundPage from '../pages/NotFoundPage'
 
 const router = createBrowserRouter([
   {
@@ -30,12 +32,17 @@ const router = createBrowserRouter([
       { path: 'gallery', element: <GalleryPage /> },
       { path: 'tentang', element: <TentangPage /> },
       { path: 'kontak', element: <KontakPage /> },
+      { path: '*', element: <NotFoundPage /> },
     ],
   },
   { path: '/admin/login', element: <AdminLogin /> },
   {
     path: '/admin/dashboard',
     element: <ProtectedRoute><AdminDashboard /></ProtectedRoute>,
+  },
+  {
+    path: '/admin/siswa',
+    element: <ProtectedRoute><AdminSiswaList /></ProtectedRoute>,
   },
   {
     path: '/admin/siswa/tambah',

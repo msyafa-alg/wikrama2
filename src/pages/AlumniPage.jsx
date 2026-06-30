@@ -1,7 +1,10 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { Users } from 'lucide-react'
 import { supabase } from '../lib/supabase'
+import { CardSkeleton } from '../components/Skeleton'
+import FotoPlaceholder from '../components/FotoPlaceholder'
 
 const AlumniPage = () => {
   const { tahun } = useParams()
@@ -60,15 +63,13 @@ const AlumniPage = () => {
       {/* Grid */}
       <div className="max-w-7xl mx-auto px-4 py-12">
         {loading ? (
-          <div className="flex justify-center py-20">
-            <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: '#1E3A5F', borderTopColor: 'transparent' }} />
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+            {Array.from({ length: 8 }).map((_, i) => <CardSkeleton key={i} />)}
           </div>
         ) : alumni.length === 0 ? (
           <div className="text-center py-20">
-            <div className="flex justify-center mb-4">
-              <svg className="w-16 h-16" style={{ color: '#CBD5E1' }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
+            <div className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center" style={{ background: '#F1F5F9' }}>
+              <Users className="w-8 h-8" style={{ color: '#94A3B8' }} />
             </div>
             <p className="font-medium" style={{ color: '#94A3B8' }}>Belum ada data alumni angkatan {tahun}</p>
             <p className="text-sm mt-1" style={{ color: '#CBD5E1' }}>Data akan ditambahkan setelah kelulusan</p>
@@ -95,11 +96,17 @@ const AlumniPage = () => {
                 onMouseLeave={e => e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.06)'}
               >
                 <div className="relative aspect-square overflow-hidden">
-                  <img
-                    src={item.foto}
-                    alt={item.nama}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
+                  {item.foto ? (
+                    <img
+                      src={item.foto}
+                      alt={item.nama}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      onError={e => { e.target.style.display = 'none'; e.target.nextElementSibling.style.display = 'flex' }}
+                    />
+                  ) : null}
+                  <div className="w-full h-full absolute inset-0" style={{ display: item.foto ? 'none' : 'flex' }}>
+                    <FotoPlaceholder nama={item.nama} className="w-full h-full" />
+                  </div>
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
                     style={{ background: 'rgba(30,58,95,0.62)' }}>
                     <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">

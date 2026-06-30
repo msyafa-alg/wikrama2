@@ -1,63 +1,39 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Plus, Edit3, Trash2, LogOut, Search, X } from 'lucide-react'
+import { LogOut, Users, GraduationCap, BookOpen, ArrowRight } from 'lucide-react'
 import { supabase } from '../../lib/supabase'
 import { useAuth } from '../../context/AuthContext'
-
-const kelasLabels = {
-  kelas10: 'Kelas 10',
-  kelas11: 'Kelas 11',
-  kelas12: 'Kelas 12',
-}
 
 const Dashboard = () => {
   const { session } = useAuth()
   const navigate = useNavigate()
-  const [students, setStudents] = useState([])
+  const [stats, setStats] = useState({ siswa: 0, alumni: 0, kelas: 0 })
   const [loading, setLoading] = useState(true)
-  const [search, setSearch] = useState('')
-  const [filterKelas, setFilterKelas] = useState('semua')
-  const [deleting, setDeleting] = useState(null)
 
-  const fetchStudents = async () => {
-    setLoading(true)
-    const { data } = await supabase.from('students').select('*').order('nama')
-    setStudents(data || [])
-    setLoading(false)
-  }
-
-  useEffect(() => { fetchStudents() }, [])
+  useEffect(() => {
+    const fetchStats = async () => {
+      const { data: siswa } = await supabase.from('students').select('id, kelas')
+      const { data: alumni } = await supabase.from('alumni').select('id')
+      setStats({
+        siswa: siswa?.length || 0,
+        alumni: alumni?.length || 0,
+        kelas: new Set(siswa?.map(s => s.kelas) || []).size,
+      })
+      setLoading(false)
+    }
+    fetchStats()
+  }, [])
 
   const handleLogout = async () => {
     await supabase.auth.signOut()
     navigate('/admin/login')
   }
 
-  const handleDelete = async (id) => {
-    if (!confirm('Yakin hapus siswa ini? Data akan hilang permanen.')) return
-    setDeleting(id)
-
-    const detailRes = await supabase.from('student_details').select('id').eq('id', id).maybeSingle()
-    if (detailRes.data) {
-      await supabase.from('student_details').delete().eq('id', id)
-    }
-
-    const student = students.find(s => s.id === id)
-    if (student?.foto) {
-      const fotoPath = student.foto.replace(/.*\/student-files\//, '')
-      if (fotoPath) await supabase.storage.from('student-files').remove([fotoPath])
-    }
-
-    await supabase.from('students').delete().eq('id', id)
-    setStudents(prev => prev.filter(s => s.id !== id))
-    setDeleting(null)
-  }
-
-  const filtered = students.filter(s => {
-    const matchKelas = filterKelas === 'semua' || s.kelas === filterKelas
-    const matchSearch = s.nama.toLowerCase().includes(search.toLowerCase())
-    return matchKelas && matchSearch
-  })
+  const cards = [
+    { label: 'Total Siswa', value: stats.siswa, icon: Users, color: '#1E3A5F', bg: 'rgba(30,58,95,0.08)', link: '/admin/siswa' },
+    { label: 'Total Alumni', value: stats.alumni, icon: GraduationCap, color: '#DC2626', bg: 'rgba(220,38,38,0.08)', link: '/admin/alumni' },
+    { label: 'Kelas Aktif', value: stats.kelas, icon: BookOpen, color: '#059669', bg: 'rgba(5,150,105,0.08)', link: '/admin/siswa' },
+  ]
 
   return (
     <div className="min-h-screen" style={{ background: '#F8FAFC' }}>
@@ -70,113 +46,72 @@ const Dashboard = () => {
               <p className="text-xs" style={{ color: 'rgba(255,255,255,0.6)' }}>{session?.user?.email}</p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
-            <Link
-              to="/admin/alumni"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white transition-all"
-              style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)' }}
-            >
-              Alumni
-            </Link>
-            <Link
-              to="/admin/siswa/tambah"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white transition-all"
-              style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.2)' }}
-            >
-              <Plus className="w-3.5 h-3.5" />
-              Tambah Siswa
-            </Link>
-            <button onClick={handleLogout}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
-              style={{ background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,0.15)' }}
-            >
-              <LogOut className="w-3.5 h-3.5" />
-              Keluar
-            </button>
-          </div>
+          <button onClick={handleLogout}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold"
+            style={{ background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,0.15)' }}>
+            <LogOut className="w-3.5 h-3.5" /> Keluar
+          </button>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6">
-        <div className="flex flex-col sm:flex-row gap-3 mb-6">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4" style={{ color: '#94A3B8' }} />
-            <input
-              type="text" placeholder="Cari nama siswa..." value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-9 pr-4 py-2.5 rounded-xl text-sm focus:outline-none"
-              style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', color: '#0F172A' }}
-            />
-          </div>
-          <select value={filterKelas} onChange={(e) => setFilterKelas(e.target.value)}
-            className="px-4 py-2.5 rounded-xl text-sm focus:outline-none"
-            style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', color: '#0F172A' }}
-          >
-            <option value="semua">Semua Kelas</option>
-            {Object.entries(kelasLabels).map(([k, l]) => (
-              <option key={k} value={k}>{l}</option>
-            ))}
-          </select>
-        </div>
-
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
         {loading ? (
-          <div className="flex justify-center py-20">
-            <div className="w-8 h-8 border-2 border-t-transparent rounded-full animate-spin" style={{ borderColor: '#1E3A5F', borderTopColor: 'transparent' }} />
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+            {[1,2,3].map(i => (
+              <div key={i} className="rounded-2xl p-6 animate-pulse" style={{ background: '#FFFFFF', border: '1px solid #E2E8F0' }}>
+                <div className="h-4 w-24 rounded bg-gray-200 mb-3" />
+                <div className="h-8 w-16 rounded bg-gray-200" />
+              </div>
+            ))}
           </div>
         ) : (
-          <div className="rounded-2xl overflow-hidden" style={{ background: '#FFFFFF', border: '1px solid #E2E8F0' }}>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr style={{ background: '#F8FAFC' }}>
-                    <th className="text-left px-4 py-3 font-semibold" style={{ color: '#64748B' }}>Foto</th>
-                    <th className="text-left px-4 py-3 font-semibold" style={{ color: '#64748B' }}>Nama</th>
-                    <th className="text-left px-4 py-3 font-semibold" style={{ color: '#64748B' }}>Kelas</th>
-                    <th className="text-left px-4 py-3 font-semibold" style={{ color: '#64748B' }}>Rombel</th>
-                    <th className="text-right px-4 py-3 font-semibold" style={{ color: '#64748B' }}>Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filtered.map((s) => (
-                    <tr key={s.id} className="border-t" style={{ borderColor: '#F1F5F9' }}>
-                      <td className="px-4 py-3">
-                        <img src={s.foto || '/favicon.png'} alt="" className="w-10 h-10 rounded-xl object-cover" />
-                      </td>
-                      <td className="px-4 py-3 font-medium" style={{ color: '#0F172A' }}>{s.nama}</td>
-                      <td className="px-4 py-3" style={{ color: '#64748B' }}>{kelasLabels[s.kelas] || s.kelas}</td>
-                      <td className="px-4 py-3" style={{ color: '#64748B' }}>{s.rombel}</td>
-                      <td className="px-4 py-3 text-right">
-                        <div className="flex items-center justify-end gap-1">
-                          <Link to={`/admin/siswa/edit/${s.id}`}
-                            className="p-2 rounded-lg transition-all"
-                            style={{ color: '#64748B' }}
-                          >
-                            <Edit3 className="w-4 h-4" />
-                          </Link>
-                          <button onClick={() => handleDelete(s.id)} disabled={deleting === s.id}
-                            className="p-2 rounded-lg transition-all disabled:opacity-40"
-                            style={{ color: '#DC2626' }}
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {filtered.length === 0 && (
-              <div className="text-center py-16">
-                <p className="font-medium" style={{ color: '#94A3B8' }}>Tidak ada siswa</p>
-                <Link to="/admin/siswa/tambah" className="text-sm font-semibold hover:underline mt-1 inline-block" style={{ color: '#1E3A5F' }}>
-                  Tambah siswa sekarang
-                </Link>
-              </div>
-            )}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-10">
+            {cards.map(c => (
+              <Link key={c.label} to={c.link}
+                className="rounded-2xl p-6 transition-all hover:scale-[1.02]"
+                style={{ background: '#FFFFFF', border: '1px solid #E2E8F0' }}>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-xs font-semibold uppercase tracking-wider" style={{ color: '#94A3B8' }}>{c.label}</span>
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: c.bg }}>
+                    <c.icon className="w-5 h-5" style={{ color: c.color }} />
+                  </div>
+                </div>
+                <p className="text-3xl font-bold" style={{ color: '#0F172A' }}>{c.value}</p>
+              </Link>
+            ))}
           </div>
         )}
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <Link to="/admin/siswa"
+            className="rounded-2xl p-6 transition-all hover:scale-[1.02] flex items-center justify-between"
+            style={{ background: '#FFFFFF', border: '1px solid #E2E8F0' }}>
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: 'rgba(30,58,95,0.08)' }}>
+                <Users className="w-6 h-6" style={{ color: '#1E3A5F' }} />
+              </div>
+              <div>
+                <p className="font-semibold" style={{ color: '#0F172A' }}>Kelola Siswa</p>
+                <p className="text-xs mt-0.5" style={{ color: '#94A3B8' }}>Tambah, edit, hapus data siswa</p>
+              </div>
+            </div>
+            <ArrowRight className="w-5 h-5" style={{ color: '#94A3B8' }} />
+          </Link>
+          <Link to="/admin/alumni"
+            className="rounded-2xl p-6 transition-all hover:scale-[1.02] flex items-center justify-between"
+            style={{ background: '#FFFFFF', border: '1px solid #E2E8F0' }}>
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: 'rgba(220,38,38,0.08)' }}>
+                <GraduationCap className="w-6 h-6" style={{ color: '#DC2626' }} />
+              </div>
+              <div>
+                <p className="font-semibold" style={{ color: '#0F172A' }}>Kelola Alumni</p>
+                <p className="text-xs mt-0.5" style={{ color: '#94A3B8' }}>Tambah, edit, hapus data alumni</p>
+              </div>
+            </div>
+            <ArrowRight className="w-5 h-5" style={{ color: '#94A3B8' }} />
+          </Link>
+        </div>
       </div>
     </div>
   )
