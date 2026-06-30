@@ -10,6 +10,8 @@ import { supabase } from '../lib/supabase'
 import { DetailSkeleton } from '../components/Skeleton'
 import FotoPlaceholder from '../components/FotoPlaceholder'
 import PdfModal from '../components/PdfModal'
+import QrModal from '../components/QrModal'
+import Timeline from '../components/Timeline'
 
 const CertModal = ({ cert, onClose }) => {
   const [showPdf, setShowPdf] = useState(false)
@@ -109,6 +111,7 @@ const AlumniDetailPage = () => {
   const navigate = useNavigate()
   const [certModal, setCertModal] = useState(null)
   const [pdfModal, setPdfModal] = useState(null)
+  const [qrModal, setQrModal] = useState(null)
   const [siswa, setSiswa] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -191,8 +194,13 @@ const AlumniDetailPage = () => {
                     <FotoPlaceholder nama={siswa.nama} className="w-full h-full text-4xl" />
                   )}
                 </div>
-                <div className="absolute -bottom-2 -right-2 w-7 h-7 rounded-full bg-yellow-400 shadow"
-                  style={{ border: '3px solid #1E3A5F' }} />
+                <button onClick={() => setQrModal(`/alumni/${tahun}/${id}`)}
+                  className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full flex items-center justify-center shadow-lg transition-all hover:scale-110"
+                  style={{ background: '#1E3A5F' }}>
+                  <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+                  </svg>
+                </button>
               </div>
 
               {/* Info */}
@@ -360,76 +368,16 @@ const AlumniDetailPage = () => {
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 }}
               className="lg:col-span-2 space-y-5 sm:space-y-6"
             >
-              {siswa.cv?.pendidikan && (
-              <div className="rounded-2xl sm:rounded-3xl p-5 sm:p-7" style={cardStyle}>
-                <SectionTitle icon={GraduationCap} title="Pendidikan" />
-                <div className="flex items-start gap-3 p-3 sm:p-4 rounded-xl sm:rounded-2xl"
-                  style={{ background: '#F8FAFC', border: '1px solid #E2E8F0' }}>
-                  <div className="w-2.5 h-2.5 rounded-full mt-1.5 shrink-0" style={{ background: '#1E3A5F' }} />
-                  <p className="text-sm leading-relaxed" style={{ color: '#64748B' }}>{siswa.cv?.pendidikan}</p>
-                </div>
-              </div>
-              )}
-
-              {siswa.cv?.pengalaman?.length > 0 && (
-              <div className="rounded-2xl sm:rounded-3xl p-5 sm:p-7" style={cardStyle}>
-                <SectionTitle icon={Briefcase} title="Pengalaman" />
-                <div className="space-y-3">
-                  {siswa.cv?.pengalaman?.map((p, i) => (
-                    <div key={i} className="flex items-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl sm:rounded-2xl"
-                      style={{ background: '#F8FAFC', border: '1px solid #E2E8F0' }}>
-                      <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 text-white font-bold text-sm"
-                        style={{ background: '#1E3A5F' }}>
-                        {i + 1}
-                      </div>
-                      <div className="min-w-0">
-                        <p className="font-semibold text-sm" style={{ color: '#0F172A' }}>{p.posisi}</p>
-                        <p className="text-xs mt-0.5 truncate" style={{ color: '#64748B' }}>{p.tempat}</p>
-                        <span className="inline-block mt-1 px-2 py-0.5 rounded-lg text-xs font-medium"
-                          style={{ background: 'rgba(30,58,95,0.07)', color: '#1E3A5F' }}>
-                          {p.periode}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              )}
+              <Timeline items={siswa.cv?.pendidikan ? [siswa.cv.pendidikan] : []} type="pendidikan" title="Pendidikan" />
+              <Timeline items={siswa.cv?.pengalaman || []} type="pengalaman" title="Pengalaman" />
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}
               className="space-y-5 sm:space-y-6"
             >
-              {siswa.cv?.organisasi?.length > 0 && (
-              <div className="rounded-2xl sm:rounded-3xl p-5 sm:p-7" style={cardStyle}>
-                <SectionTitle icon={User} title="Organisasi" />
-                <div className="space-y-2">
-                  {siswa.cv?.organisasi?.map((o, i) => (
-                    <div key={i} className="flex items-center gap-3 p-2.5 sm:p-3 rounded-xl"
-                      style={{ background: '#F8FAFC', border: '1px solid #E2E8F0' }}>
-                      <ChevronRight className="w-4 h-4 shrink-0" style={{ color: '#1E3A5F' }} strokeWidth={2.5} />
-                      <p className="text-xs sm:text-sm" style={{ color: '#64748B' }}>{o}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              )}
-
-              {siswa.cv?.prestasi?.length > 0 && (
-              <div className="rounded-2xl sm:rounded-3xl p-5 sm:p-7" style={cardStyle}>
-                <SectionTitle icon={Award} title="Prestasi" />
-                <div className="space-y-2">
-                  {siswa.cv?.prestasi?.map((p, i) => (
-                    <div key={i} className="flex items-start gap-2.5 p-2.5 sm:p-3 rounded-xl"
-                      style={{ background: '#FFFBEB', border: '1px solid rgba(245,158,11,0.2)' }}>
-                      <Star className="w-4 h-4 shrink-0 mt-0.5" style={{ color: '#F59E0B' }} strokeWidth={2} fill="#F59E0B" />
-                      <p className="text-xs sm:text-sm leading-snug" style={{ color: '#0F172A' }}>{p}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              )}
+              <Timeline items={siswa.cv?.organisasi || []} type="organisasi" title="Organisasi" />
+              <Timeline items={siswa.cv?.prestasi || []} type="prestasi" title="Prestasi" />
             </motion.div>
           </div>
           )}
@@ -511,6 +459,7 @@ const AlumniDetailPage = () => {
       <AnimatePresence>
         {certModal && <CertModal cert={certModal} onClose={() => setCertModal(null)} />}
         {pdfModal && <PdfModal url={pdfModal.url} title={pdfModal.title} onClose={() => setPdfModal(null)} />}
+        {qrModal && <QrModal url={qrModal} nama={siswa?.nama} onClose={() => setQrModal(null)} />}
       </AnimatePresence>
     </>
   )

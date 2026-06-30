@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Plus, Edit3, Trash2, LogOut, Search } from 'lucide-react'
+import { Plus, Edit3, Trash2, LogOut, Search, Download } from 'lucide-react'
 import { supabase } from '../../lib/supabase'
 import { useAuth } from '../../context/AuthContext'
+import { exportSiswa } from '../../lib/exportExcel'
 import { useToast } from '../../components/Toast'
 
 const kelasLabels = {
@@ -70,16 +71,16 @@ const SiswaList = () => {
               <p className="text-xs" style={{ color: 'rgba(255,255,255,0.6)' }}>{session?.user?.email}</p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap justify-end">
+            <Link to="/admin/dashboard"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white"
+              style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)' }}>
+              Dashboard
+            </Link>
             <Link to="/admin/alumni"
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white"
               style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)' }}>
               Alumni
-            </Link>
-            <Link to="/admin/siswa/tambah"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white"
-              style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.2)' }}>
-              <Plus className="w-3.5 h-3.5" /> Tambah Siswa
             </Link>
             <button onClick={handleLogout}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold"
@@ -107,6 +108,18 @@ const SiswaList = () => {
               <option key={k} value={k}>{l}</option>
             ))}
           </select>
+        </div>
+        <div className="flex items-center gap-2 mb-6">
+          <button onClick={() => exportSiswa(siswa)}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold"
+            style={{ background: '#059669', color: '#FFFFFF' }}>
+            <Download className="w-3.5 h-3.5" /> Export Excel
+          </button>
+          <Link to="/admin/siswa/tambah"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold"
+            style={{ background: '#1E3A5F', color: '#FFFFFF' }}>
+            <Plus className="w-3.5 h-3.5" /> Tambah Siswa
+          </Link>
         </div>
 
         {loading ? (

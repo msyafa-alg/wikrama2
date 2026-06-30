@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Plus, Edit3, Trash2, LogOut, Search } from 'lucide-react'
+import { Plus, Edit3, Trash2, LogOut, Search, Download } from 'lucide-react'
 import { supabase } from '../../lib/supabase'
 import { useAuth } from '../../context/AuthContext'
 import { useToast } from '../../components/Toast'
+import { exportAlumni } from '../../lib/exportExcel'
 
 const AlumniList = () => {
   const { session } = useAuth()
@@ -60,16 +61,16 @@ const AlumniList = () => {
               <p className="text-xs" style={{ color: 'rgba(255,255,255,0.6)' }}>{session?.user?.email}</p>
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap justify-end">
             <Link to="/admin/dashboard"
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white"
               style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)' }}>
-              ← Siswa
+              Dashboard
             </Link>
-            <Link to="/admin/alumni/tambah"
+            <Link to="/admin/siswa"
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold text-white"
-              style={{ background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.2)' }}>
-              <Plus className="w-3.5 h-3.5" /> Tambah Alumni
+              style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.15)' }}>
+              Siswa
             </Link>
             <button onClick={handleLogout}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold"
@@ -94,6 +95,18 @@ const AlumniList = () => {
             style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', color: '#0F172A' }}>
             {angkatanList.map(a => <option key={a} value={a}>{a === 'semua' ? 'Semua Angkatan' : `Angkatan ${a}`}</option>)}
           </select>
+        </div>
+        <div className="flex items-center gap-2 mb-6">
+          <button onClick={() => exportAlumni(alumni)}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold"
+            style={{ background: '#059669', color: '#FFFFFF' }}>
+            <Download className="w-3.5 h-3.5" /> Export Excel
+          </button>
+          <Link to="/admin/alumni/tambah"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold"
+            style={{ background: '#1E3A5F', color: '#FFFFFF' }}>
+            <Plus className="w-3.5 h-3.5" /> Tambah Alumni
+          </Link>
         </div>
 
         {loading ? (

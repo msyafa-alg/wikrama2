@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { RouterProvider } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { ToastProvider } from './components/Toast'
+
 import router from './router'
 import LoadingScreen from './components/LoadingScreen'
 
