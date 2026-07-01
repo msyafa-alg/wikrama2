@@ -9,6 +9,9 @@ import GalleryPage from '../pages/GalleryPage'
 import TentangPage from '../pages/TentangPage'
 import KontakPage from '../pages/KontakPage'
 import SiswaDetailPage from '../pages/SiswaDetailPage'
+import BeritaPage from '../pages/BeritaPage'
+import BeritaDetailPage from '../pages/BeritaDetailPage'
+import PengumumanPage from '../pages/PengumumanPage'
 import AdminLogin from '../pages/admin/Login'
 import AdminDashboard from '../pages/admin/Dashboard'
 import AdminSiswaForm from '../pages/admin/SiswaForm'
@@ -17,6 +20,10 @@ import AdminAlumniForm from '../pages/admin/AlumniForm'
 import AdminSiswaList from '../pages/admin/SiswaList'
 import AdminChat from '../pages/admin/AdminChat'
 import AdminChatDetail from '../pages/admin/AdminChatDetail'
+import AdminBeritaList from '../pages/admin/BeritaList'
+import AdminBeritaForm from '../pages/admin/BeritaForm'
+import AdminPengumumanList from '../pages/admin/PengumumanList'
+import AdminPengumumanForm from '../pages/admin/PengumumanForm'
 import ChatPage from '../pages/ChatPage'
 import ChatLogin from '../pages/ChatLogin'
 import ChatRegister from '../pages/ChatRegister'
@@ -36,6 +43,9 @@ const router = createBrowserRouter([
       { path: 'alumni', element: <Navigate to="/alumni/2026" replace /> },
       { path: 'gallery', element: <GalleryPage /> },
       { path: 'tentang', element: <TentangPage /> },
+      { path: 'berita', element: <BeritaPage /> },
+      { path: 'berita/:slug', element: <BeritaDetailPage /> },
+      { path: 'pengumuman', element: <PengumumanPage /> },
       { path: 'kontak', element: <KontakPage /> },
       { path: 'chat', element: <ChatPage /> },
       { path: 'chat/login', element: <ChatLogin /> },
@@ -79,6 +89,30 @@ const router = createBrowserRouter([
   {
     path: '/admin/chat/:id',
     element: <ProtectedRoute><AdminChatDetail /></ProtectedRoute>,
+  },
+  {
+    path: '/admin/berita',
+    element: <ProtectedRoute><AdminBeritaList /></ProtectedRoute>,
+  },
+  {
+    path: '/admin/berita/tambah',
+    element: <ProtectedRoute><AdminBeritaForm /></ProtectedRoute>,
+  },
+  {
+    path: '/admin/berita/edit/:id',
+    element: <ProtectedRoute><AdminBeritaForm /></ProtectedRoute>,
+  },
+  {
+    path: '/admin/pengumuman',
+    element: <ProtectedRoute><AdminPengumumanList /></ProtectedRoute>,
+  },
+  {
+    path: '/admin/pengumuman/tambah',
+    element: <ProtectedRoute><AdminPengumumanForm /></ProtectedRoute>,
+  },
+  {
+    path: '/admin/pengumuman/edit/:id',
+    element: <ProtectedRoute><AdminPengumumanForm /></ProtectedRoute>,
   },
 ])
 

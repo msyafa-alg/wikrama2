@@ -64,6 +64,13 @@ const Navbar = () => {
   const navItems = [
     { label: 'Beranda', href: '/' },
     {
+      label: 'Informasi',
+      dropdown: [
+        { label: 'Berita', href: '/berita' },
+        { label: 'Pengumuman', href: '/pengumuman' },
+      ],
+    },
+    {
       label: 'Murid',
       dropdown: [
         { label: 'Daftar Murid', href: '/murid' },
