@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ScrollText, Rocket, Star, GraduationCap } from 'lucide-react'
+import { ScrollText, Rocket, Star, GraduationCap, Quote } from 'lucide-react'
 
 const TentangPage = () => {
   const visi = 'Menjadi rayon unggulan yang mencetak generasi berkarakter, berprestasi, dan berdaya saing tinggi dalam era global.'
@@ -145,18 +145,17 @@ Dengan semangat kebersamaan dan jiwa kompetitif yang sehat, rayon ini telah mela
             </div>
             <div className="text-center sm:text-left flex-1">
               <h3 className="text-2xl sm:text-3xl font-bold text-white mb-1">Rizky Kurniawan</h3>
-              <p className="font-medium mb-4 text-sm sm:text-base" style={{ color: '#F59E0B' }}>
+              <p className="font-semibold mb-4 text-sm sm:text-base" style={{ color: '#F59E0B' }}>
                 Pembimbing Rayon Wikrama 2
               </p>
-              <blockquote className="relative">
-                <span className="text-4xl font-serif leading-none" style={{ color: '#F59E0B' }}>"</span>
-                <p className="text-sm sm:text-base leading-relaxed italic -mt-2 px-3"
-                  style={{ color: 'rgba(255,255,255,0.7)' }}>
-                  Mendidik bukan hanya mengajar, tetapi membentuk karakter untuk masa depan.
+              <div className="flex gap-2">
+                <div className="hidden sm:block shrink-0">
+                  <Quote className="w-6 h-6 mt-0.5" style={{ color: '#F59E0B' }} strokeWidth={2} />
+                </div>
+                <p className="text-sm sm:text-base leading-relaxed italic" style={{ color: 'rgba(255,255,255,0.8)' }}>
+                  "Mendidik bukan hanya mengajar, tetapi membentuk karakter untuk masa depan."
                 </p>
-                <span className="text-4xl font-serif leading-none float-right" style={{ color: '#F59E0B' }}>"</span>
-                <div className="clear-both" />
-              </blockquote>
+              </div>
             </div>
           </div>
         </motion.section>
