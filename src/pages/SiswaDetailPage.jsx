@@ -1,10 +1,11 @@
 import { useParams, useNavigate, Link } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   ArrowLeft, MapPin, Mail, Phone, Hash, CalendarDays,
   BookOpen, Briefcase, Award, Star, ChevronRight,
-  ZoomIn, User, X, GraduationCap, Download, Eye, FileText
+  ZoomIn, User, X, GraduationCap, Download, Eye, FileText,
+  ChevronLeft, Loader
 } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import { DetailSkeleton } from '../components/Skeleton'
@@ -12,6 +13,15 @@ import FotoPlaceholder from '../components/FotoPlaceholder'
 import PdfModal from '../components/PdfModal'
 import QrModal from '../components/QrModal'
 import Timeline from '../components/Timeline'
+import { Document, Page, pdfjs } from 'react-pdf'
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.mjs',
+  import.meta.url,
+).toString()
+
+import 'react-pdf/dist/Page/AnnotationLayer.css'
+import 'react-pdf/dist/Page/TextLayer.css'
 
 const kelasLabels = {
   kelas10: 'Kelas 10',
@@ -48,6 +58,67 @@ const CreatorBadge = () => (
   </div>
 )
 
+const CertModalContent = ({ pdfUrl }) => {
+  const [numPages, setNumPages] = useState(null)
+  const [pageNumber, setPageNumber] = useState(1)
+  const [pdfError, setPdfError] = useState(false)
+
+  const onLoadSuccess = useCallback(({ numPages }) => {
+    setNumPages(numPages)
+    setPdfError(false)
+  }, [])
+
+  const onLoadError = useCallback(() => {
+    setPdfError(true)
+  }, [])
+
+  if (pdfError) {
+    return (
+      <div className="flex-1 flex flex-col items-center justify-center gap-3 p-6 text-center">
+        <FileText className="w-10 h-10" style={{ color: '#DC2626' }} strokeWidth={1.5} />
+        <p className="text-xs font-medium" style={{ color: '#64748B' }}>Gagal memuat PDF</p>
+      </div>
+    )
+  }
+
+  return (
+    <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 overflow-auto flex justify-center p-4">
+        <Document
+          file={pdfUrl}
+          onLoadSuccess={onLoadSuccess}
+          onLoadError={onLoadError}
+          loading={
+            <div className="flex items-center justify-center h-full py-20">
+              <Loader className="w-6 h-6 animate-spin" style={{ color: '#1E3A5F' }} />
+            </div>
+          }
+        >
+          <Page pageNumber={pageNumber} width={Math.min(700, window.innerWidth - 80)} />
+        </Document>
+      </div>
+      {numPages > 1 && (
+        <div className="flex items-center justify-center gap-4 px-4 py-2 shrink-0"
+          style={{ background: '#F8FAFC', borderTop: '1px solid #E2E8F0' }}>
+          <button onClick={() => setPageNumber(p => Math.max(1, p - 1))}
+            disabled={pageNumber <= 1}
+            className="w-7 h-7 rounded-lg flex items-center justify-center disabled:opacity-30 transition-all"
+            style={{ background: '#FFFFFF', border: '1px solid #E2E8F0' }}>
+            <ChevronLeft className="w-3.5 h-3.5" style={{ color: '#1E3A5F' }} />
+          </button>
+          <span className="text-xs font-semibold" style={{ color: '#64748B' }}>{pageNumber}/{numPages}</span>
+          <button onClick={() => setPageNumber(p => Math.min(numPages, p + 1))}
+            disabled={pageNumber >= numPages}
+            className="w-7 h-7 rounded-lg flex items-center justify-center disabled:opacity-30 transition-all"
+            style={{ background: '#FFFFFF', border: '1px solid #E2E8F0' }}>
+            <ChevronRight className="w-3.5 h-3.5" style={{ color: '#1E3A5F' }} />
+          </button>
+        </div>
+      )}
+    </div>
+  )
+}
+
 const CertModal = ({ cert, onClose }) => {
   const [showPdf, setShowPdf] = useState(false)
 
@@ -67,7 +138,7 @@ const CertModal = ({ cert, onClose }) => {
       onClick={(e) => e.stopPropagation()}
     >
       {cert.file_pdf && showPdf ? (
-        <div className="w-full rounded-2xl overflow-hidden shadow-2xl" style={{ background: '#FFFFFF', height: '70vh' }}>
+        <div className="w-full rounded-2xl overflow-hidden shadow-2xl flex flex-col" style={{ background: '#FFFFFF', height: '70vh' }}>
           <div className="flex items-center justify-between px-4 py-2 shrink-0" style={{ background: '#F8FAFC', borderBottom: '1px solid #E2E8F0' }}>
             <span className="text-sm font-medium truncate" style={{ color: '#0F172A' }}>{cert.nama} - PDF</span>
             <div className="flex items-center gap-2">
@@ -85,7 +156,7 @@ const CertModal = ({ cert, onClose }) => {
               </a>
             </div>
           </div>
-          <iframe src={cert.file_pdf} className="w-full h-[calc(70vh-44px)]" title={cert.nama} />
+          <CertModalContent pdfUrl={cert.file_pdf} />
         </div>
       ) : cert.gambar ? (
         <div className="relative">
@@ -99,7 +170,7 @@ const CertModal = ({ cert, onClose }) => {
           )}
         </div>
       ) : cert.file_pdf ? (
-        <div className="w-full rounded-2xl overflow-hidden shadow-2xl" style={{ background: '#FFFFFF', height: '70vh' }}>
+        <div className="w-full rounded-2xl overflow-hidden shadow-2xl flex flex-col" style={{ background: '#FFFFFF', height: '70vh' }}>
           <div className="flex items-center justify-between px-4 py-2 shrink-0" style={{ background: '#F8FAFC', borderBottom: '1px solid #E2E8F0' }}>
             <span className="text-sm font-medium truncate" style={{ color: '#0F172A' }}>{cert.nama}</span>
             <a href={cert.file_pdf} target="_blank" rel="noopener noreferrer"
@@ -108,7 +179,7 @@ const CertModal = ({ cert, onClose }) => {
               <Download className="w-3.5 h-3.5" /> Download
             </a>
           </div>
-          <iframe src={cert.file_pdf} className="w-full h-[calc(70vh-44px)]" title={cert.nama} />
+          <CertModalContent pdfUrl={cert.file_pdf} />
         </div>
       ) : null}
       <div className="mt-3 text-center px-2">

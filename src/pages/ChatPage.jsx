@@ -46,11 +46,15 @@ const ChatPage = () => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
+  const [sendError, setSendError] = useState('')
+
   const handleSend = async (text) => {
+    setSendError('')
     try {
       await sendMessage(text)
     } catch (err) {
       console.error(err)
+      setSendError('Gagal mengirim pesan. Coba lagi.')
     }
   }
 
@@ -216,6 +220,9 @@ const ChatPage = () => {
           </div>
 
           <div className="px-5 sm:px-6 py-4 border-t shrink-0" style={{ borderColor: '#F1F5F9' }}>
+            {sendError && (
+              <p className="text-xs font-medium mb-2 text-center" style={{ color: '#DC2626' }}>{sendError}</p>
+            )}
             <ChatInput onSend={handleSend} />
           </div>
         </div>

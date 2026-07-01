@@ -68,10 +68,12 @@ export const ChatProvider = ({ children }) => {
       createdAt: serverTimestamp(),
     })
     const convRef = doc(db, 'conversations', user.uid)
-    await updateDoc(convRef, {
+    await setDoc(convRef, {
+      studentEmail: user.email,
+      studentName: user.displayName || 'Siswa',
       lastMessage: text,
       lastMessageAt: serverTimestamp(),
-    })
+    }, { merge: true })
   }
 
   const sendAdminMessage = async (studentUid, text) => {
@@ -83,10 +85,10 @@ export const ChatProvider = ({ children }) => {
       createdAt: serverTimestamp(),
     })
     const convRef = doc(db, 'conversations', studentUid)
-    await updateDoc(convRef, {
+    await setDoc(convRef, {
       lastMessage: text,
       lastMessageAt: serverTimestamp(),
-    })
+    }, { merge: true })
   }
 
   const subscribeToMessages = (callback) => {
