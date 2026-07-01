@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { MessageSquare, Loader, Clock, ChevronRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useChat } from '../context/ChatContext'
+import { ADMIN_FIREBASE_EMAIL } from '../lib/firebase'
 import ChatBubble from '../components/ChatBubble'
 import ChatInput from '../components/ChatInput'
 
@@ -22,7 +23,11 @@ const ChatPage = () => {
   const bottomRef = useRef(null)
 
   useEffect(() => {
-    if (!loading && !user) {
+    if (loading) return
+    if (!user) {
+      navigate('/chat/login')
+    } else if (user.email === ADMIN_FIREBASE_EMAIL) {
+      signOut()
       navigate('/chat/login')
     }
   }, [user, loading, navigate])

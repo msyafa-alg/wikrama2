@@ -1,12 +1,19 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { MessageSquare, Eye, EyeOff } from 'lucide-react'
 import { useChat } from '../context/ChatContext'
+import { ADMIN_FIREBASE_EMAIL } from '../lib/firebase'
 import { motion } from 'framer-motion'
 
 const ChatLogin = () => {
-  const { signIn } = useChat()
+  const { signIn, user, signOut, loading: fbLoading } = useChat()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!fbLoading && user?.email === ADMIN_FIREBASE_EMAIL) {
+      signOut()
+    }
+  }, [user, fbLoading])
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPw, setShowPw] = useState(false)
