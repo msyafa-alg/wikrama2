@@ -42,7 +42,7 @@ const ChatRegister = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4" style={{ background: '#F8FAFC' }}>
+    <div className="min-h-screen flex items-center justify-center p-4 pt-24" style={{ background: '#F8FAFC' }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

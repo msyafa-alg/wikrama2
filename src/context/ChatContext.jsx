@@ -6,8 +6,8 @@ import {
   onAuthStateChanged,
 } from 'firebase/auth'
 import {
-  doc, setDoc, getDoc, collection, query, orderBy,
-  onSnapshot, addDoc, serverTimestamp, updateDoc,
+  doc, setDoc, getDoc, getDocs, collection, query, orderBy,
+  onSnapshot, addDoc, serverTimestamp, updateDoc, deleteDoc,
 } from 'firebase/firestore'
 import { auth, db, ADMIN_FIREBASE_EMAIL, ADMIN_FIREBASE_PASSWORD } from '../lib/firebase'
 
@@ -117,6 +117,19 @@ export const ChatProvider = ({ children }) => {
     })
   }
 
+  const getConversation = async (studentUid) => {
+    const snap = await getDoc(doc(db, 'conversations', studentUid))
+    if (snap.exists()) return { id: snap.id, ...snap.data() }
+    return null
+  }
+
+  const deleteConversation = async (studentUid) => {
+    const msgSnap = await getDocs(collection(db, 'conversations', studentUid, 'messages'))
+    const deletes = msgSnap.docs.map((msg) => deleteDoc(doc(db, 'conversations', studentUid, 'messages', msg.id)))
+    await Promise.all(deletes)
+    await deleteDoc(doc(db, 'conversations', studentUid))
+  }
+
   return (
     <ChatContext.Provider value={{
       user,
@@ -130,6 +143,8 @@ export const ChatProvider = ({ children }) => {
       subscribeToMessages,
       subscribeToAdminMessages,
       subscribeToConversations,
+      getConversation,
+      deleteConversation,
     }}>
       {children}
     </ChatContext.Provider>
