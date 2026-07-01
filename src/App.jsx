@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { RouterProvider } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
+import { ChatProvider } from './context/ChatContext'
 import { ToastProvider } from './components/Toast'
 
 import router from './router'
@@ -20,9 +21,11 @@ const App = () => {
     <>
       <LoadingScreen isLoading={isLoading} />
       <AuthProvider>
-        <ToastProvider>
-          <RouterProvider router={router} />
-        </ToastProvider>
+        <ChatProvider>
+          <ToastProvider>
+            <RouterProvider router={router} />
+          </ToastProvider>
+        </ChatProvider>
       </AuthProvider>
     </>
   )

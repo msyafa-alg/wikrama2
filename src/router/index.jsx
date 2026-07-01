@@ -15,6 +15,11 @@ import AdminSiswaForm from '../pages/admin/SiswaForm'
 import AdminAlumniList from '../pages/admin/AlumniList'
 import AdminAlumniForm from '../pages/admin/AlumniForm'
 import AdminSiswaList from '../pages/admin/SiswaList'
+import AdminChat from '../pages/admin/AdminChat'
+import AdminChatDetail from '../pages/admin/AdminChatDetail'
+import ChatPage from '../pages/ChatPage'
+import ChatLogin from '../pages/ChatLogin'
+import ChatRegister from '../pages/ChatRegister'
 import NotFoundPage from '../pages/NotFoundPage'
 
 const router = createBrowserRouter([
@@ -32,6 +37,9 @@ const router = createBrowserRouter([
       { path: 'gallery', element: <GalleryPage /> },
       { path: 'tentang', element: <TentangPage /> },
       { path: 'kontak', element: <KontakPage /> },
+      { path: 'chat', element: <ChatPage /> },
+      { path: 'chat/login', element: <ChatLogin /> },
+      { path: 'chat/register', element: <ChatRegister /> },
       { path: '*', element: <NotFoundPage /> },
     ],
   },
@@ -63,6 +71,14 @@ const router = createBrowserRouter([
   {
     path: '/admin/alumni/edit/:id',
     element: <ProtectedRoute><AdminAlumniForm /></ProtectedRoute>,
+  },
+  {
+    path: '/admin/chat',
+    element: <ProtectedRoute><AdminChat /></ProtectedRoute>,
+  },
+  {
+    path: '/admin/chat/:id',
+    element: <ProtectedRoute><AdminChatDetail /></ProtectedRoute>,
   },
 ])
 

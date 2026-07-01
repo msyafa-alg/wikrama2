@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { LogOut, Users, GraduationCap, BookOpen, ArrowRight } from 'lucide-react'
+import { LogOut, Users, GraduationCap, BookOpen, MessageSquare, ArrowRight } from 'lucide-react'
 import { supabase } from '../../lib/supabase'
 import { useAuth } from '../../context/AuthContext'
 
@@ -82,7 +82,7 @@ const Dashboard = () => {
           </div>
         )}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
           <Link to="/admin/siswa"
             className="rounded-2xl p-6 transition-all hover:scale-[1.02] flex items-center justify-between"
             style={{ background: '#FFFFFF', border: '1px solid #E2E8F0' }}>
@@ -107,6 +107,20 @@ const Dashboard = () => {
               <div>
                 <p className="font-semibold" style={{ color: '#0F172A' }}>Kelola Alumni</p>
                 <p className="text-xs mt-0.5" style={{ color: '#94A3B8' }}>Tambah, edit, hapus data alumni</p>
+              </div>
+            </div>
+            <ArrowRight className="w-5 h-5" style={{ color: '#94A3B8' }} />
+          </Link>
+          <Link to="/admin/chat"
+            className="rounded-2xl p-6 transition-all hover:scale-[1.02] flex items-center justify-between"
+            style={{ background: '#FFFFFF', border: '1px solid #E2E8F0' }}>
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: 'rgba(5,150,105,0.08)' }}>
+                <MessageSquare className="w-6 h-6" style={{ color: '#059669' }} />
+              </div>
+              <div>
+                <p className="font-semibold" style={{ color: '#0F172A' }}>Pesan Masuk</p>
+                <p className="text-xs mt-0.5" style={{ color: '#94A3B8' }}>Lihat & balas kritik & saran siswa</p>
               </div>
             </div>
             <ArrowRight className="w-5 h-5" style={{ color: '#94A3B8' }} />
